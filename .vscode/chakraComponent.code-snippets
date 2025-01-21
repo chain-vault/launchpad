@@ -1,0 +1,19 @@
+{
+  "Chakra Component": {
+    "prefix": "chakraComponent",
+    "body": [
+      "import { Box, Text } from '@chakra-ui/react';",
+      "",
+      "interface ${1:${TM_FILENAME_BASE}}Props {}",
+      "",
+      "const ${1:${TM_FILENAME_BASE}} = ({}: ${1:${TM_FILENAME_BASE}}Props) => (",
+      "    <Box>",
+      "      <Text>Hello World</Text>",
+      "    </Box>",
+      ");",
+      "",
+      "export default ${1:${TM_FILENAME_BASE}};",
+    ],
+    "description": "Create a Basic Chakra UI component",
+  },
+}

@@ -1,0 +1,95 @@
+.editor-preview {
+  font-size: 1rem;
+  font-weight: 400;
+  letter-spacing: 0.6px;
+  opacity: 0.8;
+}
+.editor-preview h2 {
+  font-size: 32px;
+  font-weight: 600;
+  letter-spacing: -0.64px;
+}
+
+.editor-preview p {
+  font-size: 1rem;
+  font-weight: 400;
+  letter-spacing: 0.6px;
+  opacity: 0.8;
+}
+
+.editor-preview ol li,
+.editor-preview ul li {
+  margin-left: 30px;
+  font-size: 1rem;
+  font-weight: 400;
+  letter-spacing: -0.3px;
+  opacity: 1;
+}
+
+.editor-preview pre.ql-syntax {
+  background-color: #202020;
+  color: #ffffff;
+  border-radius: 8px;
+  padding-top: 28px;
+  padding-bottom: 16px;
+  padding-left: 12px;
+  margin: 20px 0;
+  font-size: 16px;
+  overflow-x: auto;
+  position: relative;
+}
+
+.editor-preview pre.ql-syntax::before {
+  text-align: right;
+  content: 'code  ';
+  position: absolute;
+  top: 0;
+  left: 0px;
+  font-weight: 700;
+  background-color: #383838;
+  color: #ffffff;
+  font-size: 12px;
+  width: 100%;
+  height: 20px;
+}
+
+.editor-preview a {
+  color: #0080ff;
+  text-decoration: none;
+  border-bottom: 1px dashed #0080ff;
+  transition:
+    color 0.3s,
+    border-bottom-color 0.3s;
+}
+
+@media (max-width: 768px) {
+  .editor-preview {
+    font-size: 12px;
+    font-weight: 400;
+    letter-spacing: 0.6px;
+    line-height: 120%;
+    opacity: 0.8;
+  }
+  .editor-preview h2 {
+    font-size: 24px;
+    letter-spacing: -0.48px;
+  }
+  .editor-preview p {
+    font-size: 12px;
+    letter-spacing: 0.6px;
+  }
+  .editor-preview ol li,
+  .editor-preview ul li {
+    font-size: 12px;
+    letter-spacing: -0.28px;
+  }
+
+  .editor-preview pre.ql-syntax {
+    font-size: 14px;
+  }
+
+  .editor-preview pre.ql-syntax::before {
+    font-size: 12px;
+    height: 18px;
+  }
+}

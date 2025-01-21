@@ -1,0 +1,31 @@
+:root {
+  --toastify-color-light: #ffffff;
+  --toastify-color-dark: #121212;
+  --toastify-text-color-light: #121212;
+  --toastify-text-color-dark: #fff;
+  --toastify-border-color-light: #f2f2f2;
+  --toastify-border-color-dark: #242424;
+}
+
+/* .toast-container {
+  border-radius: 16px;
+} */
+
+.toast-container-light {
+  border: 2px solid var(--toastify-border-color-light);
+  border-radius: 16px;
+}
+
+.toast-container-dark {
+  border: 2px solid var(--toastify-border-color-dark);
+  border-radius: 16px;
+}
+
+.Toastify__toast-container {
+  width: fit-content;
+}
+
+.Toastify__close-button {
+  opacity: 1;
+  align-self: center;
+}

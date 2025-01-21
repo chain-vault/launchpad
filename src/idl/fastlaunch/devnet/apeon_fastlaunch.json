@@ -1,0 +1,2729 @@
+{
+  "address": "FhG8tJVBb9bCwcyLAnaVvRR1b5UxLnJ3nQxZP6WSv7N2",
+  "metadata": {
+    "name": "apeon_fastlaunch",
+    "version": "0.1.0",
+    "spec": "0.1.0",
+    "description": "Created with Anchor"
+  },
+  "instructions": [
+    {
+      "name": "burn_remaining_token",
+      "discriminator": [
+        86,
+        94,
+        123,
+        99,
+        246,
+        111,
+        139,
+        6
+      ],
+      "accounts": [
+        {
+          "name": "liquidity_creator",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "launch_settings",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  102,
+                  97,
+                  115,
+                  116,
+                  95,
+                  115,
+                  101,
+                  116,
+                  116,
+                  105,
+                  110,
+                  103,
+                  115
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "pool",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "account",
+                "path": "mint"
+              },
+              {
+                "kind": "const",
+                "value": [
+                  102,
+                  97,
+                  115,
+                  116,
+                  95,
+                  108,
+                  97,
+                  117,
+                  110,
+                  99,
+                  104
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "mint",
+          "writable": true
+        },
+        {
+          "name": "liquidity_creator_token_account",
+          "writable": true
+        },
+        {
+          "name": "token_program"
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "buy",
+      "discriminator": [
+        102,
+        6,
+        61,
+        18,
+        1,
+        218,
+        235,
+        234
+      ],
+      "accounts": [
+        {
+          "name": "trade_fee_wallet",
+          "writable": true
+        },
+        {
+          "name": "trader",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "launch_settings",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  102,
+                  97,
+                  115,
+                  116,
+                  95,
+                  115,
+                  101,
+                  116,
+                  116,
+                  105,
+                  110,
+                  103,
+                  115
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "curve_accounts",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  102,
+                  97,
+                  115,
+                  116,
+                  95,
+                  99,
+                  117,
+                  114,
+                  118,
+                  101
+                ]
+              },
+              {
+                "kind": "arg",
+                "path": "curve_index"
+              }
+            ]
+          }
+        },
+        {
+          "name": "pool",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "account",
+                "path": "mint"
+              },
+              {
+                "kind": "const",
+                "value": [
+                  102,
+                  97,
+                  115,
+                  116,
+                  95,
+                  108,
+                  97,
+                  117,
+                  110,
+                  99,
+                  104
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "mint",
+          "writable": true
+        },
+        {
+          "name": "pool_token_account",
+          "writable": true
+        },
+        {
+          "name": "trader_token_account",
+          "writable": true
+        },
+        {
+          "name": "system_program",
+          "docs": [
+            "Solana ecosystem accounts"
+          ],
+          "address": "11111111111111111111111111111111"
+        },
+        {
+          "name": "token_program"
+        },
+        {
+          "name": "associated_token_program",
+          "address": "ATokenGPvbdGVxr1b2hvZbsiqW5xWH25efTNsLJA8knL"
+        },
+        {
+          "name": "base",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "lock_event_authority",
+          "writable": true
+        },
+        {
+          "name": "escrow",
+          "writable": true
+        },
+        {
+          "name": "escrow_metadata",
+          "writable": true
+        },
+        {
+          "name": "escrow_token",
+          "writable": true
+        },
+        {
+          "name": "lock_program",
+          "address": "LocpQgucEQHbqNABEYvBvwoxCPsSbG91A1QaQhQQqjn"
+        }
+      ],
+      "args": [
+        {
+          "name": "curve_index",
+          "type": "string"
+        },
+        {
+          "name": "input_amount",
+          "type": "u128"
+        },
+        {
+          "name": "amount_output_min",
+          "type": "u128"
+        }
+      ]
+    },
+    {
+      "name": "close_pool",
+      "discriminator": [
+        140,
+        189,
+        209,
+        23,
+        239,
+        62,
+        239,
+        11
+      ],
+      "accounts": [
+        {
+          "name": "platform_authority",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "launch_settings",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  102,
+                  97,
+                  115,
+                  116,
+                  95,
+                  115,
+                  101,
+                  116,
+                  116,
+                  105,
+                  110,
+                  103,
+                  115
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "pool",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "account",
+                "path": "mint"
+              },
+              {
+                "kind": "const",
+                "value": [
+                  102,
+                  97,
+                  115,
+                  116,
+                  95,
+                  108,
+                  97,
+                  117,
+                  110,
+                  99,
+                  104
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "mint",
+          "writable": true
+        },
+        {
+          "name": "token_program"
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "create_curve_accounts",
+      "discriminator": [
+        198,
+        177,
+        177,
+        159,
+        109,
+        151,
+        207,
+        29
+      ],
+      "accounts": [
+        {
+          "name": "platform_authority",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "curve_accounts",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  102,
+                  97,
+                  115,
+                  116,
+                  95,
+                  99,
+                  117,
+                  114,
+                  118,
+                  101
+                ]
+              },
+              {
+                "kind": "arg",
+                "path": "curve_index"
+              }
+            ]
+          }
+        },
+        {
+          "name": "launch_settings",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  102,
+                  97,
+                  115,
+                  116,
+                  95,
+                  115,
+                  101,
+                  116,
+                  116,
+                  105,
+                  110,
+                  103,
+                  115
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": [
+        {
+          "name": "curve_index",
+          "type": "string"
+        },
+        {
+          "name": "curve_type",
+          "type": "u8"
+        },
+        {
+          "name": "coefficient1",
+          "type": "u128"
+        },
+        {
+          "name": "coefficient2",
+          "type": "u128"
+        },
+        {
+          "name": "max_raise_amount",
+          "type": "u128"
+        },
+        {
+          "name": "max_sold_tokens",
+          "type": "u128"
+        },
+        {
+          "name": "target_marketcap",
+          "type": "u128"
+        }
+      ]
+    },
+    {
+      "name": "create_fee_settings",
+      "discriminator": [
+        9,
+        134,
+        229,
+        223,
+        222,
+        87,
+        179,
+        94
+      ],
+      "accounts": [
+        {
+          "name": "platform_authority",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "launch_settings",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  102,
+                  97,
+                  115,
+                  116,
+                  95,
+                  115,
+                  101,
+                  116,
+                  116,
+                  105,
+                  110,
+                  103,
+                  115
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": [
+        {
+          "name": "platform_authority",
+          "type": "pubkey"
+        },
+        {
+          "name": "trade_fee_wallet",
+          "type": "pubkey"
+        },
+        {
+          "name": "liquidity_creator_wallet",
+          "type": "pubkey"
+        },
+        {
+          "name": "lp_risk_mitigation_wallet",
+          "type": "pubkey"
+        },
+        {
+          "name": "initial_token_for_sale",
+          "type": "u128"
+        },
+        {
+          "name": "initial_token_for_lp",
+          "type": "u128"
+        },
+        {
+          "name": "trade_fee_numerator",
+          "type": "u128"
+        },
+        {
+          "name": "trade_fee_denominator",
+          "type": "u128"
+        },
+        {
+          "name": "max_raise_amount",
+          "type": "u128"
+        },
+        {
+          "name": "trade_minimum_sol_amount",
+          "type": "u128"
+        }
+      ]
+    },
+    {
+      "name": "create_pool",
+      "discriminator": [
+        233,
+        146,
+        209,
+        142,
+        207,
+        104,
+        64,
+        188
+      ],
+      "accounts": [
+        {
+          "name": "pool_creator",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "launch_settings",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  102,
+                  97,
+                  115,
+                  116,
+                  95,
+                  115,
+                  101,
+                  116,
+                  116,
+                  105,
+                  110,
+                  103,
+                  115
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "curve_accounts",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  102,
+                  97,
+                  115,
+                  116,
+                  95,
+                  99,
+                  117,
+                  114,
+                  118,
+                  101
+                ]
+              },
+              {
+                "kind": "arg",
+                "path": "curve_index"
+              }
+            ]
+          }
+        },
+        {
+          "name": "mint",
+          "writable": true
+        },
+        {
+          "name": "pool",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "account",
+                "path": "mint"
+              },
+              {
+                "kind": "const",
+                "value": [
+                  102,
+                  97,
+                  115,
+                  116,
+                  95,
+                  108,
+                  97,
+                  117,
+                  110,
+                  99,
+                  104
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "pool_creator_token_account",
+          "writable": true
+        },
+        {
+          "name": "pool_token_account",
+          "writable": true
+        },
+        {
+          "name": "associated_token_program",
+          "address": "ATokenGPvbdGVxr1b2hvZbsiqW5xWH25efTNsLJA8knL"
+        },
+        {
+          "name": "token_program"
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": [
+        {
+          "name": "curve_index",
+          "type": "string"
+        },
+        {
+          "name": "name",
+          "type": "string"
+        },
+        {
+          "name": "inital_buy_lock_days",
+          "type": "u8"
+        },
+        {
+          "name": "selected_dex",
+          "type": "u8"
+        },
+        {
+          "name": "selected_env",
+          "type": "u8"
+        }
+      ]
+    },
+    {
+      "name": "sell",
+      "discriminator": [
+        51,
+        230,
+        133,
+        164,
+        1,
+        127,
+        131,
+        173
+      ],
+      "accounts": [
+        {
+          "name": "trade_fee_wallet",
+          "writable": true
+        },
+        {
+          "name": "trader",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "launch_settings",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  102,
+                  97,
+                  115,
+                  116,
+                  95,
+                  115,
+                  101,
+                  116,
+                  116,
+                  105,
+                  110,
+                  103,
+                  115
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "curve_accounts",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  102,
+                  97,
+                  115,
+                  116,
+                  95,
+                  99,
+                  117,
+                  114,
+                  118,
+                  101
+                ]
+              },
+              {
+                "kind": "arg",
+                "path": "curve_index"
+              }
+            ]
+          }
+        },
+        {
+          "name": "pool",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "account",
+                "path": "mint"
+              },
+              {
+                "kind": "const",
+                "value": [
+                  102,
+                  97,
+                  115,
+                  116,
+                  95,
+                  108,
+                  97,
+                  117,
+                  110,
+                  99,
+                  104
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "mint",
+          "writable": true
+        },
+        {
+          "name": "pool_token_account",
+          "writable": true
+        },
+        {
+          "name": "trader_token_account",
+          "writable": true
+        },
+        {
+          "name": "system_program",
+          "docs": [
+            "Solana ecosystem accounts"
+          ],
+          "address": "11111111111111111111111111111111"
+        },
+        {
+          "name": "token_program"
+        },
+        {
+          "name": "associated_token_program",
+          "address": "ATokenGPvbdGVxr1b2hvZbsiqW5xWH25efTNsLJA8knL"
+        },
+        {
+          "name": "base",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "lock_event_authority",
+          "writable": true
+        },
+        {
+          "name": "escrow",
+          "writable": true
+        },
+        {
+          "name": "escrow_metadata",
+          "writable": true
+        },
+        {
+          "name": "escrow_token",
+          "writable": true
+        },
+        {
+          "name": "lock_program",
+          "address": "LocpQgucEQHbqNABEYvBvwoxCPsSbG91A1QaQhQQqjn"
+        }
+      ],
+      "args": [
+        {
+          "name": "curve_index",
+          "type": "string"
+        },
+        {
+          "name": "input_amount",
+          "type": "u128"
+        },
+        {
+          "name": "amount_output_min",
+          "type": "u128"
+        }
+      ]
+    },
+    {
+      "name": "update_curve_accounts",
+      "discriminator": [
+        28,
+        170,
+        47,
+        18,
+        229,
+        136,
+        117,
+        236
+      ],
+      "accounts": [
+        {
+          "name": "platform_authority",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "curve_accounts",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  102,
+                  97,
+                  115,
+                  116,
+                  95,
+                  99,
+                  117,
+                  114,
+                  118,
+                  101
+                ]
+              },
+              {
+                "kind": "arg",
+                "path": "curve_index"
+              }
+            ]
+          }
+        },
+        {
+          "name": "launch_settings",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  102,
+                  97,
+                  115,
+                  116,
+                  95,
+                  115,
+                  101,
+                  116,
+                  116,
+                  105,
+                  110,
+                  103,
+                  115
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": [
+        {
+          "name": "curve_index",
+          "type": "string"
+        },
+        {
+          "name": "coefficient1",
+          "type": {
+            "option": "u128"
+          }
+        },
+        {
+          "name": "coefficient2",
+          "type": {
+            "option": "u128"
+          }
+        },
+        {
+          "name": "max_raise_amount",
+          "type": {
+            "option": "u128"
+          }
+        },
+        {
+          "name": "max_sold_tokens",
+          "type": {
+            "option": "u128"
+          }
+        },
+        {
+          "name": "target_marketcap",
+          "type": {
+            "option": "u128"
+          }
+        }
+      ]
+    },
+    {
+      "name": "update_liquidity_pool_address",
+      "discriminator": [
+        158,
+        79,
+        51,
+        86,
+        17,
+        148,
+        38,
+        101
+      ],
+      "accounts": [
+        {
+          "name": "liquidity_creator",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "launch_settings",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  102,
+                  97,
+                  115,
+                  116,
+                  95,
+                  115,
+                  101,
+                  116,
+                  116,
+                  105,
+                  110,
+                  103,
+                  115
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "pool",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "account",
+                "path": "mint"
+              },
+              {
+                "kind": "const",
+                "value": [
+                  102,
+                  97,
+                  115,
+                  116,
+                  95,
+                  108,
+                  97,
+                  117,
+                  110,
+                  99,
+                  104
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "mint",
+          "writable": true
+        },
+        {
+          "name": "token_program"
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": [
+        {
+          "name": "liquidity_pool_address",
+          "type": "pubkey"
+        }
+      ]
+    },
+    {
+      "name": "update_pause_status",
+      "discriminator": [
+        233,
+        65,
+        81,
+        11,
+        187,
+        201,
+        28,
+        176
+      ],
+      "accounts": [
+        {
+          "name": "platform_authority",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "launch_settings",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  102,
+                  97,
+                  115,
+                  116,
+                  95,
+                  115,
+                  101,
+                  116,
+                  116,
+                  105,
+                  110,
+                  103,
+                  115
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": [
+        {
+          "name": "is_paused",
+          "type": "bool"
+        }
+      ]
+    },
+    {
+      "name": "update_platform_authority_wallet",
+      "discriminator": [
+        243,
+        97,
+        49,
+        117,
+        151,
+        232,
+        118,
+        38
+      ],
+      "accounts": [
+        {
+          "name": "platform_authority",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "launch_settings",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  102,
+                  97,
+                  115,
+                  116,
+                  95,
+                  115,
+                  101,
+                  116,
+                  116,
+                  105,
+                  110,
+                  103,
+                  115
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": [
+        {
+          "name": "platform_authority",
+          "type": {
+            "option": "pubkey"
+          }
+        }
+      ]
+    },
+    {
+      "name": "update_platform_wallets",
+      "discriminator": [
+        207,
+        91,
+        229,
+        237,
+        39,
+        111,
+        136,
+        16
+      ],
+      "accounts": [
+        {
+          "name": "platform_authority",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "launch_settings",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  102,
+                  97,
+                  115,
+                  116,
+                  95,
+                  115,
+                  101,
+                  116,
+                  116,
+                  105,
+                  110,
+                  103,
+                  115
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": [
+        {
+          "name": "trade_fee_wallet",
+          "type": {
+            "option": "pubkey"
+          }
+        },
+        {
+          "name": "liquidity_creator_wallet",
+          "type": {
+            "option": "pubkey"
+          }
+        },
+        {
+          "name": "lp_risk_mitigation_wallet",
+          "type": {
+            "option": "pubkey"
+          }
+        }
+      ]
+    },
+    {
+      "name": "update_pool_env",
+      "discriminator": [
+        72,
+        159,
+        12,
+        8,
+        237,
+        72,
+        60,
+        211
+      ],
+      "accounts": [
+        {
+          "name": "platform_authority",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "launch_settings",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  102,
+                  97,
+                  115,
+                  116,
+                  95,
+                  115,
+                  101,
+                  116,
+                  116,
+                  105,
+                  110,
+                  103,
+                  115
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "mint",
+          "writable": true
+        },
+        {
+          "name": "pool",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "account",
+                "path": "mint"
+              },
+              {
+                "kind": "const",
+                "value": [
+                  102,
+                  97,
+                  115,
+                  116,
+                  95,
+                  108,
+                  97,
+                  117,
+                  110,
+                  99,
+                  104
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": [
+        {
+          "name": "selected_env",
+          "type": "u8"
+        }
+      ]
+    },
+    {
+      "name": "update_sale_token_details",
+      "discriminator": [
+        75,
+        40,
+        87,
+        3,
+        252,
+        148,
+        64,
+        251
+      ],
+      "accounts": [
+        {
+          "name": "platform_authority",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "launch_settings",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  102,
+                  97,
+                  115,
+                  116,
+                  95,
+                  115,
+                  101,
+                  116,
+                  116,
+                  105,
+                  110,
+                  103,
+                  115
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": [
+        {
+          "name": "initial_token_for_sale",
+          "type": {
+            "option": "u128"
+          }
+        },
+        {
+          "name": "initial_token_for_lp",
+          "type": {
+            "option": "u128"
+          }
+        },
+        {
+          "name": "max_raise_amount",
+          "type": {
+            "option": "u128"
+          }
+        }
+      ]
+    },
+    {
+      "name": "update_trade_fee",
+      "discriminator": [
+        186,
+        69,
+        168,
+        25,
+        5,
+        73,
+        89,
+        26
+      ],
+      "accounts": [
+        {
+          "name": "platform_authority",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "launch_settings",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  102,
+                  97,
+                  115,
+                  116,
+                  95,
+                  115,
+                  101,
+                  116,
+                  116,
+                  105,
+                  110,
+                  103,
+                  115
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": [
+        {
+          "name": "trade_fee_numerator",
+          "type": {
+            "option": "u128"
+          }
+        },
+        {
+          "name": "trade_fee_denominator",
+          "type": {
+            "option": "u128"
+          }
+        }
+      ]
+    },
+    {
+      "name": "update_trade_minimum_sol_amount",
+      "discriminator": [
+        200,
+        251,
+        116,
+        7,
+        76,
+        111,
+        98,
+        72
+      ],
+      "accounts": [
+        {
+          "name": "platform_authority",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "launch_settings",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  102,
+                  97,
+                  115,
+                  116,
+                  95,
+                  115,
+                  101,
+                  116,
+                  116,
+                  105,
+                  110,
+                  103,
+                  115
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": [
+        {
+          "name": "trade_minimum_sol_amount",
+          "type": "u128"
+        }
+      ]
+    },
+    {
+      "name": "withdraw_liquidity",
+      "discriminator": [
+        149,
+        158,
+        33,
+        185,
+        47,
+        243,
+        253,
+        31
+      ],
+      "accounts": [
+        {
+          "name": "liquidity_creator",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "launch_settings",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  102,
+                  97,
+                  115,
+                  116,
+                  95,
+                  115,
+                  101,
+                  116,
+                  116,
+                  105,
+                  110,
+                  103,
+                  115
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "pool",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "account",
+                "path": "mint"
+              },
+              {
+                "kind": "const",
+                "value": [
+                  102,
+                  97,
+                  115,
+                  116,
+                  95,
+                  108,
+                  97,
+                  117,
+                  110,
+                  99,
+                  104
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "mint",
+          "writable": true
+        },
+        {
+          "name": "pool_token_account",
+          "writable": true
+        },
+        {
+          "name": "liquidity_creator_token_account",
+          "writable": true
+        },
+        {
+          "name": "token_program"
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        },
+        {
+          "name": "associated_token_program",
+          "address": "ATokenGPvbdGVxr1b2hvZbsiqW5xWH25efTNsLJA8knL"
+        }
+      ],
+      "args": []
+    }
+  ],
+  "accounts": [
+    {
+      "name": "CurveAccounts",
+      "discriminator": [
+        11,
+        39,
+        14,
+        10,
+        138,
+        178,
+        55,
+        245
+      ]
+    },
+    {
+      "name": "FastLaunchSettings",
+      "discriminator": [
+        255,
+        107,
+        165,
+        8,
+        120,
+        199,
+        236,
+        142
+      ]
+    },
+    {
+      "name": "PoolData",
+      "discriminator": [
+        155,
+        28,
+        220,
+        37,
+        221,
+        242,
+        70,
+        167
+      ]
+    }
+  ],
+  "events": [
+    {
+      "name": "CurveAccountsUpdateEvent",
+      "discriminator": [
+        232,
+        83,
+        185,
+        117,
+        28,
+        216,
+        130,
+        218
+      ]
+    },
+    {
+      "name": "CurveThresholdReachedEvent",
+      "discriminator": [
+        252,
+        20,
+        25,
+        224,
+        240,
+        64,
+        115,
+        42
+      ]
+    },
+    {
+      "name": "FastLaunchSettingUpdateEvent",
+      "discriminator": [
+        123,
+        30,
+        135,
+        160,
+        81,
+        21,
+        97,
+        37
+      ]
+    },
+    {
+      "name": "LiquidityPoolAddressUpdatedEvent",
+      "discriminator": [
+        124,
+        120,
+        178,
+        167,
+        233,
+        140,
+        161,
+        23
+      ]
+    },
+    {
+      "name": "LiquidityWithdrawnEvent",
+      "discriminator": [
+        76,
+        239,
+        52,
+        31,
+        16,
+        147,
+        153,
+        227
+      ]
+    },
+    {
+      "name": "PoolBuyEvent",
+      "discriminator": [
+        99,
+        142,
+        88,
+        205,
+        115,
+        159,
+        5,
+        168
+      ]
+    },
+    {
+      "name": "PoolCreatedEvent",
+      "discriminator": [
+        25,
+        94,
+        75,
+        47,
+        112,
+        99,
+        53,
+        63
+      ]
+    },
+    {
+      "name": "PoolSellEvent",
+      "discriminator": [
+        155,
+        114,
+        9,
+        4,
+        124,
+        124,
+        212,
+        122
+      ]
+    },
+    {
+      "name": "SystemPauseEvent",
+      "discriminator": [
+        96,
+        235,
+        45,
+        102,
+        165,
+        128,
+        237,
+        69
+      ]
+    },
+    {
+      "name": "TokenBurnEvent",
+      "discriminator": [
+        51,
+        27,
+        242,
+        215,
+        185,
+        35,
+        71,
+        20
+      ]
+    },
+    {
+      "name": "TokenLockEvent",
+      "discriminator": [
+        234,
+        49,
+        51,
+        40,
+        221,
+        223,
+        128,
+        44
+      ]
+    }
+  ],
+  "errors": [
+    {
+      "code": 6000,
+      "name": "SystemProcessPaused",
+      "msg": "protocol is temporarily paused for maintenance"
+    },
+    {
+      "code": 6001,
+      "name": "UnauthorizedSigner",
+      "msg": "unauthorized signer"
+    },
+    {
+      "code": 6002,
+      "name": "UnauthorizedPlatform",
+      "msg": "unauthorized platform wallet"
+    },
+    {
+      "code": 6003,
+      "name": "InvalidDexPlatform",
+      "msg": "select dex platform is not valid"
+    },
+    {
+      "code": 6004,
+      "name": "InvaildMint",
+      "msg": "invaild mint"
+    },
+    {
+      "code": 6005,
+      "name": "MintSupplyMismatch",
+      "msg": "mint supply mismatch"
+    },
+    {
+      "code": 6006,
+      "name": "InsufficientSolInPool",
+      "msg": "pool does not have sufficient balance"
+    },
+    {
+      "code": 6007,
+      "name": "InvalidFee",
+      "msg": "The provided fee does not match the program owner's constraints"
+    },
+    {
+      "code": 6008,
+      "name": "ExceededSlippage",
+      "msg": "Swap instruction exceeds desired slippage limit"
+    },
+    {
+      "code": 6009,
+      "name": "InVaildAmountIn",
+      "msg": "amount_in should be greater than zero"
+    },
+    {
+      "code": 6010,
+      "name": "MismatchMint",
+      "msg": "mint address mismatch"
+    },
+    {
+      "code": 6011,
+      "name": "InvaildPoolCreator",
+      "msg": "pool creator address mismatch"
+    },
+    {
+      "code": 6012,
+      "name": "PoolMarketCapReached",
+      "msg": "pool market cap reached"
+    },
+    {
+      "code": 6013,
+      "name": "InvaildLockProgram",
+      "msg": "invaild lock program"
+    },
+    {
+      "code": 6014,
+      "name": "CurveThresholdNotReached",
+      "msg": "liquidity creation failed: CurveThreshold not reached."
+    },
+    {
+      "code": 6015,
+      "name": "InvaildLiquidityCreator",
+      "msg": "liquidity creator wallet miss match."
+    },
+    {
+      "code": 6016,
+      "name": "DuplicateliquidityWithdrawRequest",
+      "msg": "liquidity already withdrawn"
+    },
+    {
+      "code": 6017,
+      "name": "LiquidityWithdrawPending",
+      "msg": "liquidity withdraw pending"
+    },
+    {
+      "code": 6018,
+      "name": "DuplicateLiquidityAddressUpdateRequest",
+      "msg": "liquidity address already updated"
+    },
+    {
+      "code": 6019,
+      "name": "LiquidityAddressUpdatePending",
+      "msg": "liquidity address is not updated"
+    },
+    {
+      "code": 6020,
+      "name": "InVaildTradeMinimumSolAmount",
+      "msg": "trade minimum sol amount should be greater than zero"
+    },
+    {
+      "code": 6021,
+      "name": "TradeSolAmountValidation",
+      "msg": "trade sol amount should be greater than trade_minimum_sol_amount"
+    },
+    {
+      "code": 6022,
+      "name": "InvaildCharacterInPoolName",
+      "msg": "pool name should be ascii character"
+    },
+    {
+      "code": 6023,
+      "name": "InvaildPoolNameMinLength",
+      "msg": "pool name length should be at least 4 characters"
+    },
+    {
+      "code": 6024,
+      "name": "InvaildPoolNameMaxLength",
+      "msg": "pool name length should not exceed 32 characters"
+    },
+    {
+      "code": 6025,
+      "name": "InvailLockPeriod",
+      "msg": "invaild lock period"
+    },
+    {
+      "code": 6026,
+      "name": "InvaildCurveAccount",
+      "msg": "invalid curve account"
+    },
+    {
+      "code": 6027,
+      "name": "UnauthorizedTradeFeeWallet",
+      "msg": "unauthorized trade fee wallet"
+    }
+  ],
+  "types": [
+    {
+      "name": "BoundingCurveType",
+      "repr": {
+        "kind": "c"
+      },
+      "type": {
+        "kind": "enum",
+        "variants": [
+          {
+            "name": "ConstantProduct"
+          }
+        ]
+      }
+    },
+    {
+      "name": "CurveAccounts",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "curve_index",
+            "type": "string"
+          },
+          {
+            "name": "curve_type",
+            "type": {
+              "defined": {
+                "name": "BoundingCurveType"
+              }
+            }
+          },
+          {
+            "name": "coefficient1",
+            "type": "u128"
+          },
+          {
+            "name": "coefficient2",
+            "type": "u128"
+          },
+          {
+            "name": "product_constant",
+            "type": "u128"
+          },
+          {
+            "name": "max_raise_amount",
+            "type": "u128"
+          },
+          {
+            "name": "max_sold_tokens",
+            "type": "u128"
+          },
+          {
+            "name": "target_marketcap",
+            "type": "u128"
+          }
+        ]
+      }
+    },
+    {
+      "name": "CurveAccountsUpdateEvent",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "curve_index",
+            "type": "string"
+          },
+          {
+            "name": "curve_type",
+            "type": {
+              "defined": {
+                "name": "BoundingCurveType"
+              }
+            }
+          },
+          {
+            "name": "coefficient1",
+            "type": "u128"
+          },
+          {
+            "name": "coefficient2",
+            "type": "u128"
+          },
+          {
+            "name": "product_constant",
+            "type": "u128"
+          },
+          {
+            "name": "max_raise_amount",
+            "type": "u128"
+          },
+          {
+            "name": "max_sold_tokens",
+            "type": "u128"
+          },
+          {
+            "name": "target_marketcap",
+            "type": "u128"
+          }
+        ]
+      }
+    },
+    {
+      "name": "CurveThresholdReachedEvent",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "id",
+            "type": "pubkey"
+          },
+          {
+            "name": "name",
+            "type": "string"
+          },
+          {
+            "name": "token",
+            "type": "pubkey"
+          },
+          {
+            "name": "sol_bal",
+            "type": "u128"
+          },
+          {
+            "name": "token_bal",
+            "type": "u128"
+          },
+          {
+            "name": "token_price",
+            "type": "u128"
+          },
+          {
+            "name": "dex_platform",
+            "type": "u8"
+          },
+          {
+            "name": "pool_creator",
+            "type": "pubkey"
+          }
+        ]
+      }
+    },
+    {
+      "name": "FastLaunchSettingUpdateEvent",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "platform_authority",
+            "type": "pubkey"
+          },
+          {
+            "name": "trade_fee_wallet",
+            "type": "pubkey"
+          },
+          {
+            "name": "liquidity_creator_wallet",
+            "type": "pubkey"
+          },
+          {
+            "name": "lp_risk_mitigation_wallet",
+            "type": "pubkey"
+          },
+          {
+            "name": "initial_pool_token_value",
+            "type": "u128"
+          },
+          {
+            "name": "initial_token_for_sale",
+            "type": "u128"
+          },
+          {
+            "name": "initial_token_for_lp",
+            "type": "u128"
+          },
+          {
+            "name": "trade_fee_numerator",
+            "type": "u128"
+          },
+          {
+            "name": "trade_fee_denominator",
+            "type": "u128"
+          },
+          {
+            "name": "curve_threshold",
+            "type": "u128"
+          },
+          {
+            "name": "max_raise_amount",
+            "type": "u128"
+          },
+          {
+            "name": "trade_minimum_sol_amount",
+            "type": "u128"
+          }
+        ]
+      }
+    },
+    {
+      "name": "FastLaunchSettings",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "platform_authority",
+            "type": "pubkey"
+          },
+          {
+            "name": "trade_fee_wallet",
+            "type": "pubkey"
+          },
+          {
+            "name": "liquidity_creator_wallet",
+            "type": "pubkey"
+          },
+          {
+            "name": "lp_risk_mitigation_wallet",
+            "type": "pubkey"
+          },
+          {
+            "name": "is_paused",
+            "type": "bool"
+          },
+          {
+            "name": "initial_pool_token_value",
+            "type": "u128"
+          },
+          {
+            "name": "initial_token_for_sale",
+            "type": "u128"
+          },
+          {
+            "name": "initial_token_for_lp",
+            "type": "u128"
+          },
+          {
+            "name": "trade_fee_numerator",
+            "type": "u128"
+          },
+          {
+            "name": "trade_fee_denominator",
+            "type": "u128"
+          },
+          {
+            "name": "curve_threshold",
+            "type": "u128"
+          },
+          {
+            "name": "max_raise_amount",
+            "type": "u128"
+          },
+          {
+            "name": "trade_minimum_sol_amount",
+            "type": "u128"
+          },
+          {
+            "name": "updated_at",
+            "type": "u32"
+          }
+        ]
+      }
+    },
+    {
+      "name": "LiquidityPoolAddressUpdatedEvent",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "id",
+            "type": "pubkey"
+          },
+          {
+            "name": "name",
+            "type": "string"
+          },
+          {
+            "name": "token",
+            "type": "pubkey"
+          },
+          {
+            "name": "liquidity_pool_address",
+            "type": "pubkey"
+          }
+        ]
+      }
+    },
+    {
+      "name": "LiquidityWithdrawnEvent",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "id",
+            "type": "pubkey"
+          },
+          {
+            "name": "name",
+            "type": "string"
+          },
+          {
+            "name": "token",
+            "type": "pubkey"
+          },
+          {
+            "name": "sol_bal",
+            "type": "u128"
+          },
+          {
+            "name": "token_bal",
+            "type": "u128"
+          }
+        ]
+      }
+    },
+    {
+      "name": "PoolBuyEvent",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "id",
+            "type": "pubkey"
+          },
+          {
+            "name": "name",
+            "type": "string"
+          },
+          {
+            "name": "token",
+            "type": "pubkey"
+          },
+          {
+            "name": "pool_creator_token_balance",
+            "type": "u128"
+          },
+          {
+            "name": "coefficient1",
+            "type": "u128"
+          },
+          {
+            "name": "coefficient2",
+            "type": "u128"
+          },
+          {
+            "name": "trader",
+            "type": "pubkey"
+          },
+          {
+            "name": "amount_in",
+            "type": "u128"
+          },
+          {
+            "name": "amount_out",
+            "type": "u128"
+          },
+          {
+            "name": "sol_bal",
+            "type": "u128"
+          },
+          {
+            "name": "token_bal",
+            "type": "u128"
+          },
+          {
+            "name": "token_price",
+            "type": "u128"
+          },
+          {
+            "name": "fee",
+            "type": "u128"
+          },
+          {
+            "name": "curve_threshold_progress",
+            "type": "u128"
+          },
+          {
+            "name": "curve_threshold_reached",
+            "type": "bool"
+          }
+        ]
+      }
+    },
+    {
+      "name": "PoolCreatedEvent",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "id",
+            "type": "pubkey"
+          },
+          {
+            "name": "token",
+            "type": "pubkey"
+          },
+          {
+            "name": "sol_balance",
+            "type": "u128"
+          },
+          {
+            "name": "token_balance",
+            "type": "u128"
+          },
+          {
+            "name": "initial_buy_lock_days",
+            "type": "u64"
+          },
+          {
+            "name": "initial_token_supply",
+            "type": "u128"
+          },
+          {
+            "name": "trade_fee_numerator",
+            "type": "u128"
+          },
+          {
+            "name": "trade_fee_denominator",
+            "type": "u128"
+          },
+          {
+            "name": "selected_dex",
+            "type": "u8"
+          },
+          {
+            "name": "selected_env",
+            "type": "u8"
+          },
+          {
+            "name": "pool_creator",
+            "type": "pubkey"
+          },
+          {
+            "name": "pool_creator_token_balance",
+            "type": "u128"
+          },
+          {
+            "name": "created_at",
+            "type": "u64"
+          },
+          {
+            "name": "liquidity_pool",
+            "type": "pubkey"
+          },
+          {
+            "name": "liquidity_withdraw_status",
+            "type": "bool"
+          },
+          {
+            "name": "coefficient1",
+            "type": "u128"
+          },
+          {
+            "name": "coefficient2",
+            "type": "u128"
+          },
+          {
+            "name": "token_price",
+            "type": "u128"
+          },
+          {
+            "name": "curve_threshold_progress",
+            "type": "u128"
+          },
+          {
+            "name": "curve_threshold_reached",
+            "type": "bool"
+          },
+          {
+            "name": "curve",
+            "type": "pubkey"
+          },
+          {
+            "name": "name",
+            "type": "string"
+          }
+        ]
+      }
+    },
+    {
+      "name": "PoolData",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "token",
+            "type": "pubkey"
+          },
+          {
+            "name": "sol_balance",
+            "type": "u128"
+          },
+          {
+            "name": "token_balance",
+            "type": "u128"
+          },
+          {
+            "name": "initial_buy_lock_days",
+            "type": "u64"
+          },
+          {
+            "name": "initial_token_supply",
+            "type": "u128"
+          },
+          {
+            "name": "trade_fee_numerator",
+            "type": "u128"
+          },
+          {
+            "name": "trade_fee_denominator",
+            "type": "u128"
+          },
+          {
+            "name": "selected_dex",
+            "type": "u8"
+          },
+          {
+            "name": "selected_env",
+            "type": "u8"
+          },
+          {
+            "name": "pool_creator",
+            "type": "pubkey"
+          },
+          {
+            "name": "pool_creator_token_balance",
+            "type": "u128"
+          },
+          {
+            "name": "created_at",
+            "type": "u64"
+          },
+          {
+            "name": "liquidity_pool",
+            "type": "pubkey"
+          },
+          {
+            "name": "liquidity_withdraw_status",
+            "type": "bool"
+          },
+          {
+            "name": "coefficient1",
+            "type": "u128"
+          },
+          {
+            "name": "coefficient2",
+            "type": "u128"
+          },
+          {
+            "name": "curve_threshold_progress",
+            "type": "u128"
+          },
+          {
+            "name": "curve_threshold_reached",
+            "type": "bool"
+          },
+          {
+            "name": "token_price",
+            "type": "u128"
+          },
+          {
+            "name": "curve",
+            "type": "pubkey"
+          },
+          {
+            "name": "name",
+            "type": "string"
+          }
+        ]
+      }
+    },
+    {
+      "name": "PoolSellEvent",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "id",
+            "type": "pubkey"
+          },
+          {
+            "name": "name",
+            "type": "string"
+          },
+          {
+            "name": "token",
+            "type": "pubkey"
+          },
+          {
+            "name": "pool_creator_token_balance",
+            "type": "u128"
+          },
+          {
+            "name": "coefficient1",
+            "type": "u128"
+          },
+          {
+            "name": "coefficient2",
+            "type": "u128"
+          },
+          {
+            "name": "trader",
+            "type": "pubkey"
+          },
+          {
+            "name": "amount_in",
+            "type": "u128"
+          },
+          {
+            "name": "amount_out",
+            "type": "u128"
+          },
+          {
+            "name": "sol_bal",
+            "type": "u128"
+          },
+          {
+            "name": "token_bal",
+            "type": "u128"
+          },
+          {
+            "name": "token_price",
+            "type": "u128"
+          },
+          {
+            "name": "fee",
+            "type": "u128"
+          },
+          {
+            "name": "curve_threshold_progress",
+            "type": "u128"
+          },
+          {
+            "name": "curve_threshold_reached",
+            "type": "bool"
+          }
+        ]
+      }
+    },
+    {
+      "name": "SystemPauseEvent",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "is_paused",
+            "type": "bool"
+          }
+        ]
+      }
+    },
+    {
+      "name": "TokenBurnEvent",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "id",
+            "type": "pubkey"
+          },
+          {
+            "name": "name",
+            "type": "string"
+          },
+          {
+            "name": "token",
+            "type": "pubkey"
+          },
+          {
+            "name": "burned_token",
+            "type": "u64"
+          }
+        ]
+      }
+    },
+    {
+      "name": "TokenLockEvent",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "id",
+            "type": "pubkey"
+          },
+          {
+            "name": "name",
+            "type": "string"
+          },
+          {
+            "name": "token",
+            "type": "pubkey"
+          },
+          {
+            "name": "lock_starttime",
+            "type": "u64"
+          },
+          {
+            "name": "lock_period",
+            "type": "u64"
+          },
+          {
+            "name": "locked_token",
+            "type": "u64"
+          },
+          {
+            "name": "lock_program",
+            "type": "pubkey"
+          },
+          {
+            "name": "recipient",
+            "type": "pubkey"
+          },
+          {
+            "name": "escrow",
+            "type": "pubkey"
+          },
+          {
+            "name": "escrow_token",
+            "type": "pubkey"
+          },
+          {
+            "name": "escrow_metadata",
+            "type": "pubkey"
+          }
+        ]
+      }
+    }
+  ],
+  "constants": [
+    {
+      "name": "CURVE_SEED",
+      "type": "bytes",
+      "value": "[102, 97, 115, 116, 95, 99, 117, 114, 118, 101]"
+    },
+    {
+      "name": "CURVE_THRESHOLD_PROGRESS",
+      "type": "u128",
+      "value": "100000"
+    },
+    {
+      "name": "PLATFORM_SEED",
+      "type": "bytes",
+      "value": "[102, 97, 115, 116, 95, 108, 97, 117, 110, 99, 104]"
+    },
+    {
+      "name": "SECONDS_IN_DAY",
+      "type": "u64",
+      "value": "86400"
+    },
+    {
+      "name": "SETTING_SEED",
+      "type": "bytes",
+      "value": "[102, 97, 115, 116, 95, 115, 101, 116, 116, 105, 110, 103, 115]"
+    },
+    {
+      "name": "TOKEN_DECIMAL",
+      "type": "u128",
+      "value": "1000000"
+    },
+    {
+      "name": "TOKEN_SUPPLY",
+      "type": "u128",
+      "value": "1000000000000000"
+    }
+  ]
+}
