@@ -97,3 +97,20 @@ export enum ProfileView {
   LAUNCHES = 'launches',
   PORTFOLIO = 'portfolio',
 }
+
+export const TRENDING_TOKENS = [
+  { id: '1', difference: 'positive', name: 'Official Trump', percentage: '16.6%', price: '$50.50' },
+  { id: '2', difference: 'negative', name: 'Official Trump', percentage: '16.6%', price: '$50.50' },
+  { id: '3', difference: 'negative', name: 'Official Trump', percentage: '16.6%', price: '$50.50' },
+];
+
+export const SAMPLE_TOKEN = {
+  dayChange: 33.8,
+  fourHourChange: -2.2,
+  interactions: 325,
+  marketCap: 187148462711,
+  name: 'Trump',
+  price: 53.26,
+  symbol: 'TRP',
+  volume: 18016044741,
+};

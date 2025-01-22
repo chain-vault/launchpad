@@ -1,73 +1,58 @@
-import { Container, Flex, Image, Text } from '@chakra-ui/react';
+import { Box, Container, Flex, Text } from '@chakra-ui/react';
 import { createFileRoute } from '@tanstack/react-router';
 
-import ApeX from '@components/Banner/ApeX';
-import { LaunchTypeIcon } from '@components/LaunchTypeIcon';
-import { LinkButton } from '@components/LinkButton';
-import { CurveIndex } from '@constants/config';
-import { isApeInPoolCreationEnabled } from '@constants/config/features';
+import PopularTokens from '@components/PopularTokens';
+import { TRENDING_TOKENS } from '@constants/index';
 import useResponsiveValue from '@hooks/useResponsiveValue';
-
-import PeeledBanana from '@assets/imges/banana-peeled.png';
 
 export const Route = createFileRoute('/')({
   component: function Render() {
     const isMobile = useResponsiveValue({ base: true, md: false });
     return (
-      <>
-        <Container textAlign="center">
-          <Flex alignItems="center" direction="column" justifyContent="center">
-            <Flex alignItems="center" justifyContent="center">
-              <Flex boxSize="40px">
-                <LaunchTypeIcon boxSize="40px" type={CurveIndex.NANO_LAUNCH} />
-              </Flex>
-              <Flex mx={3}>
-                <Text textStyle="h2">Ape In</Text>
-              </Flex>
-              <Flex boxSize="40px">
-                <LaunchTypeIcon boxSize="40px" type={CurveIndex.PRIME_LAUNCH} />
-              </Flex>
+      <Container marginInline="10" maxW="95vw">
+        {/* <VStack align="stretch" bg="#1a1b23" p={6} spacing={6} w="full"> */}
+        <Text textStyle="h1">AI Token by Market Cap</Text>
+        <Text textStyle="body-sm">The AI Token market cap today is $3.78 Trillion in Solana</Text>
+        <Flex gap="1rem">
+          <Box bg="WindowFrame" borderRadius="md" padding="2">
+            <Text textStyle="h5">$3,755,754,662,008</Text>
+            <Flex alignItems="center">
+              <Text>Market Cap</Text>
+              <Text>1.8%</Text>
             </Flex>
-            <Flex direction="column" mb={6} mt={5}>
-              <Text>
-                Ready to go bananas?{' '}
-                <Image
-                  alt="Apen in"
-                  display="inline-block"
-                  src={PeeledBanana}
-                  transform="rotateY(180deg)"
-                  verticalAlign="middle"
-                  w={22}
-                />{' '}
-                Create your tokens in seconds
-              </Text>
-              <Text>and launch instantly.</Text>
+          </Box>
+          <Box bg="WindowFrame" borderRadius="md" padding="2">
+            <Text textStyle="h5">$415,853,021,780</Text>
+            <Text>24h Trading Volume</Text>
+          </Box>
+          <Box bg="WindowFrame" borderRadius="md" maxW="750px" padding="2">
+            <Flex justifyContent="space-between">
+              <Text textStyle="h5">Trending</Text>
+              <Text>view more &gt;</Text>
             </Flex>
-            <Flex>
-              <LinkButton
-                align="left"
-                height={43}
-                label={`Launch${!isMobile ? ' your' : ''} token`}
-                link={!isApeInPoolCreationEnabled ? '#' : '/fast-launch/create'}
-                maxWidth={210}
-                mr={2}
-                size="small"
-                variant="accent"
-              />
-              <LinkButton
-                align="left"
-                height={43}
-                label="Explore"
-                link="/launches/pump"
-                maxWidth={210}
-                size="small"
-                variant="outline-ape"
-              />
+            <Flex alignItems="center" gap="1" overflowY="auto">
+              {TRENDING_TOKENS.map((token) => (
+                <Box bg="brand.accent.900" borderRadius="md" key={token.id} padding="2">
+                  <Flex gap="2" wrap="nowrap">
+                    <Flex>
+                      <Text>ICO</Text>
+                      <Text>{token.name}</Text>
+                    </Flex>
+                    <Flex>
+                      <Text>{token.price}</Text>
+                      <Text>{token.difference === 'negative' ? 'negICO' : 'posICO'}</Text>
+                      <Text>{token.percentage}</Text>
+                    </Flex>
+                  </Flex>
+                </Box>
+              ))}
             </Flex>
-          </Flex>
-        </Container>
-        <ApeX />
-      </>
+          </Box>
+        </Flex>
+        <Box bg="WindowFrame" mt="2.5">
+          <PopularTokens />
+        </Box>
+      </Container>
     );
   },
 });
