@@ -1,32 +1,16 @@
 import { walletConnectModalAtom } from '@atoms/index';
-import {
-  Box,
-  Flex,
-  HStack,
-  Icon,
-  IconButton,
-  Image,
-  Skeleton,
-  Text,
-  useClipboard,
-} from '@chakra-ui/react';
+import { Box, Flex, HStack, Icon, IconButton, Image, Text, useClipboard } from '@chakra-ui/react';
 import { useAtom } from 'jotai';
 import { FaCheck } from 'react-icons/fa6';
 import { PiCopy } from 'react-icons/pi';
 import { RiShutDownLine } from 'react-icons/ri';
 import { RxChevronDown } from 'react-icons/rx';
 
-import { NATIVE_TOKEN, NATIVE_TOKEN_ADDRESS, WalletInfoButonActions } from '@constants/index';
+import { WalletInfoButonActions } from '@constants/index';
 // import useResponsiveValue from '@hooks/useResponsiveValue';
 
-import { PublicKey } from '@solana/web3.js';
-
-import NumberWithTooltip from '@components/ui/Tooltip/NumberWithTooltip';
-import { useTokenBalance } from '@hooks/useGetTokenBalance';
 import useWalletConnection from '@hooks/useWalletConnection';
 import { useWeb3React } from '@hooks/useWeb3React';
-import { formatNumber, NumberFormatType } from '@utils/formatNumbers';
-import { Token } from '@utils/token';
 
 import { CircleInsideCircle } from '@assets/icons';
 
@@ -42,32 +26,32 @@ const WalletInfoButton = ({ action, showAddress = true }: WalletInfoButtonProps)
   const [, setIsOpen] = useAtom(walletConnectModalAtom);
   const { hasCopied, onCopy } = useClipboard(publicKey ? publicKey.toBase58() : '');
 
-  const { balance: tokenInBalance, isLoading: tokenInBalanceLoading } = useTokenBalance(
-    new PublicKey(NATIVE_TOKEN_ADDRESS),
-    true
-  );
+  // const { balance: tokenInBalance, isLoading: tokenInBalanceLoading } = useTokenBalance(
+  //   new PublicKey(NATIVE_TOKEN_ADDRESS),
+  //   true
+  // );
 
-  const isBalanceZero =
-    Token.fromRawAmount(tokenInBalance ?? 0, NATIVE_TOKEN?.decimal).toString() === '0';
+  // const isBalanceZero =
+  //   Token.fromRawAmount(tokenInBalance ?? 0, NATIVE_TOKEN?.decimal).toString() === '0';
 
   const getAddressShortened = () =>
     publicKey && showAddress ?
-      `${publicKey.toBase58().slice(0, 2)}...${publicKey.toBase58().slice(-2)}`
+      `${publicKey.toBase58().slice(0, 4)}...${publicKey.toBase58().slice(-4)}`
     : '';
 
   return (
     <Box
-      w={
-        action === WalletInfoButonActions.DISCONNECT_WALLET ?
-          { base: isBalanceZero ? '190px' : '230px', md: isBalanceZero ? '220px' : '270px' }
-        : { base: isBalanceZero ? '120px' : '170px', md: isBalanceZero ? '180px' : '230px' }
-      }
+      // w={
+      //   action === WalletInfoButonActions.DISCONNECT_WALLET ?
+      //     { base: '230px', md: '270px' }
+      //   : { base: '100px', md: '200px' }
+      // }
       bg="surface.base.200"
       border="2px solid"
       borderColor="surface.base.500"
       borderRadius="3xl"
       cursor="default"
-      px="0"
+      px="2"
     >
       {isConnected ?
         <Flex align="center" justifyContent="space-between" w="100%">
@@ -75,14 +59,14 @@ const WalletInfoButton = ({ action, showAddress = true }: WalletInfoButtonProps)
             <Box p={1} textAlign="left">
               <Image borderRadius="20px" boxSize={6} src={wallet?.adapter.icon ?? ''} />
             </Box>
-            <Flex alignItems="center" gap={1} textAlign="left" w="100%">
+            <Flex alignItems="center" gap={1} mr="1.5" textAlign="left" w="100%">
               <Text letterSpacing="0.4px" textStyle="body-sm">
                 {getAddressShortened()}{' '}
               </Text>
-              <Text display={showAddress ? 'flex' : 'none'} textStyle="body-md-bold">
+              {/* <Text display={showAddress ? 'flex' : 'none'} textStyle="body-md-bold">
                 |
-              </Text>
-              <Skeleton isLoaded={!tokenInBalanceLoading}>
+              </Text> */}
+              {/* <Skeleton isLoaded={!connecting}>
                 <NumberWithTooltip
                   tooltip={Token.fromRawAmount(
                     tokenInBalance ?? 0,
@@ -93,7 +77,7 @@ const WalletInfoButton = ({ action, showAddress = true }: WalletInfoButtonProps)
                     {`${formatNumber({ input: Token.fromRawAmount(tokenInBalance ?? 0, NATIVE_TOKEN?.decimal), suffix: NATIVE_TOKEN?.symbol, type: NumberFormatType.TokenBalanceFormatter })}`}
                   </Text>
                 </NumberWithTooltip>
-              </Skeleton>
+              </Skeleton> */}
             </Flex>
           </HStack>
           {action === WalletInfoButonActions.DISCONNECT_WALLET ?
