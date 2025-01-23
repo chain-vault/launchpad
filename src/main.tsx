@@ -34,7 +34,7 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
         <ReactQueryDevtools buttonPosition="bottom-left" initialIsOpen={false} />
         <ApolloProvider client={graphQlClient}>
           <JotaiProvider store={jotaiStore}>
-            <DevTools position="top-left" store={jotaiStore} />
+            <DevTools position="bottom-right" store={jotaiStore} />
             <SolanaWalletProvider>
               <AuthWrapper>
                 <RouterProvider router={router} />

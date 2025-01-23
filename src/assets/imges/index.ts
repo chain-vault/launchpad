@@ -3,6 +3,7 @@ export { default as AppLogoMobile } from './app-logo-mobile.svg';
 export { default as AppLogo } from './app-logo.svg';
 export { default as BananaPeeled } from './banana-peeled.png';
 export { default as Banana } from './banana.png';
+export { default as BlockBeastLogo } from './block-beast-logo.svg';
 export { default as CoconutError } from './coconut-error-icon.png';
 export { default as CoconutTree } from './coconut-tree.png';
 export { default as Lock } from './lock.svg';

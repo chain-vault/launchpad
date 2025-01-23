@@ -96,7 +96,7 @@ export const getMigrationDexPoolLink = (address: string, selectedDex: DexType = 
   `${MIGRATION_DEX_POOL_URL[selectedDex]}${address}`;
 
 export const generateSignInMessage = (publicKey: string, nonce: string, timestamp: string) => `
-Welcome to apeon.it dapp!
+Welcome to BlockBeast dapp!
 
 Please sign this message to authenticate your wallet and log in.
 
@@ -104,7 +104,7 @@ Please sign this message to authenticate your wallet and log in.
 - Solana account: ${publicKey}
 - Issued at: ${timestamp}
 
-Signing is the only way that you are the owner of the wallet you are connecting. Signing is safe, gas-less transaction that does not in any way give Apeon permission to perform any transaction with your wallet.
+Signing is the only way that you are the owner of the wallet you are connecting. Signing is safe, gas-less transaction that does not in any way give BlockBeast permission to perform any transaction with your wallet.
 `;
 
 // bubble map link
