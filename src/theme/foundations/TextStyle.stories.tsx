@@ -37,7 +37,7 @@ export const Default: Story = {
               <Text
                 opacity={0.5}
                 textStyle="body-xs"
-              >{`Gilroy / ${style.fontWeight} / ${isSmallDevice ? style.fontSize.base : style.fontSize.md} / ${
+              >{`Space Grotesk / ${style.fontWeight} / ${isSmallDevice ? style.fontSize.base : style.fontSize.md} / ${
                 typeof style.lineHeight === 'string' ? style.lineHeight
                 : isSmallDevice ? style.lineHeight?.base
                 : style.lineHeight?.md

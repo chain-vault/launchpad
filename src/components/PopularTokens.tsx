@@ -2,6 +2,7 @@
 import {
   Box,
   Button,
+  Flex,
   HStack,
   Image,
   Table,
@@ -13,6 +14,8 @@ import {
   Thead,
   Tr,
 } from '@chakra-ui/react';
+import { IoMdCopy } from 'react-icons/io';
+import { LuArrowDownUp, LuExternalLink } from 'react-icons/lu';
 
 import { SAMPLE_TOKEN } from '@constants/index';
 
@@ -25,20 +28,39 @@ const formatNumber = (num: number): string =>
   }).format(num);
 
 const PopularTokens = () => (
-  <Box bg="#1a1b23" p={4}>
+  <Box bg="#1E263A" borderRadius="md" p={4}>
     <HStack mb={4} spacing={2}>
-      <Button _hover={{ bg: 'blue.500' }} bg="blue.400" borderRadius="full" color="white" size="sm">
-        Total Value Locked
-      </Button>
-      <Button
-        _hover={{ bg: 'whiteAlpha.100' }}
-        borderRadius="full"
-        color="gray.400"
-        size="sm"
-        variant="ghost"
-      >
-        Market Cap
-      </Button>
+      <Box bg="#121E30" borderRadius="full" display="flex" padding="2">
+        <Button
+          _hover={{ bg: 'blue.500' }}
+          bg="blue.400"
+          borderRadius="full"
+          color="white"
+          size="sm"
+        >
+          Recently Launched
+        </Button>
+        <Button
+          _hover={{ bg: 'whiteAlpha.100' }}
+          bg="transparant"
+          borderRadius="full"
+          color="gray.400"
+          size="sm"
+          variant="ghost"
+        >
+          Market Cap
+        </Button>
+        <Button
+          _hover={{ bg: 'whiteAlpha.100' }}
+          bg="transparant"
+          borderRadius="full"
+          color="gray.400"
+          size="sm"
+          variant="ghost"
+        >
+          Bonded
+        </Button>
+      </Box>
     </HStack>
 
     <TableContainer w="full">
@@ -49,15 +71,34 @@ const PopularTokens = () => (
             <Th color="gray.400">
               <HStack spacing={1}>
                 <Text>Price</Text>
-                {/* <ChevronDownIcon /> */}
-                <Text>ICO</Text>
+                <LuArrowDownUp />
               </HStack>
             </Th>
-            <Th color="gray.400">4h</Th>
-            <Th color="gray.400">24h</Th>
-            <Th color="gray.400">24h Volume</Th>
-            <Th color="gray.400">Market Cap</Th>
-            <Th color="gray.400">Intractions</Th>
+            <Th color="gray.400">
+              <HStack spacing={1}>
+                <Text>24h</Text>
+                <LuArrowDownUp />
+              </HStack>
+            </Th>
+            <Th color="gray.400">
+              <HStack spacing={1}>
+                <Text>24h Volume</Text>
+                <LuArrowDownUp />
+              </HStack>
+            </Th>
+            <Th color="gray.400">
+              <HStack spacing={1}>
+                <Text>Market Cap</Text>
+                <LuArrowDownUp />
+              </HStack>
+            </Th>
+            <Th color="gray.400">
+              <HStack spacing={1}>
+                <Text>Intractions</Text>
+                <LuArrowDownUp />
+              </HStack>
+            </Th>
+            <Th color="gray.400">Holderlist</Th>
             <Th color="gray.400">AI Agent</Th>
           </Tr>
         </Thead>
@@ -79,27 +120,45 @@ const PopularTokens = () => (
                       {token.symbol}
                     </Text>
                   </HStack>
+                  <Tr>
+                    <Flex alignItems="center" direction="row" gap="2" marginTop="2">
+                      <Flex
+                        alignItems="center"
+                        bgColor="rgb(255 255 255 / 5%)"
+                        borderRadius="full"
+                        direction="row"
+                        gap="1"
+                        px={2}
+                        py={1}
+                      >
+                        <Text fontSize="xs">{token.ca}</Text>
+                        <LuExternalLink />
+                      </Flex>
+                      <Flex bgColor="rgb(255 255 255 / 5%)" borderRadius="full" px={2} py={2}>
+                        <IoMdCopy />
+                      </Flex>
+                    </Flex>
+                  </Tr>
                 </Td>
                 <Td>{formatNumber(token.price)}</Td>
-                <Td color={token.fourHourChange < 0 ? 'red.400' : 'green.400'}>
-                  {token.fourHourChange}%
-                </Td>
                 <Td color="green.400">{token.dayChange}%</Td>
                 <Td>{formatNumber(token.volume)}</Td>
                 <Td>{formatNumber(token.marketCap)}</Td>
                 <Td>{token.interactions}</Td>
+                <Td>{token.holders}</Td>
                 <Td>
                   <Button
                     _hover={{ bg: 'green.500', color: 'white' }}
+                    bg="transparent"
                     borderColor="green.500"
-                    borderRadius="full"
+                    borderRadius="2xl"
                     color="green.500"
                     h="24px"
                     px={3}
                     size="sm"
                     variant="outline"
                   >
-                    chat
+                    View
                   </Button>
                 </Td>
               </Tr>

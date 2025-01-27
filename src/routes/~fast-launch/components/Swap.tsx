@@ -147,7 +147,7 @@ export const SwapSection: React.FC = () => {
               </Flex>
               <Box mb={2}>
                 <Flex direction="row" justifyContent="space-between" mb={2}>
-                  <Flex textStyle="body-md">You Pay</Flex>
+                  <Flex textStyle="body-md">You ll Pay</Flex>
                   <Flex color="surface.base.800" textStyle="body-md">
                     <Flex alignItems="center" gap={2} justifyContent="space-between">
                       <IconButton

@@ -1,21 +1,7 @@
 import { useEffect, useState } from 'react';
 
-import {
-  Box,
-  Button,
-  chakra,
-  Container,
-  Flex,
-  HStack,
-  Image,
-  Input,
-  InputGroup,
-  InputLeftElement,
-  Text,
-} from '@chakra-ui/react';
-import styled from '@emotion/styled';
+import { Box, Button, Container, Flex, HStack, Image, Text } from '@chakra-ui/react';
 import { Link, useLocation } from '@tanstack/react-router';
-import { IoMdSearch } from 'react-icons/io';
 
 // import { ActionButton } from '@components/ui/Button';
 import { ConnectWalletButton } from '@components/WalletAdapter';
@@ -165,7 +151,7 @@ const Navbar = ({
   }, [isOpen, onToggle]);
 
   return (
-    <Box bg="gray.900" py={4}>
+    <Box bg="base.900" py={4} shadow="0px 4px 4px 0px rgba(0, 0, 0, 0.25)">
       <Container maxW="container.xl">
         <Flex align="center" justify="space-between">
           {/* Logo and Navigation */}
@@ -184,28 +170,6 @@ const Navbar = ({
               <Text color="gray.400">Newely Launched</Text>
             </HStack>
           </HStack>
-
-          {/* Search Bar */}
-          <Box maxW="18.75rem" w="full">
-            <InputGroup>
-              <InputLeftElement pointerEvents="none">
-                {/* <SearchIcon color="gray.400" /> */}
-                <IoMdSearch />
-              </InputLeftElement>
-              <Input
-                _focus={{
-                  border: '1px solid',
-                  borderColor: 'blue.400',
-                  boxShadow: 'none',
-                }}
-                _placeholder={{ color: 'gray.400' }}
-                bg="gray.800"
-                border="none"
-                color="white"
-                placeholder="Search"
-              />
-            </InputGroup>
-          </Box>
 
           {/* Action Buttons */}
           <HStack spacing={4}>

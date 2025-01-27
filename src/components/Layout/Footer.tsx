@@ -7,7 +7,7 @@ import SocialsListing from '@components/SocialsListing';
 import { NAVBAR_SOCIAL_ICONS } from '@constants/index';
 import createPathConstants from '@constants/routes';
 
-import AppLogo from '@assets/imges/app-logo.svg';
+import AppLogo from '@assets//imges/block-beast-logo.svg';
 
 const Footer = () => {
   const pathConstants = useMemo(() => createPathConstants(), []);
@@ -15,6 +15,7 @@ const Footer = () => {
   return (
     <Flex
       alignItems="center"
+      bg="#13192C"
       flexDirection="column"
       gap={3}
       height="100%"
@@ -31,7 +32,8 @@ const Footer = () => {
           />
         </Link>
         <SocialsListing
-          _hover={{ bg: 'brand.accent.600', transition: '0.1s ease-in' }}
+          _hover={{ bg: 'brand.accent.900', transition: '0.1s ease-in' }}
+          bgColor="rgb(255 255 255 / 5%)"
           socialsList={NAVBAR_SOCIAL_ICONS}
         />
         <Box textAlign="center">
@@ -68,19 +70,35 @@ const Footer = () => {
         </Box>
       </Flex>
       <Flex direction="column" gap={2} mb={6}>
-        <Text opacity="0.5" textStyle="body-regular">
-          Version: {import.meta.env.VITE_APP_VERSION.substring(0, 6)}
-        </Text>
-        <Flex alignItems="center" gap={1} justifyContent="center">
+        <Flex alignItems="center" direction="row" gap={2} justifyContent="center">
+          <Flex alignItems="center" gap={1} justifyContent="center">
+            <Text opacity="0.5" textStyle="body-regular">
+              Charts powered by{' '}
+            </Text>
+            <ChakraLink color="blue.500" href="https://www.tradingview.com/" isExternal>
+              Tradingview
+            </ChakraLink>
+          </Flex>
+          <Box>
+            <Text>|</Text>
+          </Box>
+          <Flex alignItems="center" gap={1} justifyContent="center">
+            <Text opacity="0.5" textStyle="body-regular">
+              Trades powered by{' '}
+            </Text>
+            <ChakraLink color="blue.500" href="https://www.apeon.it/" isExternal>
+              Apeon
+            </ChakraLink>
+          </Flex>
+          <Box>
+            <Text>|</Text>
+          </Box>
           <Text opacity="0.5" textStyle="body-regular">
-            Charts powered by{' '}
+            Version: {import.meta.env.VITE_APP_VERSION.substring(0, 6)}
           </Text>
-          <ChakraLink color="blue.500" href="https://www.tradingview.com/" isExternal>
-            Tradingview
-          </ChakraLink>
         </Flex>
         <Text opacity="0.5" textStyle="body-regular">
-          © 2024 ApeOn, All Rights Reserved
+          © 2025 blackbest.ai, All Rights Reserved
         </Text>
       </Flex>
     </Flex>

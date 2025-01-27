@@ -24,7 +24,7 @@ export const textStyles: TextStyles = {
     fontWeight: 'semibold',
     letterSpacing: { base: '0.9px', md: '0.96px' },
     lineHeight: '100%',
-    fontFamily: 'Gilroy',
+    fontFamily: 'Space Grotesk',
   },
   h2: {
     /** Header 2 - 40px and 24px */
@@ -32,7 +32,7 @@ export const textStyles: TextStyles = {
     fontWeight: 'semibold',
     letterSpacing: { base: '0.96px', md: '0.96px' },
     lineHeight: '100%',
-    fontFamily: 'Gilroy',
+    fontFamily: 'Space Grotesk',
   },
   h3: {
     /** Header 3 - 18px and 16px */
@@ -40,7 +40,7 @@ export const textStyles: TextStyles = {
     fontWeight: 'semibold',
     letterSpacing: { base: '0.96px', md: '0.96px' },
     lineHeight: '100%',
-    fontFamily: 'Gilroy',
+    fontFamily: 'Space Grotesk',
   },
 
   'body-regular': {

@@ -1,5 +1,18 @@
-import { Box, Container, Flex, Text } from '@chakra-ui/react';
+import {
+  Box,
+  Container,
+  Flex,
+  Heading,
+  Highlight,
+  HStack,
+  Image,
+  Input,
+  InputGroup,
+  InputLeftElement,
+  Text,
+} from '@chakra-ui/react';
 import { createFileRoute } from '@tanstack/react-router';
+import { IoMdSearch } from 'react-icons/io';
 
 import PopularTokens from '@components/PopularTokens';
 import { TRENDING_TOKENS } from '@constants/index';
@@ -9,50 +22,105 @@ export const Route = createFileRoute('/')({
   component: function Render() {
     const isMobile = useResponsiveValue({ base: true, md: false });
     return (
-      <Container marginInline="10" maxW="95vw">
-        {/* <VStack align="stretch" bg="#1a1b23" p={6} spacing={6} w="full"> */}
-        <Text textStyle="h1">AI Token by Market Cap</Text>
-        <Text textStyle="body-sm">The AI Token market cap today is $3.78 Trillion in Solana</Text>
-        <Flex gap="1rem">
-          <Box bg="WindowFrame" borderRadius="md" padding="2">
-            <Text textStyle="h5">$3,755,754,662,008</Text>
-            <Flex alignItems="center">
-              <Text>Market Cap</Text>
-              <Text>1.8%</Text>
+      <Box bg="base.900" py={2}>
+        <Container maxW="container.xl">
+          <Flex direction="column">
+            <Heading letterSpacing="tight" size="2xl">
+              <Highlight query="Launchpad" styles={{ color: 'teal.600' }}>
+                AI Token Launchpad
+              </Highlight>
+            </Heading>
+            <Text color="fg.muted" fontSize="md">
+              The AI 1 Token market cap today is $3.78 Trillion in Solana
+            </Text>
+
+            <Flex gap="1rem" mt={8}>
+              {/* <Box bg="#1E263A" borderRadius="md" paddingX="4" paddingY="4">
+                <Heading letterSpacing="tight" mb="2" size="md">
+                  $3,755,754,662,008
+                </Heading>
+                <Flex alignItems="baseline" justifyContent="space-between">
+                  <Text color="fg.muted" fontSize="md">
+                    Market Cap
+                  </Text>
+                  <Text color="green.400">1.8%</Text>
+                </Flex>
+              </Box>
+              <Box bg="#1E263A" borderRadius="md" paddingX="4" paddingY="4">
+                <Heading letterSpacing="tight" mb="2" size="md">
+                  $415,853,021,780
+                </Heading>
+                <Flex alignItems="baseline" justifyContent="space-between">
+                  <Text color="fg.muted" fontSize="md">
+                    24h Trading Volume
+                  </Text>
+                  <Text color="red.400">1.8%</Text>
+                </Flex>
+              </Box> */}
+              <Box bg="#1E263A" borderRadius="md" paddingX="4" paddingY="4" width="100%">
+                <Flex justifyContent="space-between" mb="2">
+                  <Text textStyle="h4">🔥Trending</Text>
+                  <Text>view more &gt;</Text>
+                </Flex>
+                <Flex alignItems="center" gap="1" overflowY="auto" width="100%">
+                  {TRENDING_TOKENS.map((token) => (
+                    <Box bg="brand.accent.900" borderRadius="md" key={token.id} padding="2">
+                      <Flex gap="2" wrap="nowrap">
+                        <HStack spacing={2}>
+                          <Flex minW="150">
+                            <Image
+                              alt="Token icon"
+                              borderRadius="full"
+                              boxSize="24px"
+                              src="https://s3-alpha-sig.figma.com/img/d2da/29ed/db62a0bcddc7a8b6e80e049081ae833c?Expires=1738540800&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=as74f6SFcoYblzly-yWLxk3EZSnUucTEFNtL034ZXJUqm0NHiRB2YSGcbsjxmaYhsOnQV5KpPuF5TP47FwJDoyNkbjFrXn45N22nbnRMNQvTZuOlhQMRngnev9Y54Aezx6eVEorLphlZ8KrwNicJ5vXIIiz4-1Au1fbfl-CVZWT5o~23rgLuYQhKy-uBeOvfN6u3FxRf1UlEvOWnUTtJ7UidNJ1EBcEeS9hA9xXBk~bAiICZ5E70xwGhqfCUWz2jQTWcGOqwSzbmyeimjnbVddFL2uClL5NCI3BKPqFRRaJag7KKFIkWSDfRyyCylYVlLCmmdC4zm5uLz4rsaH-bng__"
+                            />
+                            <Text fontWeight="medium">{token.name}</Text>
+                            <Text color="gray.400" fontSize="sm">
+                              {token.symbol}
+                            </Text>
+                          </Flex>
+
+                          <Flex>
+                            <Text>{token.price}</Text>
+                            <Text>{token.difference === 'negative' ? 'negICO' : 'posICO'}</Text>
+                            <Text>{token.percentage}</Text>
+                          </Flex>
+                        </HStack>
+                      </Flex>
+                    </Box>
+                  ))}
+                </Flex>
+              </Box>
             </Flex>
-          </Box>
-          <Box bg="WindowFrame" borderRadius="md" padding="2">
-            <Text textStyle="h5">$415,853,021,780</Text>
-            <Text>24h Trading Volume</Text>
-          </Box>
-          <Box bg="WindowFrame" borderRadius="md" maxW="750px" padding="2">
-            <Flex justifyContent="space-between">
-              <Text textStyle="h5">Trending</Text>
-              <Text>view more &gt;</Text>
+            {/* Search Bar */}
+            <Flex alignItems="center" justifyContent="center" mt={4}>
+              <Box maxW="18.75rem" w="full">
+                <InputGroup>
+                  <InputLeftElement pointerEvents="none">
+                    {/* <SearchIcon color="gray.400" /> */}
+                    <IoMdSearch />
+                  </InputLeftElement>
+                  <Input
+                    _focus={{
+                      border: '1px solid',
+                      borderColor: 'blue.400',
+                      boxShadow: 'none',
+                    }}
+                    _placeholder={{ color: 'gray.400' }}
+                    bg="#2C3655"
+                    border="none"
+                    color="white"
+                    placeholder="Search Token Name or CA"
+                  />
+                </InputGroup>
+              </Box>
             </Flex>
-            <Flex alignItems="center" gap="1" overflowY="auto">
-              {TRENDING_TOKENS.map((token) => (
-                <Box bg="brand.accent.900" borderRadius="md" key={token.id} padding="2">
-                  <Flex gap="2" wrap="nowrap">
-                    <Flex>
-                      <Text>ICO</Text>
-                      <Text>{token.name}</Text>
-                    </Flex>
-                    <Flex>
-                      <Text>{token.price}</Text>
-                      <Text>{token.difference === 'negative' ? 'negICO' : 'posICO'}</Text>
-                      <Text>{token.percentage}</Text>
-                    </Flex>
-                  </Flex>
-                </Box>
-              ))}
-            </Flex>
-          </Box>
-        </Flex>
-        <Box bg="WindowFrame" mt="2.5">
-          <PopularTokens />
-        </Box>
-      </Container>
+            <Box bg="base.800" mt="2.5">
+              <PopularTokens />
+            </Box>
+          </Flex>
+        </Container>
+      </Box>
     );
   },
 });
