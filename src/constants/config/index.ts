@@ -128,3 +128,5 @@ export const DEX_OPTIONS: LockType[] = [
 ];
 
 export const PHANTOM_DOWNLOAD_URL = 'https://phantom.com/';
+
+export const BLOCK_BEAST_BASE_URL = 'https://d5489svsusa37.cloudfront.net';

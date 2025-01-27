@@ -13,6 +13,9 @@ export enum TABS {
 export type TabNames = `${TABS}`;
 
 export type FastLaunchForm = {
+  beastBiography: string;
+  beastDescription: string;
+  beastGreeting: string;
   discord: string;
   initialBuy: number | string;
   lockToken: {

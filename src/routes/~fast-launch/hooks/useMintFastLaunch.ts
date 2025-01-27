@@ -1,5 +1,6 @@
 import { useMemo, useRef, useState } from 'react';
 
+import apiConfig from '@adapters/api/apiConfig';
 import { transactionSettings } from '@atoms/index';
 import * as anchor from '@coral-xyz/anchor';
 import { BN, type Idl } from '@coral-xyz/anchor';
@@ -16,10 +17,12 @@ import utc from 'dayjs/plugin/utc';
 import Decimal from 'decimal.js';
 import { useAtomValue } from 'jotai';
 import isFunction from 'lodash/isFunction';
+import { v4 as uuid } from 'uuid';
 
 import { isApeInPoolCreationEnabled } from '@constants/config/features';
 import {
   ApeInCurveMode,
+  BLOCK_BEAST_BASE_URL,
   EVENT_AUTHORITY,
   IRYS_FILE_PREFIX,
   LOCK_PROGRAM_ID,
@@ -41,6 +44,7 @@ import { getConnection, useWeb3React } from '@hooks/useWeb3React';
 import { ApeonFastlaunch, FastLauchIdl } from '@idl/fastlaunch';
 import { TokenFactory, TokenFactoryIdl } from '@idl/token';
 import createJSONFile from '@utils/createJSONfile';
+import { fileToBase64 } from '@utils/fileConversion';
 import { compressString } from '@utils/textCompression';
 import { Token } from '@utils/token';
 
@@ -359,7 +363,31 @@ const useMintToken = (onSuccess?: (data: string[]) => void, onError?: (error: st
       throw new Error(SOMETHING_WENT_WRONG);
     }
   };
+  type CreateAgentRequest = {
+    agent_id: string;
+    bio: string;
+    content: string;
+    description: string;
+    greeting: string;
+    image: string;
+    mintAddress: string;
+    name: string;
+    poolAddress: string;
+    public_key: string;
+    txHash: string;
+  };
 
+  const { mutate: createAgent } = useMutation({
+    mutationFn: (payload: CreateAgentRequest) =>
+      apiConfig(`${BLOCK_BEAST_BASE_URL}/insert`, 'POST', payload),
+    onError: (error) => {
+      showToast({
+        message: error.message,
+        title: 'Failed to create beast',
+        type: ToastType.FAILED,
+      });
+    },
+  });
   const {
     error: txError,
     isError,
@@ -382,7 +410,7 @@ const useMintToken = (onSuccess?: (data: string[]) => void, onError?: (error: st
         onError(error.message);
       }
     },
-    onSuccess: (data) => {
+    onSuccess: async (data, variables) => {
       if (!data) return;
       const [mintAddress, poolAddress, txHash] = data;
       showToast(
@@ -396,6 +424,65 @@ const useMintToken = (onSuccess?: (data: string[]) => void, onError?: (error: st
           type: ToastType.SUCCESS,
         },
         { autoClose: 5000 }
+      );
+
+      if (publicKey === null) {
+        throw new Error(WALLET_NOT_CONNECTED);
+      }
+      if (!(variables.tokenLogo && variables.tokenLogo instanceof File)) {
+        throw new Error('Unable to read logo to create Beast');
+      }
+      showToast({ title: 'Creating your beast', type: ToastType.LOADING });
+      const image = await fileToBase64(variables.tokenLogo);
+      const agentId = uuid();
+      createAgent(
+        {
+          agent_id: agentId,
+          bio: variables.beastBiography,
+          content: '',
+          description: variables.beastDescription,
+          greeting: variables.beastGreeting,
+          image,
+          mintAddress,
+          name: variables.tokenName,
+          poolAddress,
+          public_key: publicKey.toBase58(),
+          txHash,
+        },
+        {
+          onSuccess: () => {
+            showToast(
+              {
+                // actions: [
+                //   { label: 'View', link: `/fast-launch/swap/${poolAddress}` },
+                //   ...createActions({ transaction: txHash }),
+                // ],
+                message: 'Success',
+                title: 'Beast created successfully',
+                type: ToastType.SUCCESS,
+              },
+              { autoClose: 5000 }
+            );
+
+            showToast(
+              {
+                actions: [
+                  {
+                    label: 'View Beast',
+                    link: `https://dapp.blockbeast.ai/chat/${agentId}`,
+                  },
+                  { label: 'View token', link: `/fast-launch/swap/${poolAddress}` },
+
+                  ...createActions({ transaction: txHash }),
+                ],
+                message: 'Success',
+                title: 'Token and Beast created successfully',
+                type: ToastType.SUCCESS,
+              },
+              { autoClose: 5000 }
+            );
+          },
+        }
       );
       setTxDetails({
         errorMessage: '',

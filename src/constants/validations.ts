@@ -25,3 +25,10 @@ export const TOKEN_SYMBOL_VALIDATION_RULES = {
   pattern: ASCII_STRING_PATTERN,
   required: 'Required field',
 };
+
+export const BEAST_BIOGRAPHY_VALIDATION_RULES = {
+  minLength: {
+    message: 'Biography length should be at least 30 characters',
+    value: 30,
+  },
+};
