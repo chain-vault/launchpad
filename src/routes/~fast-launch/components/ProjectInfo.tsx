@@ -27,6 +27,7 @@ export const ProjectInfo: React.FC = () => {
           />
         </Skeleton>
       </Box>
+      <Box>asgg</Box>
       {isMobile && (
         <Flex py={2}>
           <Socials />

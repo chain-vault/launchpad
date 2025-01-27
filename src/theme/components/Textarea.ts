@@ -18,7 +18,7 @@ export default defineStyleConfig({
     bg: 'surface.base.700',
     border: 'solid 1px !important',
     borderColor: 'red',
-    fontFamily: 'Gilroy',
+    fontFamily: 'Space Grotesk',
     fontWeight: 600,
     minH: '164px',
   },

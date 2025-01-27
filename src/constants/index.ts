@@ -3,15 +3,15 @@ import { SocialIconsMapList } from '@app-types/index';
 export const NAVBAR_SOCIAL_ICONS: SocialIconsMapList = [
   {
     id: 'twitter',
-    url: 'apeonit',
+    url: 'aiblockbeast',
   },
   {
     id: 'gitbook',
-    url: 'https://apeon.gitbook.io/apeon',
+    url: 'https://docs.blockbeast.ai/',
   },
   {
     id: 'telegram',
-    url: 'https://t.me/apeonit',
+    url: 'https://t.me/blockbeastai',
   },
 ];
 
@@ -105,8 +105,9 @@ export const TRENDING_TOKENS = [
 ];
 
 export const SAMPLE_TOKEN = {
+  ca: '4kiKP...Rpump',
   dayChange: 33.8,
-  fourHourChange: -2.2,
+  holders: 542,
   interactions: 325,
   marketCap: 187148462711,
   name: 'Trump',

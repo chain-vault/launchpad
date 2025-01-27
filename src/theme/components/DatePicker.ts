@@ -7,7 +7,7 @@ const DatePicker = defineStyleConfig({
   baseStyle: (props) => ({
     /** Container */
     '.react-datepicker': {
-      fontFamily: 'Gilroy',
+      fontFamily: 'Space Grotesk',
       border: '1px solid',
       borderColor: mode('base.200', 'base.700')(props),
       backgroundColor: mode('base.100', 'base.800')(props),

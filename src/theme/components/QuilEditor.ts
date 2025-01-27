@@ -7,7 +7,7 @@ const QuillEditor = defineStyleConfig({
   baseStyle: (props) => ({
     /** Quill container styles */
     '.ql-container': {
-      fontFamily: 'Gilroy',
+      fontFamily: 'Space Grotesk',
     },
     '.ql-container.ql-snow': {
       minHeight: '90px',

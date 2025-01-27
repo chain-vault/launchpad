@@ -37,7 +37,7 @@ const FooterContainer = styled(Box)`
   text-align: center;
 
   &:before {
-    z-index: 1;
+    /* z-index: 1;
     content: '';
     top: -55px;
     left: 0;
@@ -45,7 +45,7 @@ const FooterContainer = styled(Box)`
     height: 100px;
     position: absolute;
     color: white;
-    clip-path: ellipse(55% 45% at 50% 50%);
+    clip-path: ellipse(55% 45% at 50% 50%); */
   }
 `;
 
@@ -92,21 +92,21 @@ const Layout = ({ children }: React.PropsWithChildren) => {
   }, [router.location.pathname]);
   return (
     <Box
-      _after={
-        isHomePage ?
-          {
-            bg: 'background.overlay',
-            content: '""',
-            display: 'block',
-            h: '35vh',
-            left: 0,
-            position: 'absolute',
-            right: 0,
-            top: 0,
-            zIndex: -1,
-          }
-        : {}
-      }
+      // _after={
+      //   isHomePage ?
+      //     {
+      //       bg: 'background.overlay',
+      //       content: '""',
+      //       display: 'block',
+      //       h: '35vh',
+      //       left: 0,
+      //       position: 'absolute',
+      //       right: 0,
+      //       top: 0,
+      //       zIndex: -1,
+      //     }
+      //   : {}
+      // }
       display="flex"
       flexDirection="column"
       minHeight="100vh"

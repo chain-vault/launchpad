@@ -92,8 +92,8 @@ export const theme = extendTheme({
   },
   textStyles,
   fonts: {
-    heading: 'Gilroy',
-    body: 'Nunito',
+    heading: 'Space Grotesk',
+    body: 'Space Grotesk',
   },
   config: {
     useSystemColorMode: false,

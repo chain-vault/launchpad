@@ -7,6 +7,7 @@ import {
   Checkbox,
   Container,
   Flex,
+  Heading,
   Link,
   Textarea,
   useColorModeValue,
@@ -30,7 +31,6 @@ import useMintToken from '../hooks/useMintFastLaunch';
 import { FastLaunchForm } from '../types';
 import { FormFooter } from './FormFooter';
 import { InitialBuyCount } from './InitialBuyCount';
-import { FastLaunchType } from './LaunchType';
 import { FormLaunchTypeLoader } from './LaunchTypeLoader';
 import { LockToken } from './LockToken';
 import { MigrationDEX } from './MigrationDEX';
@@ -82,18 +82,14 @@ export const CreateFastLaunch: React.FC = () => {
     setToolTipContent(message);
   };
 
-  const gradient = useColorModeValue(
-    'linear(rgba(0,0,0,0) 0%, rgba(0,0,0,0) 90%, rgba(255,255,255,.6) 100%)',
-    'linear(rgba(0,0,0,0) 0%, rgba(0,0,0,0) 90%, rgba(0,0,0,.6) 100%)'
-  );
-
   return (
     <Box w="100%">
       <Container maxW="container.xl" pb={5} textAlign="center">
         {/* {isPending && <Toast />} */}
         <Card
-          bg="surface.fast_launch !important"
-          borderRadius={40}
+          bg="#2C3655 !important"
+          borderColor="#2C3655 !important"
+          borderRadius="8px !important"
           m="auto"
           maxW={684}
           minH={200}
@@ -104,15 +100,15 @@ export const CreateFastLaunch: React.FC = () => {
             <FormLaunchTypeLoader />
             <Box
               as="form"
-              bgGradient={gradient}
               borderRadius="inherit"
-              layerStyle="shadow"
               onSubmit={handleSubmit(onSubmit)}
               p={{ base: 0, md: 4 }}
             >
               <Flex flexDirection="column" h="100%" justifyContent="space-between" px={5}>
-                <Flex mb={3}>
-                  <FastLaunchType />
+                <Flex mb={4}>
+                  <Heading letterSpacing="tight" size="lg">
+                    Create New AI Agent (New Token)
+                  </Heading>
                 </Flex>
                 <Flex flexDirection="column" gap={4} mb={4}>
                   <FormHandler
@@ -126,12 +122,12 @@ export const CreateFastLaunch: React.FC = () => {
                         control={control}
                         maxLength={32}
                         name="tokenName"
-                        placeholder="Name your token"
+                        placeholder="Name your AI Agent"
                       />
                     }
                     fieldError={errors.tokenName}
                     htmlFor="tokenName"
-                    label="Token name"
+                    label="Agent name"
                     required
                   />
                 </Flex>
@@ -169,14 +165,14 @@ export const CreateFastLaunch: React.FC = () => {
                         bg="surface.base.700"
                         border="none"
                         {...methods.register('projectDescription', { required: false })}
-                        placeholder="Describe your token"
+                        placeholder="This is the short bio that will be shown at your agent's profile."
                         resize="none"
                       />
                     }
                     alignOptionalLabel="right"
                     fieldError={errors.projectDescription}
                     htmlFor="projectDescription"
-                    label="Project description"
+                    label="AI Agent Biography"
                     optional
                   />
                 </Flex>
