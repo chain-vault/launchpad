@@ -25,7 +25,11 @@ import {
   STRING_TWITTER_USERNAME,
   STRING_URL_PATTERN,
 } from '@constants/stringPattern';
-import { TOKEN_NAME_VALIDATION_RULES, TOKEN_SYMBOL_VALIDATION_RULES } from '@constants/validations';
+import {
+  BEAST_BIOGRAPHY_VALIDATION_RULES,
+  TOKEN_NAME_VALIDATION_RULES,
+  TOKEN_SYMBOL_VALIDATION_RULES,
+} from '@constants/validations';
 
 import useMintToken from '../hooks/useMintFastLaunch';
 import { FastLaunchForm } from '../types';
@@ -39,6 +43,7 @@ import { TokenLogo } from './TokenLogo';
 export const CreateFastLaunch: React.FC = () => {
   const methods = useForm<FastLaunchForm>({
     defaultValues: {
+      beastGreeting: '',
       discord: '',
       initialBuy: '',
       lockToken: {
@@ -299,6 +304,62 @@ export const CreateFastLaunch: React.FC = () => {
                     <InitialBuyCount />
                   </Box>
                 </Flex>
+                <Flex flexDirection="column" gap={4} mb={4}>
+                  <FormHandler
+                    inputField={
+                      <FormInput<FastLaunchForm>
+                        rules={{
+                          required: 'Required field',
+                        }}
+                        control={control}
+                        name="beastGreeting"
+                        placeholder="Enter beast greeting"
+                      />
+                    }
+                    fieldError={errors.beastGreeting}
+                    htmlFor="beastGreeting"
+                    label="Beast greeting"
+                    required
+                  />
+                </Flex>
+                <Flex flexDirection="column" gap={4} mb={4}>
+                  <FormHandler
+                    inputField={
+                      <FormInput<FastLaunchForm>
+                        rules={{
+                          ...BEAST_BIOGRAPHY_VALIDATION_RULES,
+                          required: 'Required field',
+                        }}
+                        control={control}
+                        name="beastBiography"
+                        placeholder="Enter beast biography"
+                      />
+                    }
+                    fieldError={errors.beastBiography}
+                    htmlFor="beastBiography"
+                    label="Beast biography"
+                    required
+                  />
+                </Flex>
+                <Flex flexDirection="column" gap={4} mb={4}>
+                  <FormHandler
+                    inputField={
+                      <FormInput<FastLaunchForm>
+                        rules={{
+                          required: 'Required field',
+                        }}
+                        control={control}
+                        name="beastDescription"
+                        placeholder="Enter beast description"
+                      />
+                    }
+                    fieldError={errors.beastDescription}
+                    htmlFor="beastDescription"
+                    label="Beast description"
+                    required
+                  />
+                </Flex>
+
                 <Flex mb={4}>
                   <LockToken />
                 </Flex>

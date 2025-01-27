@@ -181,7 +181,7 @@ const Navbar = ({
               size="md"
               width="100%"
             >
-              Create New Agent
+              <Link to="/fast-launch/create">Create New Agent</Link>
             </Button>
 
             {isConnected ?
