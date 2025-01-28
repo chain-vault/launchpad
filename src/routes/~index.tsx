@@ -63,12 +63,12 @@ export const Route = createFileRoute('/')({
                 <Flex justifyContent="space-between" mb="2">
                   <Text textStyle="h4">🔥Trending</Text>
 
-                  <Link to="/trending">
+                  {/* <Link to="/trending"> */}
                     <Flex alignItems="center" direction="row">
                       <Text>view more</Text>
                       <LuChevronRight />
                     </Flex>
-                  </Link>
+                  {/* </Link> */}
                 </Flex>
                 <Flex alignItems="center" gap="1" overflowY="auto" width="100%">
                   {TRENDING_TOKENS.map((token) => (
@@ -84,7 +84,7 @@ export const Route = createFileRoute('/')({
                             />
                             <Text fontWeight="medium">{token.name}</Text>
                             <Text color="gray.400" fontSize="sm">
-                              {token.symbol}
+                              {/* {token.symbol} */}
                             </Text>
                           </Flex>
 

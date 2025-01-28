@@ -370,6 +370,7 @@ const useMintToken = (onSuccess?: (data: string[]) => void, onError?: (error: st
     description: string;
     greeting: string;
     image: string;
+    is_token: boolean;
     mintAddress: string;
     name: string;
     poolAddress: string;
@@ -379,7 +380,7 @@ const useMintToken = (onSuccess?: (data: string[]) => void, onError?: (error: st
 
   const { mutate: createAgent } = useMutation({
     mutationFn: (payload: CreateAgentRequest) =>
-      apiConfig(`${BLOCK_BEAST_BASE_URL}/insert`, 'POST', payload),
+      apiConfig(`${BLOCK_BEAST_BASE_URL}/create-agent`, 'POST', payload),
     onError: (error) => {
       showToast({
         message: error.message,
@@ -443,6 +444,7 @@ const useMintToken = (onSuccess?: (data: string[]) => void, onError?: (error: st
           description: variables.beastDescription,
           greeting: variables.beastGreeting,
           image,
+          is_token: true,
           mintAddress,
           name: variables.tokenName,
           poolAddress,
