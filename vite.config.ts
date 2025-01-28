@@ -4,7 +4,7 @@ import tsconfigPaths from 'vite-tsconfig-paths';
 import svgr from 'vite-plugin-svgr';
 import rollupNodePolyFill from 'rollup-plugin-node-polyfills';
 import { nodePolyfills } from 'vite-plugin-node-polyfills';
-import { sentryVitePlugin } from '@sentry/vite-plugin';
+// import { sentryVitePlugin } from '@sentry/vite-plugin';
 import * as child from 'child_process';
 // import { visualizer } from 'rollup-plugin-visualizer';
 
@@ -62,14 +62,14 @@ export default defineConfig({
       protocolImports: true,
     }),
     svgr(),
-    sentryVitePlugin({
-      org: 'apeon',
-      project: 'apeonlbp',
-      authToken: process.env.SENTRY_AUTH_TOKEN,
-      sourcemaps: {
-        filesToDeleteAfterUpload: ['dist/**/*.js.map'],
-      },
-    }),
+    // sentryVitePlugin({
+    //   org: 'apeon',
+    //   project: 'apeonlbp',
+    //   authToken: process.env.SENTRY_AUTH_TOKEN,
+    //   sourcemaps: {
+    //     filesToDeleteAfterUpload: ['dist/**/*.js.map'],
+    //   },
+    // }),
     // visualizer({
     //   open: true,
     //   filename: 'bundle-visualization.html',
@@ -99,7 +99,7 @@ export default defineConfig({
     },
   },
   build: {
-    sourcemap: true,
+    // sourcemap: true,
     rollupOptions: {
       plugins: [(rollupNodePolyFill as any)()],
     },
