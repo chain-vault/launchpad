@@ -56,21 +56,21 @@ const SwapDesktopView: React.FC = () => {
             </BreadcrumbItem>
           </Breadcrumb>
           <Grid columnGap={6} mt={0} rowGap={6} templateColumns={{ base: '1fr', lg: '1.8fr 1fr' }}>
-            <GridItem rowStart={{ base: 1, lg: 1 }}>
+            <GridItem bgColor="base.500" borderRadius={8} padding={4} rowStart={{ base: 1, lg: 1 }}>
               <Box mb={3}>
                 <Header />
               </Box>
               <Box width="100%">
                 <TradeGraph />
               </Box>
+              <Box py={3}>
+                <Socials />
+              </Box>
               <Box my={1}>
                 <DetailsPanelDesktop />
               </Box>
             </GridItem>
             <GridItem>
-              <Box py={3}>
-                <Socials />
-              </Box>
               <Box mb={3}>
                 <SwapSection />
               </Box>

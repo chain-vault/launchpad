@@ -178,7 +178,7 @@ const SwapSection = ({ currentPoolStatus }: { currentPoolStatus?: LBPPoolStatus 
               )}
             </Skeleton>
           </CardHeader>
-          <CardBody bg="surface.base.600" borderRadius="38px" borderWidth={0}>
+          <CardBody bg="surface.base.600" borderRadius="8px" borderWidth={0}>
             {/* Live pool design */}
             {currentPoolStatus === LBPPoolStatus.LIVE_NOW && (
               <SimpleGrid rowGap={6}>

@@ -96,7 +96,7 @@ export const SwapSection: React.FC = () => {
   };
 
   return (
-    <Card bg="surface.base.100 !important">
+    <Card bg="surface.base.600 !important">
       {!bondingCurveCompleted && (
         <>
           {tokenIn && tokenOut && confirmation.isOpen && values.in && values.out && (
@@ -147,7 +147,7 @@ export const SwapSection: React.FC = () => {
               </Flex>
               <Box mb={2}>
                 <Flex direction="row" justifyContent="space-between" mb={2}>
-                  <Flex textStyle="body-md">You ll Pay</Flex>
+                  <Flex textStyle="body-md">You Pay</Flex>
                   <Flex color="surface.base.800" textStyle="body-md">
                     <Flex alignItems="center" gap={2} justifyContent="space-between">
                       <IconButton

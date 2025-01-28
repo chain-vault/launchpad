@@ -52,6 +52,7 @@ const WalletInfoButton = ({ action, showAddress = true }: WalletInfoButtonProps)
       borderRadius="3xl"
       cursor="default"
       px="2"
+      py="1"
     >
       {isConnected ?
         <Flex align="center" justifyContent="space-between" w="100%">

@@ -9,10 +9,12 @@ import {
   Input,
   InputGroup,
   InputLeftElement,
+  Link,
   Text,
 } from '@chakra-ui/react';
 import { createFileRoute } from '@tanstack/react-router';
 import { IoMdSearch } from 'react-icons/io';
+import { LuChevronRight } from 'react-icons/lu';
 
 import PopularTokens from '@components/PopularTokens';
 import { TRENDING_TOKENS } from '@constants/index';
@@ -60,7 +62,13 @@ export const Route = createFileRoute('/')({
               <Box bg="#1E263A" borderRadius="md" paddingX="4" paddingY="4" width="100%">
                 <Flex justifyContent="space-between" mb="2">
                   <Text textStyle="h4">🔥Trending</Text>
-                  <Text>view more &gt;</Text>
+
+                  <Link to="/trending">
+                    <Flex alignItems="center" direction="row">
+                      <Text>view more</Text>
+                      <LuChevronRight />
+                    </Flex>
+                  </Link>
                 </Flex>
                 <Flex alignItems="center" gap="1" overflowY="auto" width="100%">
                   {TRENDING_TOKENS.map((token) => (
@@ -82,7 +90,10 @@ export const Route = createFileRoute('/')({
 
                           <Flex>
                             <Text>{token.price}</Text>
-                            <Text>{token.difference === 'negative' ? 'negICO' : 'posICO'}</Text>
+                            <Text>
+                              {/* <IoCaretDown /> */}
+                              {token.difference === 'negative' ? 'negICO' : 'posICO'}
+                            </Text>
                             <Text>{token.percentage}</Text>
                           </Flex>
                         </HStack>
@@ -98,7 +109,9 @@ export const Route = createFileRoute('/')({
                 <InputGroup>
                   <InputLeftElement pointerEvents="none">
                     {/* <SearchIcon color="gray.400" /> */}
-                    <IoMdSearch />
+                    <Flex bgColor="#1e263a" borderRadius="4px" padding="4px">
+                      <IoMdSearch height="1.75rem" width="1.75rem" />
+                    </Flex>
                   </InputLeftElement>
                   <Input
                     _focus={{

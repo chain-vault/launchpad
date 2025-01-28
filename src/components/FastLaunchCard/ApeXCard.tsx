@@ -50,7 +50,7 @@ const ApeXCard: React.FC<FastLaunchProps> = ({ isTokensLoading, pool }: FastLaun
             isLockActive ? 'brand.accent.600 !important' : 'brand.secondary.600 !important'
           }
           bg="brand.secondary.600 !important"
-          borderRadius="32px !important"
+          borderRadius="8px !important"
           borderWidth={1}
           boxShadow="none"
           pl={2}

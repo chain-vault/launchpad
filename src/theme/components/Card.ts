@@ -8,13 +8,13 @@ const baseStyle = definePartsStyle({
     // dark theme
     _dark: {
       bg: 'base.800',
-      borderColor: 'base.700',
-      borderRadius: '40px',
+      borderColor: 'base.800',
+      borderRadius: '8px',
       borderWidth: '2px',
     },
     bg: 'base.100',
-    borderColor: 'base.200',
-    borderRadius: '40px',
+    borderColor: 'base.100',
+    borderRadius: '8px',
     borderStyle: 'solid',
     borderWidth: '2px',
   },

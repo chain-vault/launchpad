@@ -109,7 +109,7 @@ export const TokenLogo: React.FC<TokenLogoProps> = ({ label }) => {
           top={1}
           whiteSpace="nowrap"
         >
-          {isDragActive ? 'Drop your file' : fileName || 'Upload Logo'}
+          {isDragActive ? 'Drop your file' : fileName || 'Upload your Token / Beast Image'}
         </Box>
 
         <input name={name} {...getInputProps()} />

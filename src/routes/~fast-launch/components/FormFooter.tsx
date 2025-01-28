@@ -73,7 +73,13 @@ export const FormFooter: React.FC<{
   }, [deploymentCost, onCostChange, message]);
   return (
     <Flex justifyContent="space-between" py={3}>
-      <Button isDisabled={!isDirty} onClick={clearForm} type="button" variant="ghost">
+      <Button
+        bgColor="surface.base.750"
+        isDisabled={!isDirty}
+        onClick={clearForm}
+        type="button"
+        variant="ghost"
+      >
         Cancel
       </Button>
       {!isConnected && (
