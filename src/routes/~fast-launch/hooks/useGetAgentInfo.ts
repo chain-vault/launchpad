@@ -9,7 +9,7 @@ export type GenericLambdaResponse<T> = {
     statusCode: number;
 };
 
-type Agent = {
+export type Agent = {
     bio: string;
     content: string;
     description: string;
@@ -35,7 +35,7 @@ export const useGetAgent = (id?: string) =>
         staleTime: 60 * 60 * 1000,
     });
 
-export const useFilterAgents = (name?: string, public_key?: string) =>
+export const useFilterAgents = (name?: string, public_key?: string, is_token?: boolean) =>
     useQuery({
         queryFn: () =>
             axios.get<any, AxiosResponse<GenericLambdaResponse<Agent[]>>>(
@@ -43,12 +43,13 @@ export const useFilterAgents = (name?: string, public_key?: string) =>
                 {
                     params: { 
                         is_token: false,
-                        // name,
-                        // public_key,
+                        ...(name && name.length>0 && { name }),
+                        ...(public_key && public_key.length>0 && { public_key }),
+                        ...(is_token !== undefined && { is_token }),
                     },
                 }
             ),
-        queryKey: [name, public_key],
+        queryKey: [name, public_key, is_token],
         select: (response: AxiosResponse<GenericLambdaResponse<Agent[]>>) => response.data.body.response,
         staleTime: 60 * 60 * 1000,
     });

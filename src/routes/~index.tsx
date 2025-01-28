@@ -103,34 +103,7 @@ export const Route = createFileRoute('/')({
                 </Flex>
               </Box>
             </Flex>
-            {/* Search Bar */}
-            <Flex alignItems="center" justifyContent="center" mt={4}>
-              <Box maxW="18.75rem" w="full">
-                <InputGroup>
-                  <InputLeftElement pointerEvents="none">
-                    {/* <SearchIcon color="gray.400" /> */}
-                    <Flex bgColor="#1e263a" borderRadius="4px" padding="4px">
-                      <IoMdSearch height="1.75rem" width="1.75rem" />
-                    </Flex>
-                  </InputLeftElement>
-                  <Input
-                    _focus={{
-                      border: '1px solid',
-                      borderColor: 'blue.400',
-                      boxShadow: 'none',
-                    }}
-                    _placeholder={{ color: 'gray.400' }}
-                    bg="#2C3655"
-                    border="none"
-                    color="white"
-                    placeholder="Search Token Name or CA"
-                  />
-                </InputGroup>
-              </Box>
-            </Flex>
-            <Box bg="base.800" mt="2.5">
               <PopularTokens />
-            </Box>
           </Flex>
         </Container>
       </Box>
