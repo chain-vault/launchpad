@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 
 import { Box, Button, Container, Flex, HStack, Image, Text } from '@chakra-ui/react';
-import { Link, useLocation } from '@tanstack/react-router';
+import { Link, useLocation, useNavigate } from '@tanstack/react-router';
 
 // import { ActionButton } from '@components/ui/Button';
 import { ConnectWalletButton } from '@components/WalletAdapter';
