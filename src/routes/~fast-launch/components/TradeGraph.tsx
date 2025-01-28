@@ -6,7 +6,7 @@ import { PublicKey } from '@solana/web3.js';
 
 import { SortOptions } from '@app-types/index';
 
-import { Graph } from '@components/Graph/Tradingview';
+import { Graph } from '@components/Graph/Tradingv2';
 import { useGetPoolById } from '@hooks/apein/useGetPool';
 import { useTokenMetadata } from '@hooks/useToken';
 import { formatGraphData } from '@utils/groupFeedData';
