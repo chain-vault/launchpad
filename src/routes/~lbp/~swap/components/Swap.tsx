@@ -29,7 +29,7 @@ import { LuArrowUpDown } from 'react-icons/lu';
 
 import { LBPPoolStatus } from '@app-types/index';
 
-import { Graph } from '@components/Graph/Tradingview';
+// import { Graph } from '@components/Graph/Tradingview';
 import StatusIndicator from '@components/Status/StatusIndicator';
 import { SwapActionButton } from '@components/SwapActionButton';
 import { SwapConfirmationModal } from '@components/SwapConfirmation';
@@ -62,13 +62,14 @@ const ChartSection = ({ currentPoolStatus }: { currentPoolStatus?: LBPPoolStatus
   const { isMetaDataLoading, poolTokenMetadata } = useTokenMetadata(useTokenAddress());
   const formattedData = useMemo(() => formatGraphData(poolCurve, 'value', 'time'), [poolCurve]);
   return (
-    <Graph
-      data={formattedData}
-      height={graphHeight}
-      isLoading={isPoolCurveLoading || isMetaDataLoading}
-      symbol={poolTokenMetadata?.symbol ?? ''}
-      type={SeriesType.Area}
-    />
+    <></>
+    // <Graph
+    //   data={formattedData}
+    //   height={graphHeight}
+    //   isLoading={isPoolCurveLoading || isMetaDataLoading}
+    //   symbol={poolTokenMetadata?.symbol ?? ''}
+    //   type={SeriesType.Area}
+    // />
   );
 };
 
