@@ -25,11 +25,7 @@ import {
   STRING_TWITTER_USERNAME,
   STRING_URL_PATTERN,
 } from '@constants/stringPattern';
-import {
-  BEAST_BIOGRAPHY_VALIDATION_RULES,
-  TOKEN_NAME_VALIDATION_RULES,
-  TOKEN_SYMBOL_VALIDATION_RULES,
-} from '@constants/validations';
+import { TOKEN_NAME_VALIDATION_RULES, TOKEN_SYMBOL_VALIDATION_RULES } from '@constants/validations';
 
 import useMintToken from '../hooks/useMintFastLaunch';
 import { FastLaunchForm } from '../types';
@@ -112,7 +108,7 @@ export const CreateFastLaunch: React.FC = () => {
               <Flex flexDirection="column" h="100%" justifyContent="space-between" px={5}>
                 <Flex mb={4}>
                   <Heading letterSpacing="tight" size="lg">
-                    Create New AI Agent (New Token)
+                    Create your AI Beast / Token
                   </Heading>
                 </Flex>
                 <Flex flexDirection="column" gap={4} mb={4}>
@@ -127,7 +123,7 @@ export const CreateFastLaunch: React.FC = () => {
                         control={control}
                         maxLength={32}
                         name="tokenName"
-                        placeholder="Name your AI Agent"
+                        placeholder="Name your Beast / Token"
                       />
                     }
                     fieldError={errors.tokenName}
@@ -161,7 +157,7 @@ export const CreateFastLaunch: React.FC = () => {
                   />
                 </Flex>
                 <Flex flexDirection="column" gap={4} mb={4}>
-                  <TokenLogo label="Token logo" />
+                  <TokenLogo label="Token Logo / Face for your Beast" />
                 </Flex>
                 <Flex flexDirection="column" gap={4} mb={4}>
                   <FormHandler
@@ -169,8 +165,8 @@ export const CreateFastLaunch: React.FC = () => {
                       <Textarea
                         bg="surface.base.700"
                         border="none"
-                        {...methods.register('projectDescription', { required: false })}
-                        placeholder="This is the short bio that will be shown at your agent's profile."
+                        {...methods.register('projectDescription', { required: true })}
+                        placeholder="Feed the Beast."
                         resize="none"
                       />
                     }
@@ -178,9 +174,48 @@ export const CreateFastLaunch: React.FC = () => {
                     fieldError={errors.projectDescription}
                     htmlFor="projectDescription"
                     label="AI Agent Biography"
-                    optional
+                    required
                   />
                 </Flex>
+
+                <Flex flexDirection="column" gap={4} mb={4}>
+                  <FormHandler
+                    inputField={
+                      <FormInput<FastLaunchForm>
+                        rules={{
+                          required: 'Required field',
+                        }}
+                        control={control}
+                        name="beastGreeting"
+                        placeholder="Beast says Hello!"
+                      />
+                    }
+                    fieldError={errors.beastGreeting}
+                    htmlFor="beastGreeting"
+                    label="Beast Greeting"
+                    required
+                  />
+                </Flex>
+
+                <Flex flexDirection="column" gap={4} mb={4}>
+                  <FormHandler
+                    inputField={
+                      <Textarea
+                        bg="surface.base.700"
+                        border="none"
+                        {...methods.register('projectDescription', { required: true })}
+                        placeholder="Who's your Beast?"
+                        resize="none"
+                      />
+                    }
+                    alignOptionalLabel="right"
+                    fieldError={errors.beastDescription}
+                    htmlFor="beastDescription"
+                    label="Beast Description"
+                    required
+                  />
+                </Flex>
+
                 <Flex flexDirection="row" flexWrap="wrap" justifyContent="space-between">
                   <Flex flexDirection="column" gap={4} mb={4} w={{ base: '100%', md: '48%' }}>
                     <FormHandler
@@ -194,13 +229,13 @@ export const CreateFastLaunch: React.FC = () => {
                           }}
                           control={control}
                           name="twitter"
-                          placeholder="Enter Twitter Username"
+                          placeholder="Enter X (Twitter) Username"
                         />
                       }
                       alignOptionalLabel="right"
                       fieldError={errors.twitter}
                       htmlFor="twitter"
-                      label="Twitter"
+                      label="X (Twitter)"
                       optional
                     />
                   </Flex>
@@ -304,61 +339,6 @@ export const CreateFastLaunch: React.FC = () => {
                     <InitialBuyCount />
                   </Box>
                 </Flex>
-                <Flex flexDirection="column" gap={4} mb={4}>
-                  <FormHandler
-                    inputField={
-                      <FormInput<FastLaunchForm>
-                        rules={{
-                          required: 'Required field',
-                        }}
-                        control={control}
-                        name="beastGreeting"
-                        placeholder="Enter beast greeting"
-                      />
-                    }
-                    fieldError={errors.beastGreeting}
-                    htmlFor="beastGreeting"
-                    label="Beast greeting"
-                    required
-                  />
-                </Flex>
-                <Flex flexDirection="column" gap={4} mb={4}>
-                  <FormHandler
-                    inputField={
-                      <FormInput<FastLaunchForm>
-                        rules={{
-                          ...BEAST_BIOGRAPHY_VALIDATION_RULES,
-                          required: 'Required field',
-                        }}
-                        control={control}
-                        name="beastBiography"
-                        placeholder="Enter beast biography"
-                      />
-                    }
-                    fieldError={errors.beastBiography}
-                    htmlFor="beastBiography"
-                    label="Beast biography"
-                    required
-                  />
-                </Flex>
-                <Flex flexDirection="column" gap={4} mb={4}>
-                  <FormHandler
-                    inputField={
-                      <FormInput<FastLaunchForm>
-                        rules={{
-                          required: 'Required field',
-                        }}
-                        control={control}
-                        name="beastDescription"
-                        placeholder="Enter beast description"
-                      />
-                    }
-                    fieldError={errors.beastDescription}
-                    htmlFor="beastDescription"
-                    label="Beast description"
-                    required
-                  />
-                </Flex>
 
                 <Flex mb={4}>
                   <LockToken />
@@ -413,7 +393,7 @@ export const CreateFastLaunch: React.FC = () => {
                       target="_blank"
                       textDecoration="underline"
                     >
-                      Apeon Terms & Conditions and Token Profile Policy
+                      BlockBeast Terms & Conditions and Token Profile Policy
                     </Link>
                   </Checkbox>
                 </Flex>

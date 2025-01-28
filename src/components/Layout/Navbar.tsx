@@ -157,17 +157,20 @@ const Navbar = ({
           {/* Logo and Navigation */}
           <HStack spacing={8}>
             <HStack spacing={2}>
-              <Image alt="Launchpad Logo" src={BlockBeastLogo} />
+              <Link to="/">
+                <Image alt="Launchpad Logo" src={BlockBeastLogo} />
+              </Link>
               {/* width={8} height={8} */}
               {/* <Text color="cyan.300" fontSize="xl" fontWeight="bold">
                 Launchpad
               </Text> */}
             </HStack>
             <HStack spacing={6}>
-              <Text color="white" fontWeight="medium">
-                AI Token Marketplace
-              </Text>
-              <Text color="gray.400">Newely Launched</Text>
+              <Link to="/">
+                <Text color="white" fontWeight="medium">
+                  AI Token Marketplace
+                </Text>
+              </Link>
             </HStack>
           </HStack>
 

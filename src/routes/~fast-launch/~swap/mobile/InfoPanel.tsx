@@ -32,7 +32,7 @@ export const InfoPanel: React.FC = () => {
       <Box mb={3} px={2} textStyle="body-xs">
         {!isMetaDataLoading && desc && desc.length && (
           <Box mb={1}>
-            <Text textStyle="body-md-bold">Project Description</Text>
+            <Text textStyle="body-md-bold">Agent Description</Text>
           </Box>
         )}
         <Box>

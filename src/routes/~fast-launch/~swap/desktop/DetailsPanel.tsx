@@ -34,7 +34,7 @@ export const DetailsPanelDesktop = () => {
       <Tabs colorScheme="accent" size={{ base: 'base', md: 'md' }} variant="classic">
         <TabList>
           <Tab>
-            <Text textStyle="body-sm-bold">Project Description</Text>
+            <Text textStyle="body-sm-bold">Agent Description</Text>
           </Tab>
           <Tab>
             <Text textStyle="body-sm-bold">Holders</Text>

@@ -413,8 +413,8 @@ const SaleDetailsForm = ({ id, changeTab }: FormBasicProps) => {
               />
             }
             fieldError={errors?.projectDescription}
-            htmlFor="project description"
-            label="Project description"
+            htmlFor="Agent description"
+            label="Agent description"
             required
           />
           <FormHandler
