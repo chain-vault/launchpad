@@ -1,4 +1,6 @@
 // import { ChevronDownIcon } from '@chakra-ui/icons';
+import { useEffect, useRef, useState } from 'react';
+
 import {
   Box,
   Button,
@@ -20,7 +22,7 @@ import {
 import { IoMdCopy, IoMdSearch } from 'react-icons/io';
 import { LuArrowDownUp, LuExternalLink } from 'react-icons/lu';
 
-import { useFilterAgents } from '@routes/~fast-launch/hooks/useGetAgentInfo';
+import { Agent, useFilterAgents } from '@routes/~fast-launch/hooks/useGetAgentInfo';
 
 const formatNumber = (num: number): string =>
   new Intl.NumberFormat('en-US', {
@@ -31,7 +33,51 @@ const formatNumber = (num: number): string =>
   }).format(num);
 
 const PopularTokens = () => {
-  const { data: popularAgents, isLoading: isPopularAgentsLoading } = useFilterAgents();
+  const searchBarRef = useRef<HTMLInputElement>(null);
+  const searchNameRef = useRef<string>("");
+  const searchPublicIdRef = useRef<string>("");
+  const searchIsTokenIdRef = useRef<boolean>(false);
+  const { data: popularAgents, isLoading: isPopularAgentsLoading } = useFilterAgents(searchNameRef.current, searchPublicIdRef.current, searchIsTokenIdRef.current);
+  const [suggestionResults, setSuggestionResults] = useState<Agent[]>([]);
+
+  useEffect(() => {
+    if (popularAgents !== undefined) {
+      setSuggestionResults(popularAgents);
+    }
+  }, [popularAgents]);
+
+  function searchAgents(
+    popularWizards: Agent[],
+    searchQuery: string
+  ) {
+    if (popularWizards === undefined) return undefined;
+    if (searchQuery === "") {
+      setSuggestionResults([]);
+      return undefined;
+    }
+
+    const results = popularWizards.filter(agent =>
+      agent.name.toLowerCase().includes(searchQuery.toLowerCase().trim())
+    );
+
+    setSuggestionResults(results);
+  }
+
+  function checkIsPublicId(id: string) {
+    if(searchBarRef.current === null) return;
+    const regex = /^[A-Za-z0-9]{44}$/;
+    if (regex.test(id)) {
+      searchPublicIdRef.current = searchBarRef.current.value;
+    }
+    else searchNameRef.current = searchBarRef.current.value;
+  }
+
+  function clearInputRefs() {
+    searchNameRef.current = "";
+    searchPublicIdRef.current = ""
+    searchIsTokenIdRef.current = false
+  }
+
   return (
     <>
       {/* Search Bar */}
@@ -40,7 +86,9 @@ const PopularTokens = () => {
           <InputGroup>
             <InputLeftElement pointerEvents="none">
               {/* <SearchIcon color="gray.400" /> */}
-              <IoMdSearch />
+              <Flex bgColor="#1e263a" borderRadius="4px" padding="4px">
+                <IoMdSearch height="1.75rem" width="1.75rem" />
+              </Flex>
             </InputLeftElement>
             <Input
               _focus={{
@@ -48,17 +96,31 @@ const PopularTokens = () => {
                 borderColor: 'blue.400',
                 boxShadow: 'none',
               }}
+              onChange={(e) => {
+                if (searchBarRef.current) {
+                  searchBarRef.current.value = e.target.value;
+                }
+              }}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter') {
+                  if (searchBarRef.current && popularAgents) {
+                    if (searchBarRef.current.value === "") clearInputRefs()
+                    searchAgents(popularAgents, searchBarRef.current.value);
+                    checkIsPublicId(searchBarRef.current.value)
+                  }
+                }
+              }}
               _placeholder={{ color: 'gray.400' }}
               bg="#2C3655"
               border="none"
               color="white"
               placeholder="Search Token Name or CA"
+              ref={searchBarRef}
             />
           </InputGroup>
         </Box>
       </Flex>
       <Box bg="base.800" mt="2.5">
-
         <Box bg="#1E263A" borderRadius="md" p={4}>
           <HStack mb={4} spacing={2}>
             <Box bg="#121E30" borderRadius="full" display="flex" padding="2">
@@ -125,7 +187,7 @@ const PopularTokens = () => {
                   </Th>
                   <Th color="gray.400">
                     <HStack spacing={1}>
-                      <Text>Intractions</Text>
+                      <Text>Interactions</Text>
                       <LuArrowDownUp />
                     </HStack>
                   </Th>
@@ -135,10 +197,8 @@ const PopularTokens = () => {
               </Thead>
               <Tbody>
                 {(isPopularAgentsLoading || popularAgents === undefined) ? <div>Loading...</div>
-                  : popularAgents
-                    // Array<typeof SAMPLE_TOKEN>(10)
-                    //   .fill(SAMPLE_TOKEN)
-                    .map((token, index) => (
+                  : suggestionResults
+                    .map((token) => (
                       <Tr _hover={{ bg: 'whiteAlpha.50' }} key={token.name}>
                         <Td>
                           <HStack spacing={2}>
