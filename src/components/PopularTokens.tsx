@@ -19,6 +19,7 @@ import {
   Thead,
   Tr,
 } from '@chakra-ui/react';
+import { useNavigate } from '@tanstack/react-router';
 import { IoMdCopy, IoMdSearch } from 'react-icons/io';
 import { LuArrowDownUp, LuExternalLink } from 'react-icons/lu';
 
@@ -33,10 +34,11 @@ const formatNumber = (num: number): string =>
   }).format(num);
 
 const PopularTokens = () => {
+  const navigate = useNavigate();
   const searchBarRef = useRef<HTMLInputElement>(null);
   const searchNameRef = useRef<string>("");
   const searchPublicIdRef = useRef<string>("");
-  const searchIsTokenIdRef = useRef<boolean>(false);
+  const searchIsTokenIdRef = useRef<boolean>(true);
   const { data: popularAgents, isLoading: isPopularAgentsLoading } = useFilterAgents(searchNameRef.current, searchPublicIdRef.current, searchIsTokenIdRef.current);
   const [suggestionResults, setSuggestionResults] = useState<Agent[]>([]);
 
@@ -75,7 +77,7 @@ const PopularTokens = () => {
   function clearInputRefs() {
     searchNameRef.current = "";
     searchPublicIdRef.current = ""
-    searchIsTokenIdRef.current = false
+    searchIsTokenIdRef.current = true
   }
 
   return (
@@ -242,6 +244,13 @@ const PopularTokens = () => {
                         <Td>30</Td>
                         <Td>
                           <Button
+                            onClick={()=>{
+                              navigate({
+                                params: { poolAddress: token.poolAddress },
+                                search: {agentId: token.id},
+                                to: '/fast-launch/swap/$poolAddress',
+                              });
+                            }}
                             _hover={{ bg: 'green.500', color: 'white' }}
                             bg="transparent"
                             borderColor="green.500"

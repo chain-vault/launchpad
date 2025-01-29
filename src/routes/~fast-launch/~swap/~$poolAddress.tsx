@@ -17,6 +17,7 @@ import { useFastLaunchSearchParams } from '../hooks/useFastLaunchSearchParams';
 import { Swap } from './Swap';
 
 type SwapSearchParams = {
+  agentId: string;
   referal?: string;
 };
 export const Route = createFileRoute('/fast-launch/swap/$poolAddress')({
@@ -25,7 +26,7 @@ export const Route = createFileRoute('/fast-launch/swap/$poolAddress')({
     const navigate = useNavigate();
 
     const [tradeReferalCodeValue, updateTradeReferalCode] = useAtom(tradeReferalCode);
-    const { pool, referal } = useFastLaunchSearchParams();
+    const { agentId, pool, referal } = useFastLaunchSearchParams();
     const { isConnected, publicKey } = useWeb3React();
 
     const { onValidateReferralCode } = useReferal();
@@ -53,6 +54,7 @@ export const Route = createFileRoute('/fast-launch/swap/$poolAddress')({
           navigate({
             from: '/fast-launch/swap/$poolAddress',
             search: () => ({
+              agentId,
               referal: tradeReferral,
             }),
           });
@@ -83,6 +85,7 @@ export const Route = createFileRoute('/fast-launch/swap/$poolAddress')({
   },
   pendingComponent: () => <PendingComponent />,
   validateSearch: (search: Record<string, unknown>): SwapSearchParams => ({
+    agentId: search.agentId as string,
     referal: search.referal as string,
   }),
 });
