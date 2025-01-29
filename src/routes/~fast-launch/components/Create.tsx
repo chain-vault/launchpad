@@ -108,7 +108,7 @@ export const CreateFastLaunch: React.FC = () => {
               <Flex flexDirection="column" h="100%" justifyContent="space-between" px={5}>
                 <Flex mb={4}>
                   <Heading letterSpacing="tight" size="lg">
-                    Create your AI Beast / Token
+                    Create your new AI Beast / Token
                   </Heading>
                 </Flex>
                 <Flex flexDirection="column" gap={4} mb={4}>
@@ -123,12 +123,12 @@ export const CreateFastLaunch: React.FC = () => {
                         control={control}
                         maxLength={32}
                         name="tokenName"
-                        placeholder="Name your Beast / Token"
+                        placeholder="Go for something beasty"
                       />
                     }
                     fieldError={errors.tokenName}
                     htmlFor="tokenName"
-                    label="Agent name"
+                    label="Name your Beast / Token"
                     required
                   />
                 </Flex>
@@ -166,14 +166,14 @@ export const CreateFastLaunch: React.FC = () => {
                         bg="surface.base.700"
                         border="none"
                         {...methods.register('projectDescription', { required: true })}
-                        placeholder="Feed the Beast."
+                        placeholder="Tell it what it should know, how to behave."
                         resize="none"
                       />
                     }
                     alignOptionalLabel="right"
                     fieldError={errors.projectDescription}
                     htmlFor="projectDescription"
-                    label="AI Agent Biography"
+                    label="Feed the Beast"
                     required
                   />
                 </Flex>
@@ -187,12 +187,12 @@ export const CreateFastLaunch: React.FC = () => {
                         }}
                         control={control}
                         name="beastGreeting"
-                        placeholder="Beast says Hello!"
+                        placeholder="Type here your Beast's hello message"
                       />
                     }
                     fieldError={errors.beastGreeting}
                     htmlFor="beastGreeting"
-                    label="Beast Greeting"
+                    label="Beast says Hello!"
                     required
                   />
                 </Flex>
@@ -200,18 +200,18 @@ export const CreateFastLaunch: React.FC = () => {
                 <Flex flexDirection="column" gap={4} mb={4}>
                   <FormHandler
                     inputField={
-                      <Textarea
-                        bg="surface.base.700"
-                        border="none"
-                        {...methods.register('projectDescription', { required: true })}
-                        placeholder="Who's your Beast?"
-                        resize="none"
+                      <FormInput<FastLaunchForm>
+                        rules={{
+                          required: 'Required field',
+                        }}
+                        control={control}
+                        name="beastDescription"
+                        placeholder="Give a short tagline to tell people who your Beast is"
                       />
                     }
-                    alignOptionalLabel="right"
                     fieldError={errors.beastDescription}
                     htmlFor="beastDescription"
-                    label="Beast Description"
+                    label="Who's your Beast?"
                     required
                   />
                 </Flex>
