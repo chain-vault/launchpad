@@ -6,6 +6,7 @@ export { default as Banana } from './banana.png';
 export { default as BlockBeastLogo } from './block-beast-logo.svg';
 export { default as CoconutError } from './coconut-error-icon.png';
 export { default as CoconutTree } from './coconut-tree.png';
+export { default as EmptyBeast } from './empty-beast.png';
 export { default as Lock } from './lock.svg';
 export { default as LogoBlack } from './logo-black.png';
 export { default as LogoWhite } from './logo-white.png';

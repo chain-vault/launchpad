@@ -4,7 +4,7 @@ import { createRouter } from '@tanstack/react-router';
 
 import PendingComponent from '@components/PendingComponent';
 
-import { MonkeyInRocket } from '@assets/imges';
+import { EmptyBeast } from '@assets/imges';
 
 // Create a new router instance
 export const router = createRouter({
@@ -26,7 +26,7 @@ export const router = createRouter({
         <Image
           left="50%"
           position="absolute"
-          src={MonkeyInRocket}
+          src={EmptyBeast}
           top="50%"
           transform="translate(-50%, -50%)"
         />

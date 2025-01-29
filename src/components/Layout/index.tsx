@@ -33,7 +33,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 const FooterContainer = styled(Box)`
   position: relative;
-  height: 230px;
+  /* height: 230px; */
   text-align: center;
 
   &:before {

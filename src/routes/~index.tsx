@@ -33,7 +33,7 @@ export const Route = createFileRoute('/')({
               </Highlight>
             </Heading>
             <Text color="fg.muted" fontSize="md">
-              The AI 1 Token market cap today is $3.78 Trillion in Solana
+              The safest and fastest way to launch and trade AI tokens on Solana
             </Text>
 
             <Flex gap="1rem" mt={8}>
@@ -64,10 +64,10 @@ export const Route = createFileRoute('/')({
                   <Text textStyle="h4">🔥Trending</Text>
 
                   {/* <Link to="/trending"> */}
-                    <Flex alignItems="center" direction="row">
-                      <Text>view more</Text>
-                      <LuChevronRight />
-                    </Flex>
+                  <Flex alignItems="center" direction="row">
+                    <Text>view more</Text>
+                    <LuChevronRight />
+                  </Flex>
                   {/* </Link> */}
                 </Flex>
                 <Flex alignItems="center" gap="1" overflowY="auto" width="100%">
@@ -103,7 +103,7 @@ export const Route = createFileRoute('/')({
                 </Flex>
               </Box>
             </Flex>
-              <PopularTokens />
+            <PopularTokens />
           </Flex>
         </Container>
       </Box>
