@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
 
-import { confettiAtom } from '@atoms/index';
 import {
   Alert,
   AlertIcon,
@@ -15,10 +14,8 @@ import {
 } from '@chakra-ui/react';
 import styled from '@emotion/styled';
 import { useLocation, useRouterState } from '@tanstack/react-router';
-import { useAtom } from 'jotai';
 import { ToastContainer } from 'react-toastify';
 
-import { BananaConfetti } from '@components/BananaConfetti';
 import CustomDrawer from '@components/Drawer';
 import Footer from '@components/Layout/Footer';
 import SettingsBody from '@components/TransactionSettings/SettingsBody';
@@ -54,7 +51,7 @@ const Layout = ({ children }: React.PropsWithChildren) => {
   const { colorMode } = useColorMode();
   const toastContainerClass = useColorModeValue('toast-container-light', 'toast-container-dark');
 
-  const [createConfetti] = useAtom(confettiAtom);
+  // const [createConfetti] = useAtom(confettiAtom);
   const bgColor = useColorModeValue('brand.secondary.100', 'brand.secondary.900');
   const alertBg = opacify(90, bgColor);
 
@@ -111,7 +108,7 @@ const Layout = ({ children }: React.PropsWithChildren) => {
       flexDirection="column"
       minHeight="100vh"
     >
-      {createConfetti.isConfettiActive && (
+      {/* {createConfetti.isConfettiActive && (
         <Box
           height="100vh"
           left="0"
@@ -123,7 +120,7 @@ const Layout = ({ children }: React.PropsWithChildren) => {
         >
           <BananaConfetti />
         </Box>
-      )}
+      )} */}
       <Box
         bgAttachment="fixed"
         bgRepeat="no-repeat"
