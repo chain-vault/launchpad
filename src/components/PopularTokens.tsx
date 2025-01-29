@@ -103,6 +103,7 @@ const PopularTokens = () => {
               }}
               onKeyDown={(e) => {
                 if (e.key === 'Enter') {
+                  clearInputRefs();
                   if (searchBarRef.current && popularAgents) {
                     if (searchBarRef.current.value === "") clearInputRefs()
                     searchAgents(popularAgents, searchBarRef.current.value);
