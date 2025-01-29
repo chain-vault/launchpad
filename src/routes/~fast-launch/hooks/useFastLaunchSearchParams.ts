@@ -5,10 +5,11 @@ export const useFastLaunchSearchParams = () => {
   const { poolAddress } = useParams({
     from: PATH,
   });
-  const { referal } = useSearch({
+  const { agentId, referal } = useSearch({
     from: PATH,
   });
   return {
+    agentId,
     pool: poolAddress ?? '',
     referal,
   };

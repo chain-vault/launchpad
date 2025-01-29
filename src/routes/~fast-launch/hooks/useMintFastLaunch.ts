@@ -133,6 +133,7 @@ const useMintToken = (onSuccess?: (data: string[]) => void, onError?: (error: st
         dcd: data?.discord,
         description: data?.projectDescription,
         image: `${IRYS_FILE_PREFIX}${tokenImageId}`,
+        isBeast: true,
         name: data?.tokenName,
         symbol: data?.tokenTicker.toUpperCase(),
         tg: data?.telegram,
@@ -373,7 +374,7 @@ const useMintToken = (onSuccess?: (data: string[]) => void, onError?: (error: st
     is_token: boolean;
     mintAddress: string;
     name: string;
-    poolAddress: string;
+    poolId: string;
     public_key: string;
     txHash: string;
   };

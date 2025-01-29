@@ -42,7 +42,7 @@ export const useFilterAgents = (name?: string, public_key?: string, is_token?: b
                 `${import.meta.env.VITE_EXTERNAL_SERVICE_BASE}/filter`,
                 {
                     params: { 
-                        is_token: false,
+                        is_token: true,
                         ...(name && name.length>0 && { name }),
                         ...(public_key && public_key.length>0 && { public_key }),
                         ...(is_token !== undefined && { is_token }),
