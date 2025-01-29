@@ -36,7 +36,7 @@ const Footer = () => {
           bgColor="rgb(255 255 255 / 5%)"
           socialsList={NAVBAR_SOCIAL_ICONS}
         />
-        <Box textAlign="center">
+        {/* <Box textAlign="center">
           {Object.values(pathConstants).map(({ isDisabled, isExternal, label, url }) => (
             <Link
               style={{
@@ -67,7 +67,7 @@ const Footer = () => {
               )}
             </Link>
           ))}
-        </Box>
+        </Box> */}
       </Flex>
       <Flex direction="column" gap={2} mb={6}>
         <Flex alignItems="center" direction="row" gap={2} justifyContent="center">
