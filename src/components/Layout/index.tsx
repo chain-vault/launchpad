@@ -121,7 +121,7 @@ const Layout = ({ children }: React.PropsWithChildren) => {
           width="100vw"
           zIndex="8888"
         >
-          <BananaConfetti />
+          {/* <BananaConfetti /> */}
         </Box>
       )}
       <Box

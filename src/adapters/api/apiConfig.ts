@@ -2,6 +2,7 @@
 import type { AxiosInstance, AxiosRequestConfig, AxiosResponse, Method } from 'axios';
 
 import axios from 'axios';
+import Cookies from 'js-cookie';
 
 import { BASE_CONFIG } from '@constants/config';
 import { SOMETHING_WENT_WRONG } from '@constants/programErrors';
@@ -28,7 +29,7 @@ const apiConfig = async <T>(
     headers: {
       ...(requestType && { 'X-Request-Type': requestType }), // Add a custom header to specify the request type
       ...(includeAuth && {
-        Authorization: `${localStorage.getItem('authToken')}`, // Add authorization token from localStorage
+        Authorization: `${Cookies.get('token')}`, // Add authorization token from localStorage
       }),
     },
     withCredentials,
