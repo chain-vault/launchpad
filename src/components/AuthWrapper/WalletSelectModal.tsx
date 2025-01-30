@@ -151,7 +151,7 @@ const WalletSelectDrawer = () => {
               <Flex
                 alignItems="center"
                 gap={2}
-                justifyContent="flex-start"
+                justifyContent="center"
                 position="relative"
                 py={14}
               >

@@ -149,7 +149,7 @@ export const Header = () => {
               maxLength: 6,
               string: poolData?.poolCreator?.toString() ?? '-',
             })}
-            onClick={onProfileClick}
+            onClick={()=>{}}
             title="Created By"
             tooltipValue={poolData?.poolCreator?.toString() ?? ''}
           />

@@ -181,7 +181,6 @@ export const useGetPoolById = (poolId?: string) => {
     async () => {
       const response = await poolProgram.account.poolData.fetch(new PublicKey(poolId));
       
-      console.log(response);
       return convertBNToDecimal(response);
     }
     : skipToken,

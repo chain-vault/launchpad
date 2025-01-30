@@ -381,7 +381,7 @@ const useMintToken = (onSuccess?: (data: string[]) => void, onError?: (error: st
 
   const { mutate: createAgent } = useMutation({
     mutationFn: (payload: CreateAgentRequest) =>
-      apiConfig(`${BLOCK_BEAST_BASE_URL}/create-agent`, 'POST', payload),
+      apiConfig(`${BLOCK_BEAST_BASE_URL}/create-agent`, 'POST', payload, null, true),
     onError: (error) => {
       showToast({
         message: error.message,

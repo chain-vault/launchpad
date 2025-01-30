@@ -13,6 +13,7 @@ import { Link } from '@tanstack/react-router';
 
 import { DexType } from '@app-types/index';
 
+import AgentAnalytics from '@components/Analytics';
 import { useGetPoolById } from '@hooks/apein/useGetPool';
 
 import { BondingCurve } from '../components/BondingCurve';
@@ -32,7 +33,6 @@ const SwapDesktopView: React.FC = () => {
   const { data: poolData, isLoading: isPoolDataLoading } = useGetPoolById(
     useFastLaunchSearchParams().pool
   );
-  console.log(poolData);
   const { data: agent, isLoading: isAgentLoading } = useGetAgent(useFastLaunchSearchParams().agentId);
 
   return (
@@ -45,7 +45,7 @@ const SwapDesktopView: React.FC = () => {
                 _hover={{ opacity: 1, textColor: 'brand.accent.600' }}
                 as={Link}
                 textDecoration="none"
-                to="/launches/pump/"
+                to="/"
               >
                 All Pools
               </BreadcrumbLink>
@@ -71,6 +71,9 @@ const SwapDesktopView: React.FC = () => {
               </Box>
               <Box my={1}>
                 <DetailsPanelDesktop />
+              </Box>
+              <Box my={1}>
+                <AgentAnalytics />
               </Box>
             </GridItem>
             <GridItem>
