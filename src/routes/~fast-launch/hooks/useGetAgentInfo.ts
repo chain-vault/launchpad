@@ -64,7 +64,7 @@ export const useGetAgentAnalytics = (agent_id?: string) =>
 
   export const useFilterAgents = (name?: string, public_key?: string, is_token?: boolean) => {
     const { data: allPoolsData, isLoading: isPoolsDataLoading } = useGetAllPools();
-    const { data: agentData, isLoading: isAgentDataLoading } = useQuery({
+    const { data: agentData, isLoading: isAgentDataLoading, refetch: refetchAgents } = useQuery({
       queryFn: () =>
         axios.get<any, AxiosResponse<GenericLambdaResponse<Agent[]>>>(
           `${import.meta.env.VITE_EXTERNAL_SERVICE_BASE}/filter`,
@@ -101,6 +101,7 @@ export const useGetAgentAnalytics = (agent_id?: string) =>
     return {
       data: combinedPools,
       isLoading: isAgentDataLoading || isPoolsDataLoading,
+      refetch: refetchAgents,
     };
   };
 

@@ -44,9 +44,6 @@ const ResultRowData = ({ poolInfo: { agent, pool } }: { poolInfo: PoolWithAgent 
             boxSize="24px"
           />
           <Text fontWeight="medium">{pool.tokenName}</Text>
-          <Text color="gray.400" fontSize="sm">
-            {/* {token.image_url} */}
-          </Text>
         </HStack>
         <Tr>
           <Flex alignItems="center" direction="row" gap="2" marginTop="2">
@@ -76,8 +73,6 @@ const ResultRowData = ({ poolInfo: { agent, pool } }: { poolInfo: PoolWithAgent 
           type: NumberFormatType.TxDisplayValuesFormatterWithSubscript,
         })}
       </Td>
-      {/* <Td color="green.400">{formatPercent(0)}</Td>
-      <Td>volume</Td> */}
       <Td>
         {formatNumber({
           input: Token.fromRawAmount(pool.marketCap.toString()),
@@ -85,8 +80,20 @@ const ResultRowData = ({ poolInfo: { agent, pool } }: { poolInfo: PoolWithAgent 
           type: NumberFormatType.TableDataFormatter,
         })}
       </Td>
-      {/* <Td>{10}</Td>
-      <Td>{10}</Td> */}
+      <Td>
+        {formatNumber({
+          input: Token.fromRawAmount(pool.bondingCurveProgress),
+          suffix: 'SOL',
+          type: NumberFormatType.TableDataFormatter,
+        })}
+      </Td>
+      {/* <Td>
+        {formatNumber({
+          input: Token.fromRawAmount(pool.curveThresholdReached),
+          suffix: 'SOL',
+          type: NumberFormatType.TableDataFormatter,
+        })}
+      </Td> */}
       <Td>
         <Button
           onClick={() => {
@@ -114,53 +121,26 @@ const ResultRowData = ({ poolInfo: { agent, pool } }: { poolInfo: PoolWithAgent 
 };
 
 const PopularTokens = () => {
-  const searchBarRef = useRef<HTMLInputElement>(null);
-  const searchNameRef = useRef<string>('');
-  const searchPublicIdRef = useRef<string>('');
-  const searchIsTokenIdRef = useRef<boolean>(true);
-  const { data: popularAgents, isLoading: isPopularAgentsLoading } = useFilterAgents(
-    searchNameRef.current,
-    searchPublicIdRef.current,
-    searchIsTokenIdRef.current
-  );
+  const [searchInput, setSearchInput] = useState("");
+  const [queryParams, setQueryParams] = useState({
+    is_token: true,
+    name: "",
+    publicId: "",
+  });
 
-  // const [suggestionResults, setSuggestionResults] = useState<PoolWithAgent[]>([]);
+  const regex = /^[A-Za-z0-9]{44}$/;
 
-  // // TODO: FIXME  Donot use useEffect. Causing infinte renders.
-  // useEffect(() => {
-  //   if (popularAgents !== undefined) {
-  //     setSuggestionResults(popularAgents);
-  //   }
-  // }, [popularAgents.length]); // To avoid infinite render
+  const { data: popularAgents, isLoading: isPopularAgentsLoading, refetch: refetchAgents } =
+    useFilterAgents(queryParams.name, queryParams.publicId, queryParams.is_token);
 
-  // // TODO: FIXME Instead of this function, better handle search results from the hook so that we can avoid unnecessary useEffect
-  // function searchAgents(popularWizards: PoolWithAgent[], searchQuery: string) {
-  //   if (popularWizards === undefined) return undefined;
-  //   if (searchQuery === '') {
-  //     setSuggestionResults([]);
-  //     return undefined;
-  //   }
-
-  //   const results = popularWizards.filter((pool) =>
-  //     pool.agent.name.toLowerCase().includes(searchQuery.toLowerCase().trim())
-  //   );
-
-  //   setSuggestionResults(results);
-  // }
-
-  function checkIsPublicId(id: string) {
-    if (searchBarRef.current === null) return;
-    const regex = /^[A-Za-z0-9]{44}$/;
-    if (regex.test(id)) {
-      searchPublicIdRef.current = searchBarRef.current.value;
-    } else searchNameRef.current = searchBarRef.current.value;
-  }
-
-  function clearInputRefs() {
-    searchNameRef.current = '';
-    searchPublicIdRef.current = '';
-    searchIsTokenIdRef.current = true;
-  }
+  const handleSearch = () => {
+    if (regex.test(searchInput)) {
+      setQueryParams({ is_token: true, name: "", publicId: searchInput });
+    } else {
+      setQueryParams({ is_token: true, name: searchInput, publicId: "" });
+    }
+    refetchAgents();
+  };
 
   return (
     <>
@@ -180,27 +160,15 @@ const PopularTokens = () => {
                 borderColor: 'blue.400',
                 boxShadow: 'none',
               }}
-              onChange={(e) => {
-                if (searchBarRef.current) {
-                  searchBarRef.current.value = e.target.value;
-                }
-              }}
               onKeyDown={(e) => {
-                if (e.key === 'Enter') {
-                  clearInputRefs();
-                  if (searchBarRef.current && popularAgents) {
-                    if (searchBarRef.current.value === '') clearInputRefs();
-                    // searchAgents(popularAgents, searchBarRef.current.value);
-                    checkIsPublicId(searchBarRef.current.value);
-                  }
-                }
+                if (e.key === "Enter") handleSearch();
               }}
               _placeholder={{ color: 'gray.400' }}
               bg="#2C3655"
               border="none"
               color="white"
+              onChange={(e) => setSearchInput(e.target.value)}
               placeholder="Search Token Name or CA"
-              ref={searchBarRef}
             />
           </InputGroup>
         </Box>
@@ -252,18 +220,6 @@ const PopularTokens = () => {
                       <LuArrowDownUp />
                     </HStack>
                   </Th>
-                  {/* <Th color="gray.400">
-                    <HStack spacing={1}>
-                      <Text>24h</Text>
-                      <LuArrowDownUp />
-                    </HStack>
-                  </Th>
-                  <Th color="gray.400">
-                    <HStack spacing={1}>
-                      <Text>24h Volume</Text>
-                      <LuArrowDownUp />
-                    </HStack>
-                  </Th> */}
                   <Th color="gray.400">
                     <HStack spacing={1}>
                       <Text>Market Cap</Text>
@@ -275,9 +231,9 @@ const PopularTokens = () => {
                       <Text>Interactions</Text>
                       <LuArrowDownUp />
                     </HStack>
-                  </Th>
-                  <Th color="gray.400">Holderlist</Th> */}
-                  <Th color="gray.400">AI Agent</Th>
+                  </Th> */}
+                  <Th color="gray.400">Bonding Curve</Th>
+                  {/* <Th color="gray.400">Holderlist</Th> */}
                 </Tr>
               </Thead>
               <Tbody>
