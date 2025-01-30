@@ -44,6 +44,7 @@ const PopularTokens = () => {
 
   useEffect(() => {
     if (popularAgents !== undefined) {
+      console.log(popularAgents);
       setSuggestionResults(popularAgents);
     }
   }, [popularAgents]);

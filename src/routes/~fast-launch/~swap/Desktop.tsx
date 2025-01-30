@@ -25,12 +25,15 @@ import { TokenDetails } from '../components/TokenDetails';
 import { TokenLockStatus } from '../components/TokenLockStatus';
 import { TradeGraph } from '../components/TradeGraph';
 import { useFastLaunchSearchParams } from '../hooks/useFastLaunchSearchParams';
+import { useGetAgent } from '../hooks/useGetAgentInfo';
 import { DetailsPanelDesktop } from './desktop/DetailsPanel';
 
 const SwapDesktopView: React.FC = () => {
   const { data: poolData, isLoading: isPoolDataLoading } = useGetPoolById(
     useFastLaunchSearchParams().pool
   );
+  console.log(poolData);
+  const { data: agent, isLoading: isAgentLoading } = useGetAgent(useFastLaunchSearchParams().agentId);
 
   return (
     <Box width="100%">
@@ -48,9 +51,9 @@ const SwapDesktopView: React.FC = () => {
               </BreadcrumbLink>
             </BreadcrumbItem>
             <BreadcrumbItem isCurrentPage>
-              <SkeletonText isLoaded={!isPoolDataLoading} noOfLines={1}>
+              <SkeletonText isLoaded={!isAgentLoading} noOfLines={1}>
                 <BreadcrumbLink cursor="initial !important" opacity={0.5} textDecoration="none">
-                  {poolData?.tokenName}
+                  {agent?.name}
                 </BreadcrumbLink>
               </SkeletonText>
             </BreadcrumbItem>

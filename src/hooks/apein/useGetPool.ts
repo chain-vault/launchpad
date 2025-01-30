@@ -177,15 +177,17 @@ export const useGetPoolById = (poolId?: string) => {
   const poolProgram = useGetProgramInstance<ApeonFastlaunch>(FastLauchIdl as Idl, false);
   const { data, isLoading, refetch } = useQuery<PoolAccountData | undefined>({
     queryFn:
-      poolId && !isLegacyPool(poolId) && poolProgram ?
-        async () => {
-          const response = await poolProgram.account.poolData.fetch(new PublicKey(poolId));
-
-          return convertBNToDecimal(response);
-        }
-      : skipToken,
+    poolId && !isLegacyPool(poolId) && poolProgram ?
+    async () => {
+      const response = await poolProgram.account.poolData.fetch(new PublicKey(poolId));
+      
+      console.log(response);
+      return convertBNToDecimal(response);
+    }
+    : skipToken,
     queryKey: ['apeInPool', poolId],
   });
+  
   const { curveSettings, isLoading: curveSettingsLoading } = useGetCurveSettings(data?.curve);
 
   const { price, solAmount, tokenAmount } = useGetLiveTokenPrice(
@@ -199,7 +201,7 @@ export const useGetPoolById = (poolId?: string) => {
   );
 
   const { isLoading: isSupplyLoading, supply } = useGetTokenSupply(data?.token);
-
+  
   const formattedPoolData = useMemo(() => {
     if (poolId && isLegacyPool(poolId)) {
       return getLegacyPoolById(poolId);
@@ -211,10 +213,10 @@ export const useGetPoolById = (poolId?: string) => {
       !curveSettings ||
       isSupplyLoading
     )
-      return undefined;
+    return undefined;
     return getFormattedPoolData(data, new PublicKey(poolId), curveSettings, supply);
   }, [poolId, data, curveSettings, isSupplyLoading, supply]);
-
+  
   const poolDataWithLivePrice = useMemo(
     () =>
       price && formattedPoolData ?
@@ -228,7 +230,6 @@ export const useGetPoolById = (poolId?: string) => {
       : formattedPoolData,
     [formattedPoolData, price, solAmount, supply, tokenAmount]
   );
-
   return {
     data: poolDataWithLivePrice,
     isLoading: curveSettingsLoading || isLoading,

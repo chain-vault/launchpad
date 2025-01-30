@@ -448,7 +448,7 @@ const useMintToken = (onSuccess?: (data: string[]) => void, onError?: (error: st
           is_token: true,
           mintAddress,
           name: variables.tokenName,
-          poolAddress,
+          poolId: poolAddress,
           public_key: publicKey.toBase58(),
           txHash,
         },
