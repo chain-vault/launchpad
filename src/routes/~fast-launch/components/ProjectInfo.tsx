@@ -16,7 +16,7 @@ export const ProjectInfo: React.FC = () => {
   const { isMetaDataLoading, poolTokenMetadata } = useTokenMetadata(useTokenAddress(), true);
   const {agentId} = useFastLaunchSearchParams();
   const { data: agent, isLoading: isAgentLoading } = useGetAgent(agentId);
-  console.log(agent)
+  // console.log(agent)
   return (
     <>
       <Box maxW={{ base: '100%', md: '100%' }} overflowWrap="break-word" wordBreak="break-word">
