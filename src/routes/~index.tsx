@@ -59,16 +59,16 @@ export const Route = createFileRoute('/')({
                   <Text color="red.400">1.8%</Text>
                 </Flex>
               </Box> */}
-              <Box bg="#1E263A" borderRadius="md" paddingX="4" paddingY="4" width="100%">
+              {/* <Box bg="#1E263A" borderRadius="md" paddingX="4" paddingY="4" width="100%">
                 <Flex justifyContent="space-between" mb="2">
                   <Text textStyle="h4">🔥Trending</Text>
 
-                  {/* <Link to="/trending"> */}
+                  <Link to="/trending">
                   <Flex alignItems="center" direction="row">
                     <Text>view more</Text>
                     <LuChevronRight />
                   </Flex>
-                  {/* </Link> */}
+                  </Link>
                 </Flex>
                 <Flex alignItems="center" gap="1" overflowY="auto" width="100%">
                   {TRENDING_TOKENS.map((token) => (
@@ -84,14 +84,14 @@ export const Route = createFileRoute('/')({
                             />
                             <Text fontWeight="medium">{token.name}</Text>
                             <Text color="gray.400" fontSize="sm">
-                              {/* {token.symbol} */}
+                              {token.symbol}
                             </Text>
                           </Flex>
 
                           <Flex>
                             <Text>{token.price}</Text>
                             <Text>
-                              {/* <IoCaretDown /> */}
+                              <IoCaretDown />
                               {token.difference === 'negative' ? 'negICO' : 'posICO'}
                             </Text>
                             <Text>{token.percentage}</Text>
@@ -101,7 +101,7 @@ export const Route = createFileRoute('/')({
                     </Box>
                   ))}
                 </Flex>
-              </Box>
+              </Box> */}
             </Flex>
             <PopularTokens />
           </Flex>
