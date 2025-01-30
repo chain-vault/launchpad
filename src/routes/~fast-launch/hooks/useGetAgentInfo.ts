@@ -1,8 +1,13 @@
-import { isToken } from '@metaplex-foundation/js';
+import { useMemo } from 'react';
+
 import { useMutation, useQuery } from '@tanstack/react-query';
 import axios, { AxiosResponse } from 'axios';
 import Cookies from 'js-cookie';
 import { toast } from 'react-toastify';
+
+import { PoolData } from '@app-types/apiIn';
+
+import { useGetAllPools } from '@hooks/apein/useGetPool';
 
 import queryClient from '../utils/queryClient';
 
@@ -23,6 +28,7 @@ export type Agent = {
   name: string;
   public_key?: string;
 };
+
 
 export const useGetAgent = (id?: string) =>
   useQuery({
@@ -54,25 +60,49 @@ export const useGetAgentAnalytics = (agent_id?: string) =>
     staleTime: 60 * 60 * 1000,
   });
 
-export const useFilterAgents = (name?: string, public_key?: string, is_token?: boolean) =>
-  useQuery({
-    queryFn: () =>
-      axios.get<any, AxiosResponse<GenericLambdaResponse<Agent[]>>>(
-        `${import.meta.env.VITE_EXTERNAL_SERVICE_BASE}/filter`,
-        {
-          params: {
-            is_token: true,
-            ...(name && name.length > 0 && { name }),
-            ...(public_key && public_key.length > 0 && { public_key }),
-            ...(is_token !== undefined && { is_token }),
-          },
-        }
-      ),
-    queryKey: [name, public_key, is_token],
-    select: (response: AxiosResponse<GenericLambdaResponse<Agent[]>>) =>
-      response.data.body.response,
-    staleTime: 60 * 60 * 1000,
-  });
+  export type PoolWithAgent = { agent: Agent } & { pool: PoolData };
+
+  export const useFilterAgents = (name?: string, public_key?: string, is_token?: boolean) => {
+    const { data: allPoolsData, isLoading: isPoolsDataLoading } = useGetAllPools();
+    const { data: agentData, isLoading: isAgentDataLoading } = useQuery({
+      queryFn: () =>
+        axios.get<any, AxiosResponse<GenericLambdaResponse<Agent[]>>>(
+          `${import.meta.env.VITE_EXTERNAL_SERVICE_BASE}/filter`,
+          {
+            params: {
+              is_token: true,
+              ...(name && name.length > 0 && { name }),
+              ...(public_key && public_key.length > 0 && { public_key }),
+              ...(is_token !== undefined && { is_token }),
+            },
+          }
+        ),
+      queryKey: [name, public_key, is_token],
+      select: (response: AxiosResponse<GenericLambdaResponse<Agent[]>>) =>
+        response.data.body.response,
+      staleTime: 60 * 60 * 1000,
+    });
+  
+    const combinedPools: PoolWithAgent[] = useMemo(() => {
+      if (!allPoolsData || !agentData) return [];
+  
+      const agentPoolIds = new Set(agentData.map((agent) => agent.poolAddress));
+      const agentMap = new Map(agentData.map((agent) => [agent.poolAddress, agent]));
+  
+      return allPoolsData
+        .filter((pool) => agentPoolIds.has(pool.poolId.toString()))
+        .map((pool) => ({
+          agent: agentMap.get(pool.poolId.toString()),
+          pool,
+        }))
+        .filter((pool): pool is PoolWithAgent => !!pool.agent);
+    }, [allPoolsData, agentData]);
+  
+    return {
+      data: combinedPools,
+      isLoading: isAgentDataLoading || isPoolsDataLoading,
+    };
+  };
 
 type CreateJwtProps = {
   message: string;

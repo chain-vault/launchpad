@@ -14,12 +14,7 @@ import { AllPoolAccounts, CurveSettings, PoolAccountData, PoolData } from '@app-
 import { DexType } from '@app-types/index';
 
 import { ApeInCurveMode, CurveIndex, DEFAULT_TOKEN_DECIMAL } from '@constants/config';
-import {
-  getLegacyPoolById,
-  getLegacyPoolsByUser,
-  isLegacyPool,
-  LEGACY_POOLS,
-} from '@constants/pools';
+import { getLegacyPoolById, getLegacyPoolsByUser, isLegacyPool } from '@constants/pools';
 import { useGetAllTokensSupply, useGetTokenSupply } from '@hooks/useGetAllTokensWithMetadata';
 import { getProgramInstance, useGetProgramInstance } from '@hooks/useGetProgramInstance';
 import { getConnection } from '@hooks/useWeb3React';
@@ -177,16 +172,16 @@ export const useGetPoolById = (poolId?: string) => {
   const poolProgram = useGetProgramInstance<ApeonFastlaunch>(FastLauchIdl as Idl, false);
   const { data, isLoading, refetch } = useQuery<PoolAccountData | undefined>({
     queryFn:
-    poolId && !isLegacyPool(poolId) && poolProgram ?
-    async () => {
-      const response = await poolProgram.account.poolData.fetch(new PublicKey(poolId));
-      
-      return convertBNToDecimal(response);
-    }
-    : skipToken,
+      poolId && !isLegacyPool(poolId) && poolProgram ?
+        async () => {
+          const response = await poolProgram.account.poolData.fetch(new PublicKey(poolId));
+
+          return convertBNToDecimal(response);
+        }
+      : skipToken,
     queryKey: ['apeInPool', poolId],
   });
-  
+
   const { curveSettings, isLoading: curveSettingsLoading } = useGetCurveSettings(data?.curve);
 
   const { price, solAmount, tokenAmount } = useGetLiveTokenPrice(
@@ -200,7 +195,7 @@ export const useGetPoolById = (poolId?: string) => {
   );
 
   const { isLoading: isSupplyLoading, supply } = useGetTokenSupply(data?.token);
-  
+
   const formattedPoolData = useMemo(() => {
     if (poolId && isLegacyPool(poolId)) {
       return getLegacyPoolById(poolId);
@@ -212,10 +207,10 @@ export const useGetPoolById = (poolId?: string) => {
       !curveSettings ||
       isSupplyLoading
     )
-    return undefined;
+      return undefined;
     return getFormattedPoolData(data, new PublicKey(poolId), curveSettings, supply);
   }, [poolId, data, curveSettings, isSupplyLoading, supply]);
-  
+
   const poolDataWithLivePrice = useMemo(
     () =>
       price && formattedPoolData ?
@@ -289,8 +284,7 @@ export const useGetAllPools = () => {
             getFormattedPoolData(pool.account, pool.publicKey, settings, supply?.totalSupply)
           : null;
       })
-      .filter((item) => item !== null)
-      .concat(LEGACY_POOLS);
+      .filter((item) => item !== null);
   }, [data, pairData, curveSettings, isSupplyFetching, getCurveSettingsById, allTokensSupply]);
 
   // const poolDatasWithLivePrice = useMemo(

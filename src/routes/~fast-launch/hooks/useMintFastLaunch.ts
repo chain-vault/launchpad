@@ -374,7 +374,7 @@ const useMintToken = (onSuccess?: (data: string[]) => void, onError?: (error: st
     is_token: boolean;
     mintAddress: string;
     name: string;
-    poolId: string;
+    poolAddress: string;
     public_key: string;
     txHash: string;
   };
@@ -448,7 +448,7 @@ const useMintToken = (onSuccess?: (data: string[]) => void, onError?: (error: st
           is_token: true,
           mintAddress,
           name: variables.tokenName,
-          poolId: poolAddress,
+          poolAddress,
           public_key: publicKey.toBase58(),
           txHash,
         },
@@ -472,7 +472,7 @@ const useMintToken = (onSuccess?: (data: string[]) => void, onError?: (error: st
                 actions: [
                   {
                     label: 'View Beast',
-                    link: `https://dapp.blockbeast.ai/chat/${agentId}`,
+                    link: `https://dev.blockbeast.ai/chat/${agentId}`,
                   },
                   { label: 'View token', link: `/fast-launch/swap/${poolAddress}` },
 
