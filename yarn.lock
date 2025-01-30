@@ -7769,6 +7769,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/js-cookie@npm:^3":
+  version: 3.0.6
+  resolution: "@types/js-cookie@npm:3.0.6"
+  checksum: 10/272d551687547445cb210213c73e72e0e5d58ad73e2e444a65d688b8ff9425529779ee0cd6492aaa1f070161916d4254ef2b1a76d64179100437f60749d094ef
+  languageName: node
+  linkType: hard
+
 "@types/js-yaml@npm:^4.0.0":
   version: 4.0.9
   resolution: "@types/js-yaml@npm:4.0.9"
@@ -9113,6 +9120,7 @@ __metadata:
     "@tanstack/router-vite-plugin": "npm:^1.35.4"
     "@types/bn.js": "npm:^5"
     "@types/crypto-js": "npm:^4"
+    "@types/js-cookie": "npm:^3"
     "@types/lodash": "npm:^4"
     "@types/mime-types": "npm:^2"
     "@types/node": "npm:^22.1.0"
@@ -9161,6 +9169,7 @@ __metadata:
     jotai-devtools: "npm:^0.10.1"
     jotai-optics: "npm:^0.4.0"
     jotai-scope: "npm:^0.7.2"
+    js-cookie: "npm:^3.0.5"
     lightweight-charts: "npm:^4.2.0"
     lodash: "npm:^4.17.21"
     mime-types: "npm:^2.1.35"
@@ -14990,6 +14999,13 @@ __metadata:
   version: 3.7.7
   resolution: "js-base64@npm:3.7.7"
   checksum: 10/185e34c536a6b1c4e1ad8bd96d25b49a9ea4e6803e259eaaaca95f1b392a0d590b2933c5ca8580c776f7279507944b81ff1faf889d84baa5e31f026e96d676a5
+  languageName: node
+  linkType: hard
+
+"js-cookie@npm:^3.0.5":
+  version: 3.0.5
+  resolution: "js-cookie@npm:3.0.5"
+  checksum: 10/366494b1630b9fb8abaef3659748db5dfd52c58c6fc3459b9f0a03b492593bc1b01c6dfcc066b46f6413c28edb3a00cc68fb61ea8cdf6991bedf1f100f8a389d
   languageName: node
   linkType: hard
 

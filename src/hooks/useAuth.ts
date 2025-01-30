@@ -48,18 +48,17 @@ export const useAuth = () => {
   //   onError: () => handleAuthorizationError(),
   // });
 
-  const getSignature = async (message: string) => {
-    if (!signMessage) {
-      handleAuthorizationError(AuthErrorMessages.AUTHORIZATION_FAILED);
-      return;
-    }
-    const messageBytes = new TextEncoder().encode(message);
-    const signature = await signMessage(messageBytes);
-    return encode(signature);
-  };
+  // const getSignature = async (message: string) => {
+  //   if (!signMessage) {
+  //     handleAuthorizationError(AuthErrorMessages.AUTHORIZATION_FAILED);
+  //     return;
+  //   }
+  //   const messageBytes = new TextEncoder().encode(message);
+  //   const signature = await signMessage(messageBytes);
+  //   return encode(signature);
+  // };
 
   const authenticateUser = async () => {
-    console.log("yuh")
     if (!publicKey) return handleAuthorizationError(AuthErrorMessages.AUTHORIZATION_FAILED);
 
     getWalletAuthToken(undefined, {
@@ -67,26 +66,27 @@ export const useAuth = () => {
         const message = new TextEncoder().encode(
           `${PRIVATE_MESSAGE} ${data.data.auth_nonce}`
         );
+        setAuthStatus({ authenticationStatus: UserAuthenticationStatus.SIGNING_USER });
         try {
           const signedMessage = await signMessage?.(message);
-          console.log(signedMessage);
           if(signedMessage === undefined) return;
           createJwt({
             message: PRIVATE_MESSAGE,
             public_key: publicKey.toString(),
             signature: Array.from(signedMessage),
           });
+          
+          setAuthStatus({
+            authenticationStatus: UserAuthenticationStatus.USER_AUTHENTICATED,
+            publickKey: publicKey.toString(),
+          });
         } catch (e) {
           console.error(e);
-          // toast.error(
-          //   e instanceof Error ? e.message : "something went wrong"
-          // );
           await disconnect();
         }
       },
     });
 
-    setAuthStatus({ authenticationStatus: UserAuthenticationStatus.SIGNING_USER });
     // try {
     //   const { data } = await getNonce({
     //     variables: {
@@ -114,11 +114,11 @@ export const useAuth = () => {
     //   if (!authTokenData.data?.walletAuth.token)
     //     return handleAuthorizationError(AuthErrorMessages.AUTHORIZATION_FAILED);
 
-    //   setUserAuthToken(authTokenData.data?.walletAuth.token);
-    //   setAuthStatus({
-    //     authenticationStatus: UserAuthenticationStatus.USER_AUTHENTICATED,
-    //     publickKey: publicKey.toString(),
-    //   });
+      // setUserAuthToken(authTokenData.data?.walletAuth.token);
+      // setAuthStatus({
+      //   authenticationStatus: UserAuthenticationStatus.USER_AUTHENTICATED,
+      //   publickKey: publicKey.toString(),
+      // });
     //   return setIsOpen(false);
     // } catch (err) {
     //   if (err instanceof Error) handleAuthorizationError(err.message);

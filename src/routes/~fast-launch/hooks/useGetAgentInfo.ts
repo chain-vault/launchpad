@@ -1,6 +1,7 @@
 import { isToken } from "@metaplex-foundation/js";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import axios, { AxiosResponse } from "axios";
+import Cookies from "js-cookie";
 import { toast } from "react-toastify";
 
 import queryClient from "../utils/queryClient";
@@ -77,7 +78,7 @@ export const useCreateJwt = () =>
       ),
     onError: (err) => toast.error(err.message),
     onSuccess: (response) => {
-    //   Cookies.set("token", response.data.access_token, { secure: true });
+      Cookies.set("token", response.data.access_token, { secure: true });
       queryClient.invalidateQueries();
     },
   });
