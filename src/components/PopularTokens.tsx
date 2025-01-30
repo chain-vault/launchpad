@@ -199,6 +199,9 @@ const PopularTokens = () => {
                 </Tr>
               </Thead>
               <Tbody>
+                {suggestionResults.length === 0 && popularAgents && (
+                  <div>No search Results</div>
+                )}
                 {(isPopularAgentsLoading || popularAgents === undefined) ? <div>Loading...</div>
                   : suggestionResults
                     .map((token) => (
