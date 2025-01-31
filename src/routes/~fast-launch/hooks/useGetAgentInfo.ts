@@ -40,7 +40,7 @@ export const useGetAgent = (id?: string) =>
           params: { agent_id: id },
         }
       ),
-    queryKey: [id],
+    queryKey: ['agents', id],
     select: (response) => response.data.body.response,
     staleTime: 60 * 60 * 1000,
   });
