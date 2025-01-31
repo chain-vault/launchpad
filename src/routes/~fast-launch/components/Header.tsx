@@ -125,9 +125,9 @@ export const Header = () => {
               </NumberWithTooltip>
             </SkeletonText>
           </VStack>
-          {poolData?.curveIndex && (
+          {/* {poolData?.curveIndex && (
             <LaunchTypeIcon boxSize="29px" type={poolData.curveIndex} zIndex={10} enableToolTip />
-          )}
+          )} */}
         </HStack>
       </GridItem>
       <GridItem
@@ -144,7 +144,7 @@ export const Header = () => {
           justifyContent={{ base: 'space-between', lg: 'space-around' }}
           rowGap={3}
         >
-          <HeaderMetrics
+          {/* <HeaderMetrics
             value={shrinkText({
               maxLength: 6,
               string: poolData?.poolCreator?.toString() ?? '-',
@@ -152,7 +152,7 @@ export const Header = () => {
             onClick={()=>{}}
             title="Created By"
             tooltipValue={poolData?.poolCreator?.toString() ?? ''}
-          />
+          /> */}
           <HeaderMetrics
             title="Price"
             tooltipValue={`${Token.fromRawAmount(poolData?.tokenPrice || 0).valueOf()}`}

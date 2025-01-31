@@ -10,11 +10,11 @@ import {
   Grid,
   GridItem,
   Heading,
+  Link,
   SimpleGrid,
   SkeletonText,
   Text,
 } from '@chakra-ui/react';
-import { Link } from '@tanstack/react-router';
 
 import { DexType } from '@app-types/index';
 
@@ -82,9 +82,9 @@ const SwapDesktopView: React.FC = () => {
                 <Box my={1}>
                   <AgentAnalytics />
 
-                  <Text opacity={0.5} textStyle="body-sm">
+                  {/* <Text opacity={0.5} textStyle="body-sm">
                     Last Updated : 1Min Ago
-                  </Text>
+                  </Text> */}
                 </Box>
                 <Box pt={3}>
                   <Flex alignSelf="flex-start" py={3}>
@@ -113,13 +113,16 @@ const SwapDesktopView: React.FC = () => {
                       />
                     </Flex>
                     <Button
+                      onClick={() => {
+                        window.open(`https://dev.blockbeast.ai/chat/${agent?.id}`, '_blank');
+                      }}
                       _hover={{ bg: 'green.200' }}
                       bg="green.100"
                       color="gray.800"
                       px={6}
                       size="md"
                     >
-                      <Link to="/fast-launch/create">ReachAgent</Link>
+                      Reach Agent
                     </Button>
                   </Flex>
                 </Box>
