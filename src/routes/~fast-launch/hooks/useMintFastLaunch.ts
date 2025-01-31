@@ -15,7 +15,7 @@ import { useMutation } from '@tanstack/react-query';
 import dayjs from 'dayjs';
 import utc from 'dayjs/plugin/utc';
 import Decimal from 'decimal.js';
-import { useAtomValue } from 'jotai';
+import { useAtomValue, useSetAtom } from 'jotai';
 import isFunction from 'lodash/isFunction';
 import { v4 as uuid } from 'uuid';
 
@@ -24,6 +24,7 @@ import {
   ApeInCurveMode,
   BLOCK_BEAST_BASE_URL,
   EVENT_AUTHORITY,
+  getExplorerUrl,
   IRYS_FILE_PREFIX,
   LOCK_PROGRAM_ID,
   ToastType,
@@ -48,6 +49,7 @@ import { fileToBase64 } from '@utils/fileConversion';
 import { compressString } from '@utils/textCompression';
 import { Token } from '@utils/token';
 
+import { modalStateAtom } from '../components/Create';
 import { FastLaunchForm } from '../types';
 import { deriveEscrow, deriveEscrowMetadata } from '../utils';
 
@@ -88,6 +90,7 @@ const useMintToken = (onSuccess?: (data: string[]) => void, onError?: (error: st
 
   const onSetTxId = (txId: string) => setTxDetails((prev) => ({ ...prev, txHash: txId }));
   const { showToast } = useProgressiveToast();
+  const setModalState = useSetAtom(modalStateAtom);
 
   const { data: poolSettings } = useApeInSettings();
 
@@ -467,26 +470,12 @@ const useMintToken = (onSuccess?: (data: string[]) => void, onError?: (error: st
               { autoClose: 5000 }
             );
 
-            showToast(
-              {
-                actions: [
-                  {
-                    label: 'View Beast',
-                    link: `https://dev.blockbeast.ai/chat/${agentId}`,
-                  },
-                  {
-                    label: 'View token',
-                    link: `/fast-launch/swap/${poolAddress}?agentId=${agentId}`,
-                  },
-
-                  ...createActions({ transaction: txHash }),
-                ],
-                message: 'Success',
-                title: 'Token and Beast created successfully',
-                type: ToastType.SUCCESS,
-              },
-              { autoClose: 5000 }
-            );
+            setModalState({
+              beastChatLink: `https://dev.blockbeast.ai/chat/${agentId}`,
+              isOpen: true,
+              tradePageLink: `/fast-launch/swap/${poolAddress}?agentId=${agentId}`,
+              transactionPageLink: getExplorerUrl(txHash),
+            });
           },
         }
       );
