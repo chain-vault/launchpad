@@ -61,8 +61,9 @@ export const useGetAgentAnalytics = (agent_id?: string) =>
   });
 
   export type PoolWithAgent = { agent: Agent } & { pool: PoolData };
+  export type PoolWithAgentFilterType = "bonded" | "marketCap" | "recentlyLaunched"
 
-  export const useFilterAgents = (name?: string, public_key?: string, is_token?: boolean) => {
+  export const useFilterAgents = (name?: string, public_key?: string, is_token?: boolean, filter: PoolWithAgentFilterType = "recentlyLaunched" ) => {
     const { data: allPoolsData, isLoading: isPoolsDataLoading } = useGetAllPools();
     const { data: agentData, isLoading: isAgentDataLoading, refetch: refetchAgents } = useQuery({
       queryFn: () =>
@@ -88,16 +89,24 @@ export const useGetAgentAnalytics = (agent_id?: string) =>
   
       const agentPoolIds = new Set(agentData.map((agent) => agent.poolAddress));
       const agentMap = new Map(agentData.map((agent) => [agent.poolAddress, agent]));
-  
+
       return allPoolsData
         .filter((pool) => agentPoolIds.has(pool.poolId.toString()))
         .map((pool) => ({
           agent: agentMap.get(pool.poolId.toString()),
           pool,
         }))
-        .filter((pool): pool is PoolWithAgent => !!pool.agent);
-    }, [allPoolsData, agentData]);
-  
+        .filter((pool): pool is PoolWithAgent => !!pool.agent)
+        .sort((a, b) => {
+          if (filter === "marketCap") {
+            return Number(b.pool.marketCap) - Number(a.pool.marketCap);
+          } if (filter === "bonded") {
+            return b.pool.bondingCurveProgress - a.pool.bondingCurveProgress;
+          }
+          return 0;
+        });
+    }, [allPoolsData, agentData, filter]);
+
     return {
       data: combinedPools,
       isLoading: isAgentDataLoading || isPoolsDataLoading,

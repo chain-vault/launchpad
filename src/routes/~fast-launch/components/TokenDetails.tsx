@@ -148,7 +148,9 @@ export const TokenDetails: React.FC = () => {
                 <ClipboardText theme="filled" trim>
                   {poolData?.token.toString() ?? ''}
                 </ClipboardText>
-                <Link
+                {poolData?.token.toString() && (
+                  
+                  <Link
                   alignItems="center"
                   display="inline-flex"
                   href={getExplorerUrlAddressUrl(poolData?.token.toString() ?? '')}
@@ -157,6 +159,7 @@ export const TokenDetails: React.FC = () => {
                 >
                   <RxExternalLink />
                 </Link>
+                )}
               </Flex>
             </GridItem>
           </Grid>

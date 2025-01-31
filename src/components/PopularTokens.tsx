@@ -1,5 +1,5 @@
 // import { ChevronDownIcon } from '@chakra-ui/icons';
-import { useEffect, useRef, useState } from 'react';
+import { useState } from 'react';
 
 import {
   Box,
@@ -10,6 +10,8 @@ import {
   Input,
   InputGroup,
   InputLeftElement,
+  Link,
+  Progress,
   Table,
   TableContainer,
   Tbody,
@@ -20,12 +22,17 @@ import {
   Tr,
 } from '@chakra-ui/react';
 import { useNavigate } from '@tanstack/react-router';
+import { filter } from 'lodash';
 import { IoMdCopy, IoMdSearch } from 'react-icons/io';
 import { LuArrowDownUp, LuExternalLink } from 'react-icons/lu';
 
-import { PoolWithAgent, useFilterAgents } from '@routes/~fast-launch/hooks/useGetAgentInfo';
+import { getExplorerUrlAddressUrl } from '@constants/config';
+import { PoolWithAgent, PoolWithAgentFilterType, useFilterAgents } from '@routes/~fast-launch/hooks/useGetAgentInfo';
+import { getTimeDifference } from '@utils/duration';
 import { formatNumber, formatPercent, NumberFormatType } from '@utils/formatNumbers';
 import { Token } from '@utils/token';
+
+import { ClipboardText } from './ClipboardText';
 
 const ResultRowData = ({ poolInfo: { agent, pool } }: { poolInfo: PoolWithAgent }) => {
   const navigate = useNavigate();
@@ -56,11 +63,17 @@ const ResultRowData = ({ poolInfo: { agent, pool } }: { poolInfo: PoolWithAgent 
               px={2}
               py={1}
             >
-              <Text fontSize="xs">fa</Text>
-              <LuExternalLink />
+              <Link
+                href={getExplorerUrlAddressUrl(pool?.token.toString() ?? '')}
+                target="_blank"
+              >
+                <LuExternalLink />
+              </Link>
             </Flex>
             <Flex bgColor="rgb(255 255 255 / 5%)" borderRadius="full" px={2} py={2}>
-              <IoMdCopy />
+              <ClipboardText theme="filled" trim>
+                {pool?.token.toString() ?? ''}
+              </ClipboardText>
             </Flex>
           </Flex>
         </Tr>
@@ -86,6 +99,25 @@ const ResultRowData = ({ poolInfo: { agent, pool } }: { poolInfo: PoolWithAgent 
           suffix: 'SOL',
           type: NumberFormatType.TableDataFormatter,
         })}
+      </Td>
+      <Td>
+        <Box minH="28px" mt={2}>
+          <Flex justifyContent="space-between" mb={1} textStyle="body-md-bold">
+            <Text color="brand.accent.600">{formatPercent(pool.bondingCurveProgress)}</Text>
+            <Text>{getTimeDifference(pool.createdAt)}</Text>
+          </Flex>
+          <Progress
+            sx={{
+              '& > div': {
+                backgroundColor: 'brand.accent.600',
+              },
+            }}
+            bg="surface.base.950"
+            borderRadius="full"
+            height="6px"
+            value={pool.bondingCurveProgress}
+          />
+        </Box>
       </Td>
       {/* <Td>
         {formatNumber({
@@ -123,6 +155,7 @@ const ResultRowData = ({ poolInfo: { agent, pool } }: { poolInfo: PoolWithAgent 
 const PopularTokens = () => {
   const [searchInput, setSearchInput] = useState("");
   const [queryParams, setQueryParams] = useState({
+    filter: "recentlyLaunched" as PoolWithAgentFilterType,
     is_token: true,
     name: "",
     publicId: "",
@@ -131,13 +164,13 @@ const PopularTokens = () => {
   const regex = /^[A-Za-z0-9]{44}$/;
 
   const { data: popularAgents, isLoading: isPopularAgentsLoading, refetch: refetchAgents } =
-    useFilterAgents(queryParams.name, queryParams.publicId, queryParams.is_token);
+    useFilterAgents(queryParams.name, queryParams.publicId, queryParams.is_token, queryParams.filter);
 
   const handleSearch = () => {
     if (regex.test(searchInput)) {
-      setQueryParams({ is_token: true, name: "", publicId: searchInput });
+      setQueryParams({...queryParams, is_token: true, name: "", publicId: searchInput });
     } else {
-      setQueryParams({ is_token: true, name: searchInput, publicId: "" });
+      setQueryParams({...queryParams, is_token: true, name: searchInput, publicId: "" });
     }
     refetchAgents();
   };
@@ -179,28 +212,31 @@ const PopularTokens = () => {
             <Box bg="#121E30" borderRadius="full" display="flex" padding="2">
               <Button
                 _hover={{ bg: 'blue.500' }}
-                bg="blue.400"
+                bg={`${queryParams.filter === 'recentlyLaunched' ? 'blue.500' : 'transparant'}`}
                 borderRadius="full"
-                color="white"
+                color={`${queryParams.filter === 'recentlyLaunched' ? 'white' : 'gray.400'}`}
+                onClick={() => setQueryParams({ ...queryParams, filter: "recentlyLaunched" })}
                 size="sm"
-              >
+                >
                 Recently Launched
               </Button>
               <Button
                 _hover={{ bg: 'whiteAlpha.100' }}
-                bg="transparant"
+                bg={`${queryParams.filter === 'marketCap' ? 'blue.500' : 'transparant'}`}
                 borderRadius="full"
-                color="gray.400"
+                color={`${queryParams.filter === 'marketCap' ? 'white' : 'gray.400'}`}
+                onClick={() => setQueryParams({ ...queryParams, filter: "marketCap" })}
                 size="sm"
                 variant="ghost"
-              >
+                >
                 Market Cap
               </Button>
               <Button
                 _hover={{ bg: 'whiteAlpha.100' }}
-                bg="transparant"
+                bg={`${queryParams.filter === 'bonded' ? 'blue.500' : 'transparant'}`}
                 borderRadius="full"
-                color="gray.400"
+                color={`${queryParams.filter === 'bonded' ? 'white' : 'gray.400'}`}
+                onClick={() => setQueryParams({ ...queryParams, filter: "bonded" })}
                 size="sm"
                 variant="ghost"
               >
@@ -233,13 +269,13 @@ const PopularTokens = () => {
                     </HStack>
                   </Th> */}
                   <Th color="gray.400">Bonding Curve</Th>
-                  {/* <Th color="gray.400">Holderlist</Th> */}
+                  <Th color="gray.400">Bonding Curve Progress</Th>
                 </Tr>
               </Thead>
               <Tbody>
                 {isPopularAgentsLoading || popularAgents === undefined ?
                   <div>Loading...</div>
-                : popularAgents.map((data) => (
+                  : popularAgents.map((data) => (
                     <ResultRowData key={data.pool.poolId.toString()} poolInfo={data} />
                   ))
                 }
