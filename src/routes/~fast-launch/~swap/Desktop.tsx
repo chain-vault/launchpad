@@ -3,11 +3,16 @@ import {
   Breadcrumb,
   BreadcrumbItem,
   BreadcrumbLink,
+  Button,
   Container,
+  Divider,
+  Flex,
   Grid,
   GridItem,
+  Heading,
   SimpleGrid,
   SkeletonText,
+  Text,
 } from '@chakra-ui/react';
 import { Link } from '@tanstack/react-router';
 
@@ -15,10 +20,12 @@ import { DexType } from '@app-types/index';
 
 import AgentAnalytics from '@components/Analytics';
 import { useGetPoolById } from '@hooks/apein/useGetPool';
+import { shrinkText } from '@utils/shrinkText';
 
 import { BondingCurve } from '../components/BondingCurve';
 import { DeveloperInfo } from '../components/DeveloperInfo';
 import { Header } from '../components/Header';
+import { HeaderMetrics } from '../components/HeaderMetrics';
 import ReferralSection from '../components/Referral';
 import { Socials } from '../components/Socials';
 import { SwapSection } from '../components/Swap';
@@ -33,7 +40,9 @@ const SwapDesktopView: React.FC = () => {
   const { data: poolData, isLoading: isPoolDataLoading } = useGetPoolById(
     useFastLaunchSearchParams().pool
   );
-  const { data: agent, isLoading: isAgentLoading } = useGetAgent(useFastLaunchSearchParams().agentId);
+  const { data: agent, isLoading: isAgentLoading } = useGetAgent(
+    useFastLaunchSearchParams().agentId
+  );
 
   return (
     <Box width="100%">
@@ -66,14 +75,57 @@ const SwapDesktopView: React.FC = () => {
               <Box width="100%">
                 <TradeGraph />
               </Box>
-              <Box py={3}>
-                <Socials />
-              </Box>
+              <Flex direction="column" my={4}>
+                <Box>
+                  <Heading size="md">Agent Metrics</Heading>
+                </Box>
+                <Box my={1}>
+                  <AgentAnalytics />
+
+                  <Text opacity={0.5} textStyle="body-sm">
+                    Last Updated : 1Min Ago
+                  </Text>
+                </Box>
+                <Box pt={3}>
+                  <Flex alignSelf="flex-start" py={3}>
+                    <Socials />
+                  </Flex>
+                  <Flex
+                    alignContent="center"
+                    borderColor="#2C3655 !important"
+                    borderTop="1px"
+                    direction="row"
+                    justifyContent="space-between"
+                    py={3}
+                  >
+                    <Flex direction="column" ml={-3}>
+                      <Text opacity={0.5} px={3} textStyle="body-sm">
+                        Created by
+                      </Text>
+                      <HeaderMetrics
+                        value={shrinkText({
+                          maxLength: 6,
+                          string: poolData?.poolCreator?.toString() ?? '-',
+                        })}
+                        onClick={() => {}}
+                        title="Created By"
+                        tooltipValue={poolData?.poolCreator?.toString() ?? ''}
+                      />
+                    </Flex>
+                    <Button
+                      _hover={{ bg: 'green.200' }}
+                      bg="green.100"
+                      color="gray.800"
+                      px={6}
+                      size="md"
+                    >
+                      <Link to="/fast-launch/create">ReachAgent</Link>
+                    </Button>
+                  </Flex>
+                </Box>
+              </Flex>
               <Box my={1}>
                 <DetailsPanelDesktop />
-              </Box>
-              <Box my={1}>
-                <AgentAnalytics />
               </Box>
             </GridItem>
             <GridItem>
