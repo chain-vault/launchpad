@@ -43,13 +43,13 @@ export const DetailsPanelDesktop = () => {
             <Text textStyle="body-sm-bold">Transactions</Text>
           </Tab>
 
-          {isApeInBubbleMapEnabled && tokenId && (
+          {/* {isApeInBubbleMapEnabled && tokenId && (
             <Box cursor="pointer" onClick={onBubbleMapModalOpen} pt="6px">
               <Text opacity={0.5} textStyle="body-sm-bold">
                 Bubble Map
               </Text>
             </Box>
-          )}
+          )} */}
         </TabList>
 
         <TabPanels>
@@ -60,13 +60,13 @@ export const DetailsPanelDesktop = () => {
             <HoldersList />
           </TabPanel>
           <TabPanel>
-            <TransactionsList />
+            <TransactionsList />g
           </TabPanel>
-          {isApeInBubbleMapEnabled && tokenId && (
+          {/* {isApeInBubbleMapEnabled && tokenId && (
             <TabPanel>
               <BubbleMap loading={isPoolDataLoading} token={tokenId} />
             </TabPanel>
-          )}
+          )} */}
         </TabPanels>
       </Tabs>
       <BubbleMapModal

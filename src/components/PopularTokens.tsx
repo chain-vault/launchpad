@@ -22,8 +22,7 @@ import {
   Tr,
 } from '@chakra-ui/react';
 import { useNavigate } from '@tanstack/react-router';
-import { filter } from 'lodash';
-import { IoMdCopy, IoMdSearch } from 'react-icons/io';
+import { IoMdSearch } from 'react-icons/io';
 import { LuArrowDownUp, LuExternalLink } from 'react-icons/lu';
 
 import { getExplorerUrlAddressUrl } from '@constants/config';
@@ -40,7 +39,15 @@ const ResultRowData = ({ poolInfo: { agent, pool } }: { poolInfo: PoolWithAgent 
   return (
     <Tr _hover={{ bg: 'whiteAlpha.50' }}>
       <Td>
-        <HStack spacing={2}>
+        <Button
+          onClick={() => navigate({
+            params: { poolAddress: pool.poolId.toString() },
+            search: { agentId: agent.id },
+            to: '/fast-launch/swap/$poolAddress',
+          })} gap={2}
+          size="sm"
+          variant="unstyled"
+        >
           <Image
             src={
               agent.image_url ||
@@ -51,7 +58,7 @@ const ResultRowData = ({ poolInfo: { agent, pool } }: { poolInfo: PoolWithAgent 
             boxSize="24px"
           />
           <Text fontWeight="medium">{pool.tokenName}</Text>
-        </HStack>
+        </Button>
         <Tr>
           <Flex alignItems="center" direction="row" gap="2" marginTop="2">
             <Flex
@@ -94,13 +101,6 @@ const ResultRowData = ({ poolInfo: { agent, pool } }: { poolInfo: PoolWithAgent 
         })}
       </Td>
       <Td>
-        {formatNumber({
-          input: Token.fromRawAmount(pool.bondingCurveProgress),
-          suffix: 'SOL',
-          type: NumberFormatType.TableDataFormatter,
-        })}
-      </Td>
-      <Td>
         <Box minH="28px" mt={2}>
           <Flex justifyContent="space-between" mb={1} textStyle="body-md-bold">
             <Text color="brand.accent.600">{formatPercent(pool.bondingCurveProgress)}</Text>
@@ -126,6 +126,24 @@ const ResultRowData = ({ poolInfo: { agent, pool } }: { poolInfo: PoolWithAgent 
           type: NumberFormatType.TableDataFormatter,
         })}
       </Td> */}
+      <Td>
+        <Button
+          onClick={() => {
+            window.open(`https://dev.blockbeast.ai/chat/${agent.id}`, '_blank');
+          }}
+          _hover={{ bg: 'green.500', color: 'white' }}
+          bg="transparent"
+          borderColor="green.500"
+          borderRadius="2xl"
+          color="green.500"
+          h="24px"
+          px={3}
+          size="sm"
+          variant="outline"
+        >
+          Agent
+        </Button>
+      </Td>
       <Td>
         <Button
           onClick={() => {
@@ -168,9 +186,9 @@ const PopularTokens = () => {
 
   const handleSearch = () => {
     if (regex.test(searchInput)) {
-      setQueryParams({...queryParams, is_token: true, name: "", publicId: searchInput });
+      setQueryParams({ ...queryParams, is_token: true, name: "", publicId: searchInput });
     } else {
-      setQueryParams({...queryParams, is_token: true, name: searchInput, publicId: "" });
+      setQueryParams({ ...queryParams, is_token: true, name: searchInput, publicId: "" });
     }
     refetchAgents();
   };
@@ -217,7 +235,7 @@ const PopularTokens = () => {
                 color={`${queryParams.filter === 'recentlyLaunched' ? 'white' : 'gray.400'}`}
                 onClick={() => setQueryParams({ ...queryParams, filter: "recentlyLaunched" })}
                 size="sm"
-                >
+              >
                 Recently Launched
               </Button>
               <Button
@@ -228,7 +246,7 @@ const PopularTokens = () => {
                 onClick={() => setQueryParams({ ...queryParams, filter: "marketCap" })}
                 size="sm"
                 variant="ghost"
-                >
+              >
                 Market Cap
               </Button>
               <Button
@@ -268,8 +286,8 @@ const PopularTokens = () => {
                       <LuArrowDownUp />
                     </HStack>
                   </Th> */}
-                  <Th color="gray.400">Bonding Curve</Th>
                   <Th color="gray.400">Bonding Curve Progress</Th>
+                  <Th color="gray.400">Agent</Th>
                 </Tr>
               </Thead>
               <Tbody>

@@ -70,7 +70,7 @@ export const CreateFastLaunch: React.FC = () => {
       tokenName: '',
       tokenTicker: '',
       twitter: '',
-      type: CurveIndex.NANO_LAUNCH,
+      type: CurveIndex.PRIME_LAUNCH,
       website: '',
     },
   });
