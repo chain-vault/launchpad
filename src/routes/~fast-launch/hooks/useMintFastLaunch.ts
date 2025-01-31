@@ -474,7 +474,10 @@ const useMintToken = (onSuccess?: (data: string[]) => void, onError?: (error: st
                     label: 'View Beast',
                     link: `https://dev.blockbeast.ai/chat/${agentId}`,
                   },
-                  { label: 'View token', link: `/fast-launch/swap/${poolAddress}` },
+                  {
+                    label: 'View token',
+                    link: `/fast-launch/swap/${poolAddress}?agentId=${agentId}`,
+                  },
 
                   ...createActions({ transaction: txHash }),
                 ],
