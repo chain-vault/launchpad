@@ -274,10 +274,14 @@ const PopularTokens = () => {
               </Thead>
               <Tbody>
                 {isPopularAgentsLoading || popularAgents === undefined ?
-                  <div>Loading...</div>
+                  <Flex justifyContent="center" width="100%">Searching...</Flex>
                   : popularAgents.map((data) => (
                     <ResultRowData key={data.pool.poolId.toString()} poolInfo={data} />
                   ))
+                }
+                {
+                  popularAgents.length === 0 && !isPopularAgentsLoading &&
+                  <Flex justifyContent="center" width="100%">No Tokens found</Flex>
                 }
               </Tbody>
             </Table>
