@@ -64,10 +64,10 @@ export const useAuth = () => {
 
   const authenticateUser = async () => {
     if (!publicKey) return handleAuthorizationError(AuthErrorMessages.AUTHORIZATION_FAILED);
+    setAuthStatus({ authenticationStatus: UserAuthenticationStatus.SIGNING_USER });
 
     getWalletAuthToken(undefined, {
       onSuccess: async (data) => {
-        setAuthStatus({ authenticationStatus: UserAuthenticationStatus.SIGNING_USER });
         try {
           const signature = await getSignature(`${PRIVATE_MESSAGE} ${data.data.auth_nonce}`);
           if (!signature) return handleAuthorizationError(AuthErrorMessages.AUTHORIZATION_FAILED);
