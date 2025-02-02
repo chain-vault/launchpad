@@ -10,7 +10,6 @@ import {
 } from '@atoms/index';
 import { useWallet } from '@solana/wallet-adapter-react';
 import { useAtom, useAtomValue } from 'jotai';
-import Cookies from "js-cookie";
 
 import { UserAuthenticationStatus } from '@constants/index';
 
@@ -23,7 +22,6 @@ const useWalletConnection = () => {
 
   const onDisconnectWallet = useCallback(() => {
     setUserAuthToken('');
-    Cookies.remove('token');
     setAuthStatus({
       authenticationStatus: UserAuthenticationStatus.NOT_AUTHORIZED,
       publickKey: undefined,
