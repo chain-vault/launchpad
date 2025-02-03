@@ -1,6 +1,11 @@
 import { useEffect } from 'react';
 
-import { updateAuthStatusAtom, userAuthAtom, userAuthTokenAtom, walletConnectModalAtom } from '@atoms/index';
+import {
+  updateAuthStatusAtom,
+  userAuthAtom,
+  userAuthTokenAtom,
+  walletConnectModalAtom,
+} from '@atoms/index';
 import { useAtom, useAtomValue } from 'jotai';
 
 import { UserAuthenticationStatus } from '@constants/index';
@@ -14,8 +19,8 @@ import WalletSelectModal from './WalletSelectModal';
 const AuthWrapper = ({ children }: React.PropsWithChildren) => {
   const { publicKey } = useWeb3React();
   const { isWalletConnected, onAccountChange } = useWalletConnection();
-  const [authenticationStatus, setAuthStatus] = useAtom(updateAuthStatusAtom);
-  const { publickKey: connectedPublickKey } = useAtomValue(userAuthAtom);
+  const [, setAuthStatus] = useAtom(updateAuthStatusAtom);
+  const { authenticationStatus, publickKey: connectedPublickKey } = useAtomValue(userAuthAtom);
   const { isTokenExpired, refreshAuthToken } = useUserAuthentication();
 
   const authToken = useAtomValue(userAuthTokenAtom);
@@ -43,11 +48,11 @@ const AuthWrapper = ({ children }: React.PropsWithChildren) => {
       if (!authToken) {
         authenticateUser();
       } else {
-      setAuthStatus({
-        authenticationStatus: UserAuthenticationStatus.USER_AUTHENTICATED,
-        publickKey: publicKey.toString(),
-      });
-      setIsOpen(false);
+        setAuthStatus({
+          authenticationStatus: UserAuthenticationStatus.USER_AUTHENTICATED,
+          publickKey: publicKey.toString(),
+        });
+        setIsOpen(false);
       }
     }
 

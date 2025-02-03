@@ -138,13 +138,7 @@ const WalletSelectDrawer = () => {
             </Flex>
           : userAuthState.authenticationStatus === UserAuthenticationStatus.SIGNING_USER ?
             <Center flexDirection="column" gap={3}>
-              <Flex
-                alignItems="center"
-                gap={2}
-                justifyContent="center"
-                position="relative"
-                py={14}
-              >
+              <Flex alignItems="center" gap={2} justifyContent="center" position="relative" py={14}>
                 <Box className="spinner" />
                 <Image boxSize={[12, 14]} src={wallet?.adapter.icon} zIndex={100} />
               </Flex>
@@ -173,7 +167,7 @@ const WalletSelectDrawer = () => {
                         }
                         borderColor={
                           isConnected && isSelected ? 'brand.accent.600' : (
-                            filledButtonStyle.borderColor
+                            `${filledButtonStyle.borderColor}`
                           )
                         }
                         onClick={() =>
@@ -183,7 +177,7 @@ const WalletSelectDrawer = () => {
                           )
                         }
                         borderRadius="2xl"
-                        color={isSelected ? 'brand.accent.600' : filledButtonStyle.color}
+                        color={isSelected ? 'brand.accent.600' : `${filledButtonStyle.color}`}
                         filter={connecting && !isSelected ? 'blur(4px)' : undefined}
                         gap={3}
                         h={{ base: '58px', md: '60px' }}
@@ -204,6 +198,23 @@ const WalletSelectDrawer = () => {
                             zIndex={1}
                           />
                         )}
+                        {/* {connecting && isSelected && (
+                          <Flex
+                            alignItems="center"
+                            border="2px solid"
+                            borderRadius="2xl"
+                            bottom="0"
+                            justifyContent="center"
+                            left="0"
+                            position="absolute"
+                            right="0"
+                            top="0"
+                            zIndex="10"
+                          >
+                            <Spinner mb={5} size={['sm', 'sm', 'md']} />
+                          </Flex>
+                        )} */}
+
                         <Image
                           boxSize={[6, 6, 8]}
                           src={connector.meta?.logoUrl || connector.adapter.icon}
