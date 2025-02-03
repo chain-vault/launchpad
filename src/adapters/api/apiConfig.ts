@@ -34,7 +34,7 @@ const apiConfig = async <T>({
     headers: {
       ...(requestType && { 'X-Request-Type': requestType }), // Add a custom header to specify the request type
       ...(includeAuth && {
-        Authorization: `${localStorage.getItem('authToken')}`, // Add authorization token from localStorage
+        Authorization: `${JSON.parse(localStorage.getItem('authToken') ?? "")}`, // Add authorization token from localStorage
       }),
     },
     withCredentials,
