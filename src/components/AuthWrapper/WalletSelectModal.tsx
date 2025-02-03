@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 
 import {
-  confettiAtom,
   lastSelectedWallet,
   updateAuthStatusAtom,
   userAuthAtom,
@@ -22,7 +21,6 @@ import {
   GridItem,
   Image,
   Link,
-  Spinner,
   Text,
   useStyleConfig,
   VStack,
@@ -48,7 +46,6 @@ const WalletSelectDrawer = () => {
   const { wallet } = useWeb3React();
   const [isOpen, setIsOpen] = useAtom(walletConnectModalAtom);
   const userAuthState = useAtomValue(userAuthAtom);
-  const [confettiState, setConfettiState] = useAtom(confettiAtom);
   const [, setUserAuthToken] = useAtom(userAuthTokenWriteAtom);
   const [, setAuthStatus] = useAtom(updateAuthStatusAtom);
   const [connectStartTime, setConnectStartTime] = useState<null | number>(null);
@@ -65,22 +62,8 @@ const WalletSelectDrawer = () => {
       !connecting
     ) {
       setUserConnecting(false);
-      setConfettiState({ ...confettiState, isConfettiActive: true });
-      if (connectStartTime !== null) {
-        const elapsedTime = Date.now() - connectStartTime;
-        setConfettiState({ ...confettiState, interval: elapsedTime });
-      }
     }
-  }, [
-    confettiState,
-    connectStartTime,
-    connecting,
-    isConnected,
-    selectedWallet,
-    setConfettiState,
-    userAuthState,
-    userConnecting,
-  ]);
+  }, [connectStartTime, connecting, isConnected, selectedWallet, userAuthState, userConnecting]);
 
   const onConnectWallet = (walletName: WalletName, isPhantomExtension: boolean = false) => {
     if (connecting) return;
