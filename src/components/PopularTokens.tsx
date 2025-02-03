@@ -1,6 +1,3 @@
-// import { ChevronDownIcon } from '@chakra-ui/icons';
-import { useState } from 'react';
-
 import {
   Box,
   Button,
@@ -25,12 +22,10 @@ import { useNavigate } from '@tanstack/react-router';
 import { IoMdSearch } from 'react-icons/io';
 import { LuArrowDownUp, LuExternalLink } from 'react-icons/lu';
 
+import { PoolWithAgent } from '@app-types/agent';
+
 import { getExplorerUrlAddressUrl } from '@constants/config';
-import {
-  PoolWithAgent,
-  PoolWithAgentFilterType,
-  useFilterAgents,
-} from '@routes/~fast-launch/hooks/useGetAgentInfo';
+import { PoolSortOptions, useFilterAgents } from '@routes/~fast-launch/hooks/useGetAgentInfo';
 import { getTimeDifference } from '@utils/duration';
 import { formatNumber, formatPercent, NumberFormatType } from '@utils/formatNumbers';
 import { Token } from '@utils/token';
@@ -175,34 +170,15 @@ const ResultRowData = ({ poolInfo: { agent, pool } }: { poolInfo: PoolWithAgent 
 };
 
 const PopularTokens = () => {
-  const [searchInput, setSearchInput] = useState('');
-  const [queryParams, setQueryParams] = useState({
-    filter: 'recentlyLaunched' as PoolWithAgentFilterType,
-    is_token: true,
-    name: '',
-    publicId: '',
-  });
-
-  const regex = /^[A-Za-z0-9]{44}$/;
-
   const {
     data: popularAgents,
+    filter,
     isLoading: isPopularAgentsLoading,
-    refetch: refetchAgents,
-  } = useFilterAgents(
-    queryParams.name,
-    queryParams.publicId,
-    queryParams.is_token,
-    queryParams.filter
-  );
+    onChangeFilters,
+  } = useFilterAgents();
 
-  const handleSearch = () => {
-    if (regex.test(searchInput)) {
-      setQueryParams({ ...queryParams, is_token: true, name: '', publicId: searchInput });
-    } else {
-      setQueryParams({ ...queryParams, is_token: true, name: searchInput, publicId: '' });
-    }
-    refetchAgents();
+  const handleSearch = (search: string) => {
+    onChangeFilters({ search });
   };
 
   return (
@@ -223,14 +199,11 @@ const PopularTokens = () => {
                 borderColor: 'blue.400',
                 boxShadow: 'none',
               }}
-              onKeyDown={(e) => {
-                if (e.key === 'Enter') handleSearch();
-              }}
               _placeholder={{ color: 'gray.400' }}
               bg="#2C3655"
               border="none"
               color="white"
-              onChange={(e) => setSearchInput(e.target.value)}
+              onChange={(e) => handleSearch(e.target.value)}
               placeholder="Search Token Name or CA"
             />
           </InputGroup>
@@ -240,38 +213,25 @@ const PopularTokens = () => {
         <Box bg="#1E263A" borderRadius="md" p={4}>
           <HStack mb={4} spacing={2}>
             <Box bg="#121E30" borderRadius="full" display="flex" padding="2">
-              <Button
-                _hover={{ bg: 'blue.500' }}
-                bg={`${queryParams.filter === 'recentlyLaunched' ? 'blue.500' : 'transparant'}`}
-                borderRadius="full"
-                color={`${queryParams.filter === 'recentlyLaunched' ? 'white' : 'gray.400'}`}
-                onClick={() => setQueryParams({ ...queryParams, filter: 'recentlyLaunched' })}
-                size="sm"
-              >
-                Recently Launched
-              </Button>
-              <Button
-                _hover={{ bg: 'whiteAlpha.100' }}
-                bg={`${queryParams.filter === 'marketCap' ? 'blue.500' : 'transparant'}`}
-                borderRadius="full"
-                color={`${queryParams.filter === 'marketCap' ? 'white' : 'gray.400'}`}
-                onClick={() => setQueryParams({ ...queryParams, filter: 'marketCap' })}
-                size="sm"
-                variant="ghost"
-              >
-                Market Cap
-              </Button>
-              <Button
-                _hover={{ bg: 'whiteAlpha.100' }}
-                bg={`${queryParams.filter === 'bonded' ? 'blue.500' : 'transparant'}`}
-                borderRadius="full"
-                color={`${queryParams.filter === 'bonded' ? 'white' : 'gray.400'}`}
-                onClick={() => setQueryParams({ ...queryParams, filter: 'bonded' })}
-                size="sm"
-                variant="ghost"
-              >
-                Bonded
-              </Button>
+              <Box bg="#121E30" borderRadius="full" display="flex" padding="2">
+                {Object.entries(PoolSortOptions).map(([key, label]) => (
+                  <Button
+                    onClick={() =>
+                      onChangeFilters({
+                        sortBy: PoolSortOptions[key as keyof typeof PoolSortOptions],
+                      })
+                    }
+                    _hover={{ bg: 'blue.500' }}
+                    bg={`${filter.sortBy === PoolSortOptions[key as keyof typeof PoolSortOptions] ? 'blue.500' : 'transparant'}`}
+                    borderRadius="full"
+                    color={`${filter.sortBy === PoolSortOptions[key as keyof typeof PoolSortOptions] ? 'white' : 'gray.400'}`}
+                    key={key}
+                    size="sm"
+                  >
+                    {label}
+                  </Button>
+                ))}
+              </Box>
             </Box>
           </HStack>
 
@@ -292,12 +252,7 @@ const PopularTokens = () => {
                       <LuArrowDownUp />
                     </HStack>
                   </Th>
-                  {/* <Th color="gray.400">
-                    <HStack spacing={1}>
-                      <Text>Interactions</Text>
-                      <LuArrowDownUp />
-                    </HStack>
-                  </Th> */}
+
                   <Th color="gray.400">Bonding Curve Progress</Th>
                   <Th color="gray.400">Agent</Th>
                 </Tr>
