@@ -47,7 +47,7 @@ export const LockToken: React.FC<LockTokenProps> = () => {
             position="absolute"
             right="0"
           >
-            <Switch {...register(name)} size="lg" variant="boxy" />
+            <Switch {...register(name)} size="lg" variant="" />
           </Flex>
           <Flex>
             <FormLabel m={0}>Token Lock</FormLabel>
