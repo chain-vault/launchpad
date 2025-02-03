@@ -59,7 +59,7 @@ export const updateDisconnectWalletAtom = atom(null, (get, set, disconnectWallet
   });
 });
 
-export const userAuthTokenAtom = atomWithStorage<string>('gmtValue', '', undefined, {
+export const userAuthTokenAtom = atomWithStorage<string>('authToken', '', undefined, {
   getOnInit: true,
 });
 export const userAuthTokenWriteAtom = atom(null, (_get, set, newToken: string) => {
