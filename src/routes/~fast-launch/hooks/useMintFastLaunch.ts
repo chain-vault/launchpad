@@ -479,7 +479,7 @@ const useMintToken = (onSuccess?: (data: string[]) => void, onError?: (error: st
             );
 
             setModalState({
-              beastChatLink: `https://dev.blockbeast.ai/chat/${agentId}`,
+              beastChatLink: `${import.meta.env.VITE_APP_BASE_API_URL}/${agentId}`,
               isOpen: true,
               tradePageLink: `/fast-launch/swap/${poolAddress}?agentId=${agentId}`,
               transactionPageLink: getExplorerUrl(txHash),
