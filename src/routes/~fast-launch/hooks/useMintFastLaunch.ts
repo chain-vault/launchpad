@@ -460,7 +460,7 @@ const useMintToken = (onSuccess?: (data: string[]) => void, onError?: (error: st
           mintAddress,
           name: variables.tokenName,
           poolAddress,
-          public_key: publicKey.toBase58(),
+          public_key: publicKey.toString(),
           txHash,
         },
         {
