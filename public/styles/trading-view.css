@@ -1,9 +1,9 @@
-span[class^=errorCard__icon] svg{
-   opacity  : 0 !important;
+span[class^='errorCard__icon'] svg {
+  opacity: 0 !important;
 }
-span[class^=errorCard__icon]{
-    background-image: url(../assets/images/apeon-head.svg) !important;
-    background-repeat: no-repeat;
-    background-position: center bottom;
-    background-size: 100% ;
+span[class^='errorCard__icon'] {
+  background-image: url(../assets/images/avatar_placeholder.svg) !important;
+  background-repeat: no-repeat;
+  background-position: center bottom;
+  background-size: 100%;
 }
