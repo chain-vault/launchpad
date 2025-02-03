@@ -139,3 +139,10 @@ export type ToggleButtonOption = {
   label: ReactNode;
   value: string;
 };
+
+export type GenericLambdaResponse<T> = {
+  body: {
+    response: T;
+  };
+  statusCode: number;
+};

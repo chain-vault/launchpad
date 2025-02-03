@@ -1,34 +1,23 @@
-import { useMemo } from 'react';
+import { useMemo, useState } from 'react';
 
 import apiConfig from '@adapters/api/apiConfig';
 import { useQuery } from '@tanstack/react-query';
 import { AxiosResponse } from 'axios';
 
-import { PoolData } from '@app-types/apiIn';
+import { Agent, PoolWithAgent } from '@app-types/agent';
+import { GenericLambdaResponse } from '@app-types/index';
 
 import { useGetAllPools } from '@hooks/apein/useGetPool';
 
-export type GenericLambdaResponse<T> = {
-  body: {
-    response: T;
-  };
-  statusCode: number;
+export enum PoolSortOptions {
+  CURVE_PROGRESS = 'Bonding Curve Progress',
+  MARKET_CAP = 'Market Cap',
+  RECENTLY_LAUNCHED = 'Recently Launched',
+}
+export type AgentFileters = {
+  search: string;
+  sortBy: PoolSortOptions;
 };
-
-export type Agent = {
-  bio: string;
-  content: string;
-  description: string;
-  greeting: string;
-  id: string;
-  imageUrl?: string;
-  name: string;
-  poolAddress: string;
-  publicKey?: string;
-};
-
-export type PoolWithAgent = { agent: Agent } & { pool: PoolData };
-export type PoolWithAgentFilterType = 'bonded' | 'marketCap' | 'recentlyLaunched';
 
 export const useGetAgent = (id?: string) =>
   useQuery({
@@ -41,7 +30,6 @@ export const useGetAgent = (id?: string) =>
       }),
     queryKey: ['agent', id],
     select: (response) => response.data.body.response,
-    staleTime: 60 * 60 * 1000,
   });
 
 export const useGetAgentAnalytics = (agentId?: string) =>
@@ -49,18 +37,18 @@ export const useGetAgentAnalytics = (agentId?: string) =>
     enabled: !!agentId,
     queryFn: () =>
       apiConfig({ method: 'GET', params: { agent_id: agentId }, url: 'get-analytics' }),
-    queryKey: [agentId, 'get-analytics'],
+    queryKey: ['get-analytics', agentId],
     select: (response) => response.data.body.response,
-    staleTime: 60 * 60 * 1000,
   });
 
-export const useFilterAgents = (
-  name?: string,
-  public_key?: string,
-  is_token?: boolean,
-  filter: PoolWithAgentFilterType = 'recentlyLaunched'
-) => {
+export const useFilterAgents = () => {
+  const [agentFilters, setAgentFilters] = useState<AgentFileters>({
+    search: '',
+    sortBy: PoolSortOptions.RECENTLY_LAUNCHED,
+  });
+
   const { data: allPoolsData, isLoading: isPoolsDataLoading } = useGetAllPools();
+
   const {
     data: agentData,
     isLoading: isAgentDataLoading,
@@ -71,18 +59,15 @@ export const useFilterAgents = (
         method: 'GET',
         params: {
           is_token: true,
-          ...(name && name.length > 0 && { name }),
-          ...(public_key && public_key.length > 0 && { public_key }),
-          ...(is_token !== undefined && { is_token }),
         },
         url: 'filter',
       }),
-    queryKey: [name, public_key, is_token],
+    queryKey: ['all-agents'],
     select: (response: AxiosResponse<GenericLambdaResponse<Agent[]>>) =>
       response.data.body.response,
-    staleTime: 60 * 60 * 1000,
   });
 
+  // TODO: Optimize the filter loop
   const combinedPools: PoolWithAgent[] = useMemo(() => {
     if (!allPoolsData || !agentData) return [];
 
@@ -97,19 +82,34 @@ export const useFilterAgents = (
       }))
       .filter((pool): pool is PoolWithAgent => !!pool.agent)
       .sort((a, b) => {
-        if (filter === 'marketCap') {
+        if (agentFilters.sortBy === PoolSortOptions.MARKET_CAP) {
           return Number(b.pool.marketCap) - Number(a.pool.marketCap);
         }
-        if (filter === 'bonded') {
+        if (agentFilters.sortBy === PoolSortOptions.CURVE_PROGRESS) {
           return b.pool.bondingCurveProgress - a.pool.bondingCurveProgress;
         }
+        if (agentFilters.sortBy === PoolSortOptions.RECENTLY_LAUNCHED) {
+          return b.pool.createdAt - a.pool.createdAt;
+        }
         return 0;
-      });
-  }, [allPoolsData, agentData, filter]);
+      })
+      .filter((data) =>
+        data.pool.tokenName.toLowerCase().includes(agentFilters.search.toLowerCase())
+      );
+  }, [allPoolsData, agentData, agentFilters]);
+
+  const onChangeFilters = (newFilter: Partial<AgentFileters>) => {
+    setAgentFilters((prevFilters) => ({
+      ...prevFilters,
+      ...newFilter,
+    }));
+  };
 
   return {
     data: combinedPools,
+    filter: agentFilters,
     isLoading: isAgentDataLoading || isPoolsDataLoading,
+    onChangeFilters,
     refetch: refetchAgents,
   };
 };
