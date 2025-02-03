@@ -13,3 +13,9 @@ export type Agent = {
 };
 
 export type PoolWithAgent = { agent: Agent } & { pool: PoolData };
+
+export type AgentAnalyticsMetrics = {
+  agentId: string;
+  msgCount: string;
+  userCount: string;
+};

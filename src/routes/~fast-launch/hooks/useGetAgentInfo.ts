@@ -4,7 +4,7 @@ import apiConfig from '@adapters/api/apiConfig';
 import { useQuery } from '@tanstack/react-query';
 import { AxiosResponse } from 'axios';
 
-import { Agent, PoolWithAgent } from '@app-types/agent';
+import { Agent, AgentAnalyticsMetrics, PoolWithAgent } from '@app-types/agent';
 import { GenericLambdaResponse } from '@app-types/index';
 
 import { useGetAllPools } from '@hooks/apein/useGetPool';
@@ -32,11 +32,15 @@ export const useGetAgent = (id?: string) =>
     select: (response) => response.data.body.response,
   });
 
-export const useGetAgentAnalytics = (agentId?: string) =>
+export const useGetAgentAnalytics = (agentId: string) =>
   useQuery({
     enabled: !!agentId,
     queryFn: () =>
-      apiConfig({ method: 'GET', params: { agent_id: agentId }, url: 'get-analytics' }),
+      apiConfig<GenericLambdaResponse<AgentAnalyticsMetrics>>({
+        method: 'GET',
+        params: { agent_id: agentId },
+        url: 'get-analytics',
+      }),
     queryKey: ['get-analytics', agentId],
     select: (response) => response.data.body.response,
   });
