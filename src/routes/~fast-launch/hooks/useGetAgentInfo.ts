@@ -1,7 +1,8 @@
 import { useMemo } from 'react';
 
+import apiConfig from '@adapters/api/apiConfig';
 import { useQuery } from '@tanstack/react-query';
-import axios, { AxiosResponse } from 'axios';
+import { AxiosResponse } from 'axios';
 
 import { PoolData } from '@app-types/apiIn';
 
@@ -20,40 +21,38 @@ export type Agent = {
   description: string;
   greeting: string;
   id: string;
-  image_url?: string;
+  imageUrl?: string;
   name: string;
-  public_key?: string;
+  poolAddress: string;
+  publicKey?: string;
 };
+
+export type PoolWithAgent = { agent: Agent } & { pool: PoolData };
+export type PoolWithAgentFilterType = 'bonded' | 'marketCap' | 'recentlyLaunched';
 
 export const useGetAgent = (id?: string) =>
   useQuery({
     enabled: !!id,
     queryFn: () =>
-      axios.get<any, AxiosResponse<GenericLambdaResponse<Agent>>>(
-        `${import.meta.env.VITE_EXTERNAL_SERVICE_BASE}/get-info`,
-        {
-          params: { agent_id: id },
-        }
-      ),
-    queryKey: ['agents', id],
-    select: (response) => response.data.body.response,
-    staleTime: 60 * 60 * 1000,
-  });
-
-export const useGetAgentAnalytics = (agent_id?: string) =>
-  useQuery({
-    enabled: !!agent_id,
-    queryFn: () =>
-      axios.get<any>(`${import.meta.env.VITE_EXTERNAL_SERVICE_BASE}/get-analytics`, {
-        params: { agent_id },
+      apiConfig<GenericLambdaResponse<Agent>>({
+        method: 'GET',
+        params: { agent_id: id },
+        url: 'get-info',
       }),
-    queryKey: [agent_id, 'get-analytics'],
+    queryKey: ['agent', id],
     select: (response) => response.data.body.response,
     staleTime: 60 * 60 * 1000,
   });
 
-export type PoolWithAgent = { agent: Agent } & { pool: PoolData };
-export type PoolWithAgentFilterType = 'bonded' | 'marketCap' | 'recentlyLaunched';
+export const useGetAgentAnalytics = (agentId?: string) =>
+  useQuery({
+    enabled: !!agentId,
+    queryFn: () =>
+      apiConfig({ method: 'GET', params: { agent_id: agentId }, url: 'get-analytics' }),
+    queryKey: [agentId, 'get-analytics'],
+    select: (response) => response.data.body.response,
+    staleTime: 60 * 60 * 1000,
+  });
 
 export const useFilterAgents = (
   name?: string,
@@ -68,17 +67,16 @@ export const useFilterAgents = (
     refetch: refetchAgents,
   } = useQuery({
     queryFn: () =>
-      axios.get<any, AxiosResponse<GenericLambdaResponse<Agent[]>>>(
-        `${import.meta.env.VITE_EXTERNAL_SERVICE_BASE}/filter`,
-        {
-          params: {
-            is_token: true,
-            ...(name && name.length > 0 && { name }),
-            ...(public_key && public_key.length > 0 && { public_key }),
-            ...(is_token !== undefined && { is_token }),
-          },
-        }
-      ),
+      apiConfig<GenericLambdaResponse<Agent[]>>({
+        method: 'GET',
+        params: {
+          is_token: true,
+          ...(name && name.length > 0 && { name }),
+          ...(public_key && public_key.length > 0 && { public_key }),
+          ...(is_token !== undefined && { is_token }),
+        },
+        url: 'filter',
+      }),
     queryKey: [name, public_key, is_token],
     select: (response: AxiosResponse<GenericLambdaResponse<Agent[]>>) =>
       response.data.body.response,

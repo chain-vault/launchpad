@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
 
-import { confettiAtom } from '@atoms/index';
 import {
   Alert,
   AlertIcon,
@@ -15,10 +14,8 @@ import {
 } from '@chakra-ui/react';
 import styled from '@emotion/styled';
 import { useLocation, useRouterState } from '@tanstack/react-router';
-import { useAtom } from 'jotai';
 import { ToastContainer } from 'react-toastify';
 
-import { BananaConfetti } from '@components/BananaConfetti';
 import CustomDrawer from '@components/Drawer';
 import Footer from '@components/Layout/Footer';
 import SettingsBody from '@components/TransactionSettings/SettingsBody';
@@ -54,7 +51,6 @@ const Layout = ({ children }: React.PropsWithChildren) => {
   const { colorMode } = useColorMode();
   const toastContainerClass = useColorModeValue('toast-container-light', 'toast-container-dark');
 
-  const [createConfetti] = useAtom(confettiAtom);
   const bgColor = useColorModeValue('brand.secondary.100', 'brand.secondary.900');
   const alertBg = opacify(90, bgColor);
 
@@ -70,7 +66,6 @@ const Layout = ({ children }: React.PropsWithChildren) => {
   // lifiting up state to add blur effect on collapse
   const { isOpen, onToggle } = useDisclosure();
   const { pathname } = useLocation();
-  const isHomePage = pathname === '/';
 
   useEffect(() => {
     if (isSettingsDrawerOpen) {
@@ -91,39 +86,7 @@ const Layout = ({ children }: React.PropsWithChildren) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [router.location.pathname]);
   return (
-    <Box
-      // _after={
-      //   isHomePage ?
-      //     {
-      //       bg: 'background.overlay',
-      //       content: '""',
-      //       display: 'block',
-      //       h: '35vh',
-      //       left: 0,
-      //       position: 'absolute',
-      //       right: 0,
-      //       top: 0,
-      //       zIndex: -1,
-      //     }
-      //   : {}
-      // }
-      display="flex"
-      flexDirection="column"
-      minHeight="100vh"
-    >
-      {createConfetti.isConfettiActive && (
-        <Box
-          height="100vh"
-          left="0"
-          pointerEvents="none"
-          position="fixed"
-          top="0"
-          width="100vw"
-          zIndex="8888"
-        >
-          {/* <BananaConfetti /> */}
-        </Box>
-      )}
+    <Box display="flex" flexDirection="column" minHeight="100vh">
       <Box
         bgAttachment="fixed"
         bgRepeat="no-repeat"

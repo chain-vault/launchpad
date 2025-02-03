@@ -22,7 +22,6 @@ import { v4 as uuid } from 'uuid';
 import { isApeInPoolCreationEnabled } from '@constants/config/features';
 import {
   ApeInCurveMode,
-  BLOCK_BEAST_BASE_URL,
   EVENT_AUTHORITY,
   getExplorerUrl,
   IRYS_FILE_PREFIX,
@@ -37,6 +36,7 @@ import {
   WALLET_NOT_CONNECTED,
 } from '@constants/programErrors';
 import { useApeInSettings } from '@hooks/apein/usePoolSettings';
+import useCheckTokenExpiryAndExecute from '@hooks/useCheckTokenExpiryAndExecute';
 import { useGetProgramInstance } from '@hooks/useGetProgramInstance';
 import useWebIrys from '@hooks/useIrys';
 import { createActions, useProgressiveToast } from '@hooks/useProgressiveToast';
@@ -49,7 +49,7 @@ import { fileToBase64 } from '@utils/fileConversion';
 import { compressString } from '@utils/textCompression';
 import { Token } from '@utils/token';
 
-import { modalStateAtom } from '../components/Create';
+import { modalStateAtom } from '../state/atom';
 import { FastLaunchForm } from '../types';
 import { deriveEscrow, deriveEscrowMetadata } from '../utils';
 
@@ -59,6 +59,21 @@ type TxDetails = {
   errorMessage: string;
   mintAddress: string;
   poolAddress: string;
+  txHash: string;
+};
+
+type CreateAgentRequest = {
+  agent_id: string;
+  bio: string;
+  content: string;
+  description: string;
+  greeting: string;
+  image: string;
+  is_token: boolean;
+  mintAddress: string;
+  name: string;
+  poolAddress: string;
+  public_key: string;
   txHash: string;
 };
 
@@ -91,6 +106,7 @@ const useMintToken = (onSuccess?: (data: string[]) => void, onError?: (error: st
   const onSetTxId = (txId: string) => setTxDetails((prev) => ({ ...prev, txHash: txId }));
   const { showToast } = useProgressiveToast();
   const setModalState = useSetAtom(modalStateAtom);
+  const { withAuthToken } = useCheckTokenExpiryAndExecute();
 
   const { data: poolSettings } = useApeInSettings();
 
@@ -367,24 +383,15 @@ const useMintToken = (onSuccess?: (data: string[]) => void, onError?: (error: st
       throw new Error(SOMETHING_WENT_WRONG);
     }
   };
-  type CreateAgentRequest = {
-    agent_id: string;
-    bio: string;
-    content: string;
-    description: string;
-    greeting: string;
-    image: string;
-    is_token: boolean;
-    mintAddress: string;
-    name: string;
-    poolAddress: string;
-    public_key: string;
-    txHash: string;
-  };
 
   const { mutate: createAgent } = useMutation({
     mutationFn: (payload: CreateAgentRequest) =>
-      apiConfig(`${BLOCK_BEAST_BASE_URL}/create-agent`, 'POST', payload, null, true),
+      apiConfig({
+        data: payload,
+        includeAuth: true,
+        method: 'POST',
+        url: '/create-agent',
+      }),
     onError: (error) => {
       showToast({
         message: error.message,
@@ -393,6 +400,7 @@ const useMintToken = (onSuccess?: (data: string[]) => void, onError?: (error: st
       });
     },
   });
+
   const {
     error: txError,
     isError,
@@ -400,7 +408,7 @@ const useMintToken = (onSuccess?: (data: string[]) => void, onError?: (error: st
     isSuccess,
     mutate: onCreatePool,
   } = useMutation({
-    mutationFn: mintTokenAndCreatePool,
+    mutationFn: (payload: FastLaunchForm) => withAuthToken(() => mintTokenAndCreatePool(payload)),
     onError: (error) => {
       showToast(
         {
@@ -459,10 +467,10 @@ const useMintToken = (onSuccess?: (data: string[]) => void, onError?: (error: st
           onSuccess: () => {
             showToast(
               {
-                // actions: [
-                //   { label: 'View', link: `/fast-launch/swap/${poolAddress}` },
-                //   ...createActions({ transaction: txHash }),
-                // ],
+                actions: [
+                  { label: 'View', link: `/fast-launch/swap/${poolAddress}?agentId=${agentId}` },
+                  ...createActions({ transaction: txHash }),
+                ],
                 message: 'Success',
                 title: 'Beast created successfully',
                 type: ToastType.SUCCESS,

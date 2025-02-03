@@ -12,7 +12,7 @@ import { Meteora, Radium } from '@assets/imges';
  */
 export const BASE_CONFIG = {
   apeInProgramId: import.meta.env.VITE_APEIN_PROGRAM_ID,
-  appApiBaseURL: '',
+  appApiBaseURL: import.meta.env.VITE_APP_BASE_API_URL,
   envMode: import.meta.env.VITE_ENV,
   fastlaunchGraphqlApiEndpoint: import.meta.env.VITE_FAST_LAUNCH_GRAPHQL_API_ENDPOINT,
   lbpGraphqlApiEndpoint: import.meta.env.VITE_LBP_GRAPHQL_API_ENDPOINT,
@@ -128,5 +128,3 @@ export const DEX_OPTIONS: LockType[] = [
 ];
 
 export const PHANTOM_DOWNLOAD_URL = 'https://phantom.com/';
-
-export const BLOCK_BEAST_BASE_URL = 'https://d5489svsusa37.cloudfront.net';

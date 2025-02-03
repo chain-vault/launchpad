@@ -13,7 +13,7 @@ export const useSolUsdPrice = (solInput: NumberType) => {
   const { data, error, isError, isLoading, isPending, isRefetching } = useQuery<AxiosResponse>({
     enabled: !!solInput,
     gcTime: Infinity,
-    queryFn: () => apiConfig(PRICE_FEED_URL, 'GET'),
+    queryFn: () => apiConfig({ method: 'GET', url: PRICE_FEED_URL }),
     queryKey: ['SOL_PRICE'],
     refetchInterval: 15 * 1000,
     // refetchOnMount: false,

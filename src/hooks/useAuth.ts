@@ -1,6 +1,6 @@
+import apiConfig from '@adapters/api/apiConfig';
 import { updateAuthStatusAtom, userAuthTokenWriteAtom, walletConnectModalAtom } from '@atoms/index';
 import { useMutation } from '@tanstack/react-query';
-import axios, { AxiosResponse } from 'axios';
 import { useAtom } from 'jotai';
 
 import { AuthErrorMessages, UserAuthenticationStatus } from '@constants/index';
@@ -17,22 +17,27 @@ type CreateJwtProps = {
   public_key: string;
   signature: number[];
 };
-type CreateJwtResponse = AxiosResponse<{
-  access_token: string;
-}>;
+type CreateJwtResponse = {
+  accessToken: string;
+};
+
+type AuthNonceResponse = {
+  authNonce: string;
+};
 
 export const useCreateJwt = () =>
   useMutation({
     mutationFn: (payload: CreateJwtProps) =>
-      axios.post<CreateJwtProps, CreateJwtResponse>(
-        `${import.meta.env.VITE_EXTERNAL_SERVICE_BASE}/login`,
-        payload
-      ),
+      apiConfig<CreateJwtResponse>({ data: payload, method: 'POST', url: 'login' }),
   });
 
 export const useGetWalletAuth = () =>
   useMutation({
-    mutationFn: () => axios.get(`${import.meta.env.VITE_EXTERNAL_SERVICE_BASE}/wallet-auth`),
+    mutationFn: () =>
+      apiConfig<AuthNonceResponse>({
+        method: 'GET',
+        url: 'wallet-auth',
+      }),
   });
 
 export const useAuth = () => {
@@ -69,7 +74,7 @@ export const useAuth = () => {
     getWalletAuthToken(undefined, {
       onSuccess: async (data) => {
         try {
-          const signature = await getSignature(`${PRIVATE_MESSAGE} ${data.data.auth_nonce}`);
+          const signature = await getSignature(`${PRIVATE_MESSAGE} ${data.data.authNonce}`);
           if (!signature) return handleAuthorizationError(AuthErrorMessages.AUTHORIZATION_FAILED);
 
           createJwt(
@@ -81,13 +86,13 @@ export const useAuth = () => {
             {
               onError: () => handleAuthorizationError(AuthErrorMessages.AUTHORIZATION_FAILED),
               onSuccess: (response) => {
-                if (!response.data.access_token)
+                if (!response.data.accessToken)
                   return handleAuthorizationError(AuthErrorMessages.AUTHORIZATION_FAILED);
                 setAuthStatus({
                   authenticationStatus: UserAuthenticationStatus.USER_AUTHENTICATED,
                   publickKey: publicKey.toString(),
                 });
-                setUserAuthToken(response.data.access_token);
+                setUserAuthToken(response.data.accessToken);
                 return setIsOpen(false);
               },
             }

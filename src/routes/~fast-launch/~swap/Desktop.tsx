@@ -5,18 +5,15 @@ import {
   BreadcrumbLink,
   Button,
   Container,
-  Divider,
   Flex,
   Grid,
   GridItem,
   Heading,
-  Link,
   SimpleGrid,
   SkeletonText,
   Text,
 } from '@chakra-ui/react';
-
-import { DexType } from '@app-types/index';
+import { Link } from '@tanstack/react-router';
 
 import AgentAnalytics from '@components/Analytics';
 import { useGetPoolById } from '@hooks/apein/useGetPool';
@@ -26,7 +23,6 @@ import { BondingCurve } from '../components/BondingCurve';
 import { DeveloperInfo } from '../components/DeveloperInfo';
 import { Header } from '../components/Header';
 import { HeaderMetrics } from '../components/HeaderMetrics';
-import ReferralSection from '../components/Referral';
 import { Socials } from '../components/Socials';
 import { SwapSection } from '../components/Swap';
 import { TokenDetails } from '../components/TokenDetails';
@@ -107,9 +103,7 @@ const SwapDesktopView: React.FC = () => {
                           maxLength: 6,
                           string: poolData?.poolCreator?.toString() ?? '-',
                         })}
-                        onClick={() => {}}
-                        title="Created By"
-                        tooltipValue={poolData?.poolCreator?.toString() ?? ''}
+                        label=""
                       />
                     </Flex>
                     <Button
@@ -135,14 +129,14 @@ const SwapDesktopView: React.FC = () => {
               <Box mb={3}>
                 <SwapSection />
               </Box>
-              {!isPoolDataLoading &&
+              {/* {!isPoolDataLoading &&
                 poolData &&
                 poolData.selectedDex === DexType.METEORA &&
                 !poolData.curveThresholdReached && (
                   <Box mb={3}>
                     <ReferralSection />
                   </Box>
-                )}
+                )} */}
               {!isPoolDataLoading && poolData?.hasTokenLockBeenApplied && (
                 <Box mb={3}>
                   <TokenLockStatus />

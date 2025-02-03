@@ -28,3 +28,10 @@ export const golbalSOLUSDT = atom<{ lastValue: number; updated: number }>({
   lastValue: 0,
   updated: new Date().getTime(),
 });
+
+export const modalStateAtom = atom({
+  beastChatLink: '',
+  isOpen: false,
+  tradePageLink: '',
+  transactionPageLink: '',
+});

@@ -26,7 +26,11 @@ import { IoMdSearch } from 'react-icons/io';
 import { LuArrowDownUp, LuExternalLink } from 'react-icons/lu';
 
 import { getExplorerUrlAddressUrl } from '@constants/config';
-import { PoolWithAgent, PoolWithAgentFilterType, useFilterAgents } from '@routes/~fast-launch/hooks/useGetAgentInfo';
+import {
+  PoolWithAgent,
+  PoolWithAgentFilterType,
+  useFilterAgents,
+} from '@routes/~fast-launch/hooks/useGetAgentInfo';
 import { getTimeDifference } from '@utils/duration';
 import { formatNumber, formatPercent, NumberFormatType } from '@utils/formatNumbers';
 import { Token } from '@utils/token';
@@ -40,17 +44,20 @@ const ResultRowData = ({ poolInfo: { agent, pool } }: { poolInfo: PoolWithAgent 
     <Tr _hover={{ bg: 'whiteAlpha.50' }}>
       <Td>
         <Button
-          onClick={() => navigate({
-            params: { poolAddress: pool.poolId.toString() },
-            search: { agentId: agent.id },
-            to: '/fast-launch/swap/$poolAddress',
-          })} gap={2}
+          onClick={() =>
+            navigate({
+              params: { poolAddress: pool.poolId.toString() },
+              search: { agentId: agent.id },
+              to: '/fast-launch/swap/$poolAddress',
+            })
+          }
+          gap={2}
           size="sm"
           variant="unstyled"
         >
           <Image
             src={
-              agent.image_url ||
+              agent.imageUrl ||
               'https://s3-alpha-sig.figma.com/img/d2da/29ed/db62a0bcddc7a8b6e80e049081ae833c?Expires=1738540800&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=as74f6SFcoYblzly-yWLxk3EZSnUucTEFNtL034ZXJUqm0NHiRB2YSGcbsjxmaYhsOnQV5KpPuF5TP47FwJDoyNkbjFrXn45N22nbnRMNQvTZuOlhQMRngnev9Y54Aezx6eVEorLphlZ8KrwNicJ5vXIIiz4-1Au1fbfl-CVZWT5o~23rgLuYQhKy-uBeOvfN6u3FxRf1UlEvOWnUTtJ7UidNJ1EBcEeS9hA9xXBk~bAiICZ5E70xwGhqfCUWz2jQTWcGOqwSzbmyeimjnbVddFL2uClL5NCI3BKPqFRRaJag7KKFIkWSDfRyyCylYVlLCmmdC4zm5uLz4rsaH-bng__'
             }
             alt="Token icon"
@@ -70,10 +77,7 @@ const ResultRowData = ({ poolInfo: { agent, pool } }: { poolInfo: PoolWithAgent 
               px={2}
               py={1}
             >
-              <Link
-                href={getExplorerUrlAddressUrl(pool?.token.toString() ?? '')}
-                target="_blank"
-              >
+              <Link href={getExplorerUrlAddressUrl(pool?.token.toString() ?? '')} target="_blank">
                 <LuExternalLink />
               </Link>
             </Flex>
@@ -171,24 +175,32 @@ const ResultRowData = ({ poolInfo: { agent, pool } }: { poolInfo: PoolWithAgent 
 };
 
 const PopularTokens = () => {
-  const [searchInput, setSearchInput] = useState("");
+  const [searchInput, setSearchInput] = useState('');
   const [queryParams, setQueryParams] = useState({
-    filter: "recentlyLaunched" as PoolWithAgentFilterType,
+    filter: 'recentlyLaunched' as PoolWithAgentFilterType,
     is_token: true,
-    name: "",
-    publicId: "",
+    name: '',
+    publicId: '',
   });
 
   const regex = /^[A-Za-z0-9]{44}$/;
 
-  const { data: popularAgents, isLoading: isPopularAgentsLoading, refetch: refetchAgents } =
-    useFilterAgents(queryParams.name, queryParams.publicId, queryParams.is_token, queryParams.filter);
+  const {
+    data: popularAgents,
+    isLoading: isPopularAgentsLoading,
+    refetch: refetchAgents,
+  } = useFilterAgents(
+    queryParams.name,
+    queryParams.publicId,
+    queryParams.is_token,
+    queryParams.filter
+  );
 
   const handleSearch = () => {
     if (regex.test(searchInput)) {
-      setQueryParams({ ...queryParams, is_token: true, name: "", publicId: searchInput });
+      setQueryParams({ ...queryParams, is_token: true, name: '', publicId: searchInput });
     } else {
-      setQueryParams({ ...queryParams, is_token: true, name: searchInput, publicId: "" });
+      setQueryParams({ ...queryParams, is_token: true, name: searchInput, publicId: '' });
     }
     refetchAgents();
   };
@@ -212,7 +224,7 @@ const PopularTokens = () => {
                 boxShadow: 'none',
               }}
               onKeyDown={(e) => {
-                if (e.key === "Enter") handleSearch();
+                if (e.key === 'Enter') handleSearch();
               }}
               _placeholder={{ color: 'gray.400' }}
               bg="#2C3655"
@@ -233,7 +245,7 @@ const PopularTokens = () => {
                 bg={`${queryParams.filter === 'recentlyLaunched' ? 'blue.500' : 'transparant'}`}
                 borderRadius="full"
                 color={`${queryParams.filter === 'recentlyLaunched' ? 'white' : 'gray.400'}`}
-                onClick={() => setQueryParams({ ...queryParams, filter: "recentlyLaunched" })}
+                onClick={() => setQueryParams({ ...queryParams, filter: 'recentlyLaunched' })}
                 size="sm"
               >
                 Recently Launched
@@ -243,7 +255,7 @@ const PopularTokens = () => {
                 bg={`${queryParams.filter === 'marketCap' ? 'blue.500' : 'transparant'}`}
                 borderRadius="full"
                 color={`${queryParams.filter === 'marketCap' ? 'white' : 'gray.400'}`}
-                onClick={() => setQueryParams({ ...queryParams, filter: "marketCap" })}
+                onClick={() => setQueryParams({ ...queryParams, filter: 'marketCap' })}
                 size="sm"
                 variant="ghost"
               >
@@ -254,7 +266,7 @@ const PopularTokens = () => {
                 bg={`${queryParams.filter === 'bonded' ? 'blue.500' : 'transparant'}`}
                 borderRadius="full"
                 color={`${queryParams.filter === 'bonded' ? 'white' : 'gray.400'}`}
-                onClick={() => setQueryParams({ ...queryParams, filter: "bonded" })}
+                onClick={() => setQueryParams({ ...queryParams, filter: 'bonded' })}
                 size="sm"
                 variant="ghost"
               >
@@ -292,15 +304,18 @@ const PopularTokens = () => {
               </Thead>
               <Tbody>
                 {isPopularAgentsLoading || popularAgents === undefined ?
-                  <Flex justifyContent="center" width="100%">Searching...</Flex>
-                  : popularAgents.map((data) => (
+                  <Flex justifyContent="center" width="100%">
+                    Searching...
+                  </Flex>
+                : popularAgents.map((data) => (
                     <ResultRowData key={data.pool.poolId.toString()} poolInfo={data} />
                   ))
                 }
-                {
-                  popularAgents.length === 0 && !isPopularAgentsLoading &&
-                  <Flex justifyContent="center" width="100%">No Tokens found</Flex>
-                }
+                {popularAgents.length === 0 && !isPopularAgentsLoading && (
+                  <Flex justifyContent="center" width="100%">
+                    No Tokens found
+                  </Flex>
+                )}
               </Tbody>
             </Table>
           </TableContainer>

@@ -17,9 +17,8 @@ import {
   ModalHeader,
   ModalOverlay,
   Textarea,
-  useColorModeValue,
 } from '@chakra-ui/react';
-import { atom, useAtom } from 'jotai';
+import { useAtom } from 'jotai';
 import { FormProvider, useForm } from 'react-hook-form';
 import { FaQuestionCircle } from 'react-icons/fa';
 
@@ -36,6 +35,7 @@ import {
 import { TOKEN_NAME_VALIDATION_RULES, TOKEN_SYMBOL_VALIDATION_RULES } from '@constants/validations';
 
 import useMintToken from '../hooks/useMintFastLaunch';
+import { modalStateAtom } from '../state/atom';
 import { FastLaunchForm } from '../types';
 import { FormFooter } from './FormFooter';
 import { InitialBuyCount } from './InitialBuyCount';
@@ -43,13 +43,6 @@ import { FormLaunchTypeLoader } from './LaunchTypeLoader';
 import { LockToken } from './LockToken';
 import { MigrationDEX } from './MigrationDEX';
 import { TokenLogo } from './TokenLogo';
-
-export const modalStateAtom = atom({
-  beastChatLink: "",
-  isOpen: false,
-  tradePageLink: "",
-  transactionPageLink: "",
-});
 
 export const CreateFastLaunch: React.FC = () => {
   const methods = useForm<FastLaunchForm>({
@@ -102,33 +95,28 @@ export const CreateFastLaunch: React.FC = () => {
 
   return (
     <>
-      <Modal isOpen={modalState.isOpen} onClose={() => { }}>
+      <Modal isOpen={modalState.isOpen} onClose={() => {}}>
         <ModalOverlay />
         <ModalContent>
           <ModalHeader>Token & Agent Created!</ModalHeader>
           <ModalBody>
-            <Link
-              href={modalState.beastChatLink ?? ''}
-              target="_blank"
-            >
+            <Link href={modalState.beastChatLink ?? ''} target="_blank">
               View Beast
             </Link>
-            <Link
-              href={modalState.tradePageLink ?? ''}
-              target="_blank"
-            >
+            <Link href={modalState.tradePageLink ?? ''} target="_blank">
               Trade Token
             </Link>
-            <Link
-              href={modalState.transactionPageLink ?? ''}
-              target="_blank"
-            >
+            <Link href={modalState.transactionPageLink ?? ''} target="_blank">
               View Market
             </Link>
           </ModalBody>
 
           <ModalFooter>
-            <Button colorScheme='cyan' mr={3} onClick={() => setModalState({ ...modalState, isOpen: false })}>
+            <Button
+              colorScheme="cyan"
+              mr={3}
+              onClick={() => setModalState({ ...modalState, isOpen: false })}
+            >
               Done
             </Button>
           </ModalFooter>
