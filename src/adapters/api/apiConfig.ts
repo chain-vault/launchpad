@@ -2,34 +2,39 @@
 import type { AxiosInstance, AxiosRequestConfig, AxiosResponse, Method } from 'axios';
 
 import axios from 'axios';
-import Cookies from 'js-cookie';
+import { camelizeKeys } from 'humps';
 
 import { BASE_CONFIG } from '@constants/config';
 import { SOMETHING_WENT_WRONG } from '@constants/programErrors';
 
+type ApiConfigInputParams = {
+  data?: any;
+  includeAuth?: boolean;
+  method: Method;
+  params?: any;
+  requestType?: string;
+  url: string;
+  withCredentials?: boolean;
+};
+
 /**
  * Axios api config to use to call api calls
- * @param url path
- * @param method Method type
- * @param data payload or query param. pass null if its get and when query or path parameters have to be passed
- * @param params query string params
- * @returns api response or error
  */
-const apiConfig = async <T>(
-  url: string,
-  method: Method,
-  data?: any,
-  params?: any,
-  includeAuth?: boolean,
-  requestType?: string,
-  withCredentials?: boolean
-): Promise<AxiosResponse<T>> => {
+const apiConfig = async <T>({
+  data,
+  includeAuth,
+  method,
+  params,
+  requestType,
+  url,
+  withCredentials,
+}: ApiConfigInputParams): Promise<AxiosResponse<T>> => {
   const instance: AxiosInstance = axios.create({
     baseURL: BASE_CONFIG.appApiBaseURL,
     headers: {
       ...(requestType && { 'X-Request-Type': requestType }), // Add a custom header to specify the request type
       ...(includeAuth && {
-        Authorization: `${Cookies.get('token')}`, // Add authorization token from localStorage
+        Authorization: `${localStorage.getItem('authToken')}`, // Add authorization token from localStorage
       }),
     },
     withCredentials,
@@ -57,6 +62,9 @@ const apiConfig = async <T>(
         cookies.forEach((cookie: string) => {
           document.cookie = cookie;
         });
+      }
+      if (res.data && res.headers['content-type'] === 'application/json') {
+        res.data = camelizeKeys(res.data);
       }
       return res;
     },

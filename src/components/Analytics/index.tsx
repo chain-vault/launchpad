@@ -1,4 +1,4 @@
-import { Card, CardBody, CardHeader, Flex, Heading, Stack } from '@chakra-ui/react';
+import { Flex, Heading, Stack } from '@chakra-ui/react';
 
 import { useFastLaunchSearchParams } from '@routes/~fast-launch/hooks/useFastLaunchSearchParams';
 import { useGetAgentAnalytics } from '@routes/~fast-launch/hooks/useGetAgentInfo';
@@ -21,7 +21,7 @@ const AgentAnalytics = () => {
         <Stack>
           <Flex background="base.700" borderRadius={4} direction="column" p={3}>
             <Flex>
-              <Heading size="sm">{analyticsData.msg_count}</Heading>
+              <Heading size="sm">{analyticsData.msgCount}</Heading>
             </Flex>
             <Flex>Agent Engagement</Flex>
           </Flex>
@@ -29,7 +29,7 @@ const AgentAnalytics = () => {
         <Stack>
           <Flex background="base.700" borderRadius={4} direction="column" p={3}>
             <Flex>
-              <Heading size="sm">{analyticsData.user_count}</Heading>
+              <Heading size="sm">{analyticsData.userCount}</Heading>
             </Flex>
             <Flex>Unique Users</Flex>
           </Flex>
