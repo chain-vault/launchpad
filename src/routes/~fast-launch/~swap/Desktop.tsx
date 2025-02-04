@@ -108,7 +108,7 @@ const SwapDesktopView: React.FC = () => {
                     </Flex>
                     <Button
                       onClick={() => {
-                        window.open(`https://dev.blockbeast.ai/chat/${agent?.id}`, '_blank');
+                        window.open(`${import.meta.env.VITE_APP_BASE_API_URL}/${agent?.id}`, '_blank');
                       }}
                       _hover={{ bg: 'green.200' }}
                       bg="green.100"
