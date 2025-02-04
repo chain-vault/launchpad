@@ -475,7 +475,7 @@ const useMintToken = (onSuccess?: (data: string[]) => void, onError?: (error: st
             );
 
             setModalState({
-              beastChatLink: `${import.meta.env.VITE_BLOCKBEAST_URL}/${agentId}`,
+              beastChatLink: `${import.meta.env.VITE_BLOCKBEAST_URL}/chat/${agentId}`,
               isOpen: true,
               tradePageLink: `/fast-launch/swap/${poolAddress}?agentId=${agentId}`,
               transactionPageLink: getExplorerUrl(txHash),
