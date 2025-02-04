@@ -10,12 +10,6 @@ import {
   Flex,
   Heading,
   Link,
-  Modal,
-  ModalBody,
-  ModalContent,
-  ModalFooter,
-  ModalHeader,
-  ModalOverlay,
   Textarea,
 } from '@chakra-ui/react';
 import { useAtom } from 'jotai';
@@ -24,6 +18,7 @@ import { FaQuestionCircle } from 'react-icons/fa';
 
 import { FormHandler, FormInput } from '@components/ui/Form';
 import InputGroup from '@components/ui/Input/InputGroup';
+import { BasicModal } from '@components/ui/Modals';
 import { TooltipWithIcon } from '@components/ui/Tooltip';
 import { CurveIndex, DEPLOYMENT_BASE_COST, NATIVE_TOKEN } from '@constants/config';
 import { getSocialLinkById } from '@constants/index';
@@ -96,34 +91,6 @@ export const CreateFastLaunch: React.FC = () => {
 
   return (
     <>
-      <Modal isOpen={modalState.isOpen} onClose={() => {}}>
-        <ModalOverlay />
-        <ModalContent>
-          <ModalHeader>Token & Agent Created!</ModalHeader>
-          <ModalBody>
-            <Link href={modalState.beastChatLink ?? ''} target="_blank">
-              View Beast
-            </Link>
-            <Link href={modalState.tradePageLink ?? ''} target="_blank">
-              Trade Token
-            </Link>
-            <Link href={modalState.transactionPageLink ?? ''} target="_blank">
-              View Market
-            </Link>
-          </ModalBody>
-
-          <ModalFooter>
-            <Button
-              colorScheme="cyan"
-              mr={3}
-              onClick={() => setModalState({ ...modalState, isOpen: false })}
-            >
-              Done
-            </Button>
-          </ModalFooter>
-        </ModalContent>
-      </Modal>
-
       <Box w="100%">
         <Container maxW="container.xl" pb={5} textAlign="center">
           {/* {isPending && <Toast />} */}
@@ -445,6 +412,55 @@ export const CreateFastLaunch: React.FC = () => {
           </Card>
         </Container>
       </Box>
+      <BasicModal
+        footer={
+          <Button
+            _hover={{ bg: 'green.200' }}
+            as={Link}
+            bg="green.100"
+            color="gray.800"
+            href={modalState.tradePageLink ?? ''}
+            mr={3}
+            px={6}
+            py="0.5rem"
+            size="md"
+            target="_blank"
+            width="100%"
+          >
+            Trade Token
+          </Button>
+        }
+        modalBody={
+          <Flex alignItems="center" direction="column" justifyContent="center">
+            <Flex direction="row" gap="0.75rem">
+              <Link
+                style={{
+                  textDecoration: 'underline',
+                  textUnderlineOffset: '4px',
+                }}
+                href={modalState.beastChatLink ?? ''}
+                target="_blank"
+              >
+                View Beast
+              </Link>
+              <Link
+                style={{
+                  textDecoration: 'underline',
+                  textUnderlineOffset: '4px',
+                }}
+                href={modalState.transactionPageLink ?? ''}
+                target="_blank"
+                textDecoration="underline"
+              >
+                View Transaction
+              </Link>
+            </Flex>
+          </Flex>
+        }
+        header="Token & Agent Created!"
+        isOpen={modalState.isOpen}
+        onClose={() => setModalState({ ...modalState, isOpen: false })}
+      />
     </>
   );
 };
