@@ -47,6 +47,7 @@ import { TokenLogo } from './TokenLogo';
 export const CreateFastLaunch: React.FC = () => {
   const methods = useForm<FastLaunchForm>({
     defaultValues: {
+      beastBiography: '',
       beastGreeting: '',
       discord: '',
       initialBuy: '',
@@ -244,12 +245,12 @@ export const CreateFastLaunch: React.FC = () => {
                             required: 'Required field',
                           }}
                           control={control}
-                          name="beastDescription"
+                          name="beastBiography"
                           placeholder="Give a short tagline to tell people who your Beast is"
                         />
                       }
-                      fieldError={errors.beastDescription}
-                      htmlFor="beastDescription"
+                      fieldError={errors.beastBiography}
+                      htmlFor="beastBiography"
                       label="Who's your Beast?"
                       required
                     />

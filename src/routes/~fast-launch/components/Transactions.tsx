@@ -86,17 +86,13 @@ export const TransactionsList: React.FC = () => {
                   </Td>
                   <Td textStyle={['body-sm-bold']}>
                     <NumberWithTooltip tooltip={item.caller.toString()} w="fit-content">
-                      <Link
-                        _hover={{ color: 'blue.500', textDecoration: 'underline' }}
-                        color="blue.500"
-                        href={`/profile?user=${item.caller.toString()}&view=pump`}
-                        textDecoration="none"
+                      <Text
                       >
                         {shrinkText({
                           maxLength: 4,
                           string: item.caller.toString() ?? '',
                         })}
-                      </Link>
+                      </Text>
                     </NumberWithTooltip>
                   </Td>
 
