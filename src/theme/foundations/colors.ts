@@ -16,7 +16,7 @@ export const colors = {
   brand: {
     accent: {
       '100': '#E9D4FF',
-      '500': '#CCA3F7',
+      '500': '#9AE6B4',
       '600': '#C6F6D5',
       '900': '#13192C',
     },
