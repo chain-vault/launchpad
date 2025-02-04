@@ -48,6 +48,7 @@ export const CreateFastLaunch: React.FC = () => {
   const methods = useForm<FastLaunchForm>({
     defaultValues: {
       beastBiography: '',
+      beastDescription: '',
       beastGreeting: '',
       discord: '',
       initialBuy: '',
@@ -58,7 +59,6 @@ export const CreateFastLaunch: React.FC = () => {
       migrationDEX: '0',
       otherLink: '',
       outToken: '',
-      projectDescription: '',
       telegram: '',
       tokenLogo: null,
       tokenName: '',
@@ -205,14 +205,14 @@ export const CreateFastLaunch: React.FC = () => {
                         <Textarea
                           bg="surface.base.700"
                           border="none"
-                          {...methods.register('projectDescription', { required: true })}
+                          {...methods.register('beastBiography', { required: true })}
                           placeholder="Tell it what it should know, how to behave."
                           resize="none"
                         />
                       }
                       alignOptionalLabel="right"
-                      fieldError={errors.projectDescription}
-                      htmlFor="projectDescription"
+                      fieldError={errors.beastBiography}
+                      htmlFor="beastBiography"
                       label="Feed the Beast"
                       required
                     />
@@ -245,12 +245,12 @@ export const CreateFastLaunch: React.FC = () => {
                             required: 'Required field',
                           }}
                           control={control}
-                          name="beastBiography"
+                          name="beastDescription"
                           placeholder="Give a short tagline to tell people who your Beast is"
                         />
                       }
-                      fieldError={errors.beastBiography}
-                      htmlFor="beastBiography"
+                      fieldError={errors.beastDescription}
+                      htmlFor="beastDescription"
                       label="Who's your Beast?"
                       required
                     />
