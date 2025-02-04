@@ -182,99 +182,99 @@ const PopularTokens = () => {
   };
 
   return (
-    <>
-      {/* Search Bar */}
-      <Flex alignItems="center" justifyContent="center" mt={4}>
-        <Box maxW="18.75rem" w="full">
-          <InputGroup>
-            <InputLeftElement pointerEvents="none">
-              {/* <SearchIcon color="gray.400" /> */}
-              <Flex bgColor="#1e263a" borderRadius="4px" padding="4px">
-                <IoMdSearch height="1.75rem" width="1.75rem" />
-              </Flex>
-            </InputLeftElement>
-            <Input
-              _focus={{
-                border: '1px solid',
-                borderColor: 'blue.400',
-                boxShadow: 'none',
-              }}
-              _placeholder={{ color: 'gray.400' }}
-              bg="#2C3655"
-              border="none"
-              color="white"
-              onChange={(e) => handleSearch(e.target.value)}
-              placeholder="Search Token Name"
-            />
-          </InputGroup>
-        </Box>
-      </Flex>
-      <Box bg="base.800" mt="2.5">
-        <Box bg="#1E263A" borderRadius="md" p={4}>
-          <HStack mb={4} spacing={2}>
+    <Box bg="base.800" mt="2.5">
+      <Box bg="#1E263A" borderRadius="md" p={4}>
+        <HStack alignItems="flex-start" justifyContent="space-between" mb={4} spacing={2}>
+          <Box bg="#121E30" borderRadius="full" display="flex" padding="2">
             <Box bg="#121E30" borderRadius="full" display="flex" padding="2">
-              <Box bg="#121E30" borderRadius="full" display="flex" padding="2">
-                {Object.entries(PoolSortOptions).map(([key, label]) => (
-                  <Button
-                    onClick={() =>
-                      onChangeFilters({
-                        sortBy: PoolSortOptions[key as keyof typeof PoolSortOptions],
-                      })
-                    }
-                    _hover={{ bg: 'blue.500' }}
-                    bg={`${filter.sortBy === PoolSortOptions[key as keyof typeof PoolSortOptions] ? 'blue.500' : 'transparant'}`}
-                    borderRadius="full"
-                    color={`${filter.sortBy === PoolSortOptions[key as keyof typeof PoolSortOptions] ? 'white' : 'gray.400'}`}
-                    key={key}
-                    size="sm"
-                  >
-                    {label}
-                  </Button>
-                ))}
-              </Box>
+              {Object.entries(PoolSortOptions).map(([key, label]) => (
+                <Button
+                  onClick={() =>
+                    onChangeFilters({
+                      sortBy: PoolSortOptions[key as keyof typeof PoolSortOptions],
+                    })
+                  }
+                  _hover={{ bg: 'blue.500' }}
+                  bg={`${filter.sortBy === PoolSortOptions[key as keyof typeof PoolSortOptions] ? 'blue.500' : 'transparant'}`}
+                  borderRadius="full"
+                  color={`${filter.sortBy === PoolSortOptions[key as keyof typeof PoolSortOptions] ? 'white' : 'gray.400'}`}
+                  key={key}
+                  size="sm"
+                >
+                  {label}
+                </Button>
+              ))}
             </Box>
-          </HStack>
+          </Box>
+          <Box>
+            {/* Search Bar */}
+            <Flex alignItems="center" justifyContent="center" mt={4}>
+              <Box maxW="18.75rem" w="full">
+                <InputGroup>
+                  <InputLeftElement pointerEvents="none">
+                    {/* <SearchIcon color="gray.400" /> */}
+                    <Flex bgColor="#1e263a" borderRadius="4px" padding="4px">
+                      <IoMdSearch height="1.75rem" width="1.75rem" />
+                    </Flex>
+                  </InputLeftElement>
+                  <Input
+                    _focus={{
+                      border: '1px solid',
+                      borderColor: 'blue.400',
+                      boxShadow: 'none',
+                    }}
+                    _placeholder={{ color: 'gray.400' }}
+                    bg="#2C3655"
+                    border="none"
+                    color="white"
+                    onChange={(e) => handleSearch(e.target.value)}
+                    placeholder="Search Token Name"
+                  />
+                </InputGroup>
+              </Box>
+            </Flex>
+          </Box>
+        </HStack>
 
-          <TableContainer w="full">
-            <Table color="white" variant="unstyled" w="full">
-              <Thead>
-                <Tr>
-                  <Th color="gray.400">AI Agent Token</Th>
-                  <Th color="gray.400">
-                    <HStack spacing={1}>
-                      <Text>Price</Text>
-                    </HStack>
-                  </Th>
-                  <Th color="gray.400">
-                    <HStack spacing={1}>
-                      <Text>Market Cap</Text>
-                    </HStack>
-                  </Th>
+        <TableContainer w="full">
+          <Table color="white" variant="unstyled" w="full">
+            <Thead>
+              <Tr>
+                <Th color="gray.400">AI Agent Token</Th>
+                <Th color="gray.400">
+                  <HStack spacing={1}>
+                    <Text>Price</Text>
+                  </HStack>
+                </Th>
+                <Th color="gray.400">
+                  <HStack spacing={1}>
+                    <Text>Market Cap</Text>
+                  </HStack>
+                </Th>
 
-                  <Th color="gray.400">Bonding Curve Progress</Th>
-                  <Th color="gray.400">Agent</Th>
-                </Tr>
-              </Thead>
-              <Tbody>
-                {isPopularAgentsLoading || popularAgents === undefined ?
-                  <Flex justifyContent="center" width="100%">
-                    Searching...
-                  </Flex>
-                : popularAgents.map((data) => (
-                    <ResultRowData key={data.pool.poolId.toString()} poolInfo={data} />
-                  ))
-                }
-                {popularAgents.length === 0 && !isPopularAgentsLoading && (
-                  <Flex justifyContent="center" width="100%">
-                    No Tokens found
-                  </Flex>
-                )}
-              </Tbody>
-            </Table>
-          </TableContainer>
-        </Box>
+                <Th color="gray.400">Bonding Curve Progress</Th>
+                <Th color="gray.400">Agent</Th>
+              </Tr>
+            </Thead>
+            <Tbody>
+              {isPopularAgentsLoading || popularAgents === undefined ?
+                <Flex justifyContent="center" width="100%">
+                  Searching...
+                </Flex>
+              : popularAgents.map((data) => (
+                  <ResultRowData key={data.pool.poolId.toString()} poolInfo={data} />
+                ))
+              }
+              {popularAgents.length === 0 && !isPopularAgentsLoading && (
+                <Flex justifyContent="center" width="100%">
+                  No Tokens found
+                </Flex>
+              )}
+            </Tbody>
+          </Table>
+        </TableContainer>
       </Box>
-    </>
+    </Box>
   );
 };
 export default PopularTokens;
