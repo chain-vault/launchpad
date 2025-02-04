@@ -125,7 +125,8 @@ const WalletSelectDrawer = () => {
           {userAuthState.authenticationStatus === UserAuthenticationStatus.ACCOUNT_SWITCHED ?
             <Flex alignItems="center" direction="column" gap={6} p={4}>
               <Text textAlign="center" textStyle="body-md-bold">
-                Account switched! Time to swing back in—sign again to keep the Apeon vibes going!
+                Account switched! Time to swing back in—sign again to keep the Blockbeast vibes
+                going!
               </Text>
               <Button onClick={authenticateUser}>Sign message</Button>
             </Flex>

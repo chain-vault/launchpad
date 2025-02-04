@@ -98,7 +98,7 @@ const Footer = () => {
           </Text>
         </Flex>
         <Text opacity="0.5" textStyle="body-regular">
-          © 2025 blackbest.ai, All Rights Reserved
+          © 2025 blockbeast.ai, All Rights Reserved
         </Text>
       </Flex>
     </Flex>

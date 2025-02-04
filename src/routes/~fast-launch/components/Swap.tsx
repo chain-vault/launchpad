@@ -142,7 +142,7 @@ export const SwapSection: React.FC = () => {
                   />
                 </Flex>
                 <Flex>
-                  <TransactionSettings colorScheme="accent" />
+                  <TransactionSettings colorScheme="accent" toggleButtonVariant="lbp" />
                 </Flex>
               </Flex>
               <Box mb={2}>

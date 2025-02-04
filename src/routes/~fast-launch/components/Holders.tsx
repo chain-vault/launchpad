@@ -54,16 +54,16 @@ export const HoldersList = () => {
                     tooltip={item?.owner}
                     w="fit-content"
                   >
-                    <Link
-                      _hover={{ color: 'blue.500', textDecoration: 'underline' }}
-                      color="blue.500"
-                      href={`/profile?user=${item?.owner}&view=pump`}
+                    <Text
+                      // _hover={{ color: 'blue.500', textDecoration: 'underline' }}
+                      // color="blue.500"
+                      // href={`/profile?user=${item?.owner}&view=pump`}
                     >
                       {shrinkText({
                         maxLength: 4,
                         string: item?.owner ?? '',
                       })}
-                    </Link>
+                    </Text>
                   </NumberWithTooltip>
                   {item?.isBondingCurve && (
                     <Tooltip label="Bonding Curve">

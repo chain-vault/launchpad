@@ -167,7 +167,7 @@ const Navbar = ({
             </HStack>
             <HStack spacing={6}>
               <Link to="/">
-                <Text color="white" fontWeight="medium">
+                <Text color={opacity ? "white" : "blue.400"} fontWeight="medium">
                   AI Token Marketplace
                 </Text>
               </Link>
@@ -176,20 +176,22 @@ const Navbar = ({
 
           {/* Action Buttons */}
           <HStack spacing={4}>
-            <Button
-              _hover={{ bg: 'green.200' }}
-              bg="green.100"
-              color="gray.800"
-              px={6}
-              size="md"
-              width="100%"
-            >
-              <Link to="/fast-launch/create">Create New Agent</Link>
-            </Button>
+            <Link to="/fast-launch/create">
+              <Button
+                _hover={{ bg: 'green.200' }}
+                bg="green.100"
+                color="gray.800"
+                px={6}
+                size="md"
+                width="100%"
+              >
+                Create New Agent
+              </Button>
+            </Link>
 
             {isConnected ?
               <WalletInfoButton action={WalletInfoButonActions.OPEN_WALLET_MODAL} />
-            : <ConnectWalletButton _hover={{ bg: 'blue.500' }} bg="blue.400" width="80%" />}
+              : <ConnectWalletButton _hover={{ bg: 'blue.500' }} bg="blue.400" width="80%" />}
           </HStack>
         </Flex>
       </Container>

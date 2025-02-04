@@ -45,9 +45,9 @@ const BasicModal: FC<BasicModalProps> = ({
     {...rest}
   >
     <ModalOverlay />
-    <ModalContent {...modalContentProps}>
+    <ModalContent {...modalContentProps} alignItems="center" justifyContent="center">
       {header && (
-        <ModalHeader>
+        <ModalHeader alignItems="center">
           <Heading size="md">{header}</Heading>
         </ModalHeader>
       )}

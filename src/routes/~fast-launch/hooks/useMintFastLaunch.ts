@@ -467,19 +467,15 @@ const useMintToken = (onSuccess?: (data: string[]) => void, onError?: (error: st
           onSuccess: () => {
             showToast(
               {
-                actions: [
-                  { label: 'View', link: `/fast-launch/swap/${poolAddress}?agentId=${agentId}` },
-                  ...createActions({ transaction: txHash }),
-                ],
                 message: 'Success',
                 title: 'Beast created successfully',
                 type: ToastType.SUCCESS,
               },
-              { autoClose: 5000 }
+              { autoClose: 1 }
             );
 
             setModalState({
-              beastChatLink: `https://dev.blockbeast.ai/chat/${agentId}`,
+              beastChatLink: `${import.meta.env.VITE_BLOCKBEAST_URL}/chat/${agentId}`,
               isOpen: true,
               tradePageLink: `/fast-launch/swap/${poolAddress}?agentId=${agentId}`,
               transactionPageLink: getExplorerUrl(txHash),

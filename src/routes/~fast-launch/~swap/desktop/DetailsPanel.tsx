@@ -60,7 +60,7 @@ export const DetailsPanelDesktop = () => {
             <HoldersList />
           </TabPanel>
           <TabPanel>
-            <TransactionsList />g
+            <TransactionsList />
           </TabPanel>
           {/* {isApeInBubbleMapEnabled && tokenId && (
             <TabPanel>
