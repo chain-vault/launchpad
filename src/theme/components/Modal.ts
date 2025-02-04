@@ -8,7 +8,7 @@ const baseStyle = definePartsStyle({
     _dark: {
       borderColor: 'base.700',
     },
-    bg: 'transparent',
+    bg: 'base.900',
     border: '2px solid',
     borderColor: 'base.200',
     borderRadius: '3xl',
