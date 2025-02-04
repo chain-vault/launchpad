@@ -128,7 +128,7 @@ const ResultRowData = ({ poolInfo: { agent, pool } }: { poolInfo: PoolWithAgent 
       <Td>
         <Button
           onClick={() => {
-            window.open(`${import.meta.env.VITE_APP_BASE_API_URL}/${agent.id}`, '_blank');
+            window.open(`${import.meta.env.VITE_BLOCKBEAST_URL}/chat/${agent.id}`, '_blank');
           }}
           _hover={{ bg: 'green.500', color: 'white' }}
           bg="transparent"

@@ -167,7 +167,7 @@ const Navbar = ({
             </HStack>
             <HStack spacing={6}>
               <Link to="/">
-                <Text color="white" fontWeight="medium">
+                <Text color={opacity ? "white" : "blue.400"}  fontWeight="medium">
                   AI Token Marketplace
                 </Text>
               </Link>
