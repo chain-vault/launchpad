@@ -20,7 +20,7 @@ import {
 } from '@chakra-ui/react';
 import { useNavigate } from '@tanstack/react-router';
 import { IoMdSearch } from 'react-icons/io';
-import { LuArrowDownUp, LuExternalLink } from 'react-icons/lu';
+import { LuExternalLink } from 'react-icons/lu';
 
 import { PoolWithAgent } from '@app-types/agent';
 
@@ -204,7 +204,7 @@ const PopularTokens = () => {
               border="none"
               color="white"
               onChange={(e) => handleSearch(e.target.value)}
-              placeholder="Search Token Name or CA"
+              placeholder="Search Token Name"
             />
           </InputGroup>
         </Box>
@@ -243,13 +243,11 @@ const PopularTokens = () => {
                   <Th color="gray.400">
                     <HStack spacing={1}>
                       <Text>Price</Text>
-                      <LuArrowDownUp />
                     </HStack>
                   </Th>
                   <Th color="gray.400">
                     <HStack spacing={1}>
                       <Text>Market Cap</Text>
-                      <LuArrowDownUp />
                     </HStack>
                   </Th>
 
