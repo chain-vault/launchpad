@@ -17,12 +17,13 @@ const useCheckTokenExpiryAndExecute = () => {
     }
 
     // Execute the passed function
-    try {
-      return await callback();
-    } catch (callbackError) {
-      console.error(`${AuthErrorMessages.Error} ${callbackError}`);
-      return null;
-    }
+    // try {
+      const callbackResult = await callback();
+      return callbackResult;
+    // } catch (callbackError) {
+    //   console.error(`${AuthErrorMessages.Error} ${callbackError}`);
+    //   return null;
+    // }
   };
 
   return { isRefreshTokenLoading, withAuthToken };
