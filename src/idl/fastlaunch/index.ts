@@ -1,7 +1,7 @@
-export * from './devnet/apeon_fastlaunch';
-export { default as FastLauchIdl } from './devnet/apeon_fastlaunch.json'
-// export * from './mainnet/apeon_fastlaunch';
-// export { default as FastLauchIdl } from './mainnet/apeon_fastlaunch.json'
+// export * from './devnet/apeon_fastlaunch';
+// export { default as FastLauchIdl } from './devnet/apeon_fastlaunch.json'
+export * from './mainnet/apeon_fastlaunch';
+export { default as FastLauchIdl } from './mainnet/apeon_fastlaunch.json'
 
 // import { ApeonFastlaunch as DevnetApeonFastlaunch } from './devnet/apeon_fastlaunch';
 // import DevnetFastLauchIdl from './devnet/apeon_fastlaunch.json';
