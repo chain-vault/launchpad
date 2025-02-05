@@ -77,20 +77,20 @@ export const TradeDetailTableRow: React.FC<TradeDetailTableRowProps> = ({
 
             <Td textStyle={['body-sm-bold']}>
               <NumberWithTooltip tooltip={trader}>
-                <Link
+                {/* <Link
                   _hover={{ color: 'blue.500', textDecoration: 'underline' }}
                   as={TanstackLink}
                   color="blue.500"
                   href={`/profile?user=${trader}&view=lbp`}
                   textDecoration="none"
-                >
+                > */}
                   <Text color="blue.500" w="fit-content">
                     {shrinkText({
                       maxLength: 4,
                       string: trader ?? '',
                     })}
                   </Text>
-                </Link>
+                {/* </Link> */}
               </NumberWithTooltip>
             </Td>
             <Td textStyle={['body-sm']}>
@@ -122,19 +122,19 @@ export const TradeDetailTableRow: React.FC<TradeDetailTableRowProps> = ({
             })}
           </Td>
           <Td textStyle={['body-sm-bold']}>
-            <Link
+            {/* <Link
               _hover={{ color: 'blue.500', textDecoration: 'underline' }}
               color="blue.500"
               href={`/profile?user=${trader}&view=lbp`}
               textDecoration="none"
-            >
+            > */}
               <Text color="blue.500" w="fit-content">
                 {shrinkText({
                   maxLength: 4,
                   string: trader ?? '',
                 })}
               </Text>
-            </Link>
+            {/* </Link> */}
           </Td>
           <Td maxW="35px" textStyle={['body-sm']}>
             <Link href={getExplorerUrl(signature?.toString())} target="_blank">
