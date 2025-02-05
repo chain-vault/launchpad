@@ -10,7 +10,7 @@ import { UserAuthenticationStatus } from '@constants/index';
 export const jotaiStore = createStore();
 
 // Auth related atoms
-type UserAuth = {
+export type UserAuth = {
   authenticationStatus: UserAuthenticationStatus;
   disconnectWallet?: () => void;
   publickKey?: string;
