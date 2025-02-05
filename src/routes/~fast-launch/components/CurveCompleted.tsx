@@ -29,7 +29,7 @@ export const CurveCompleted: React.FC = () => {
       </Box>
       <Box opacity={0.5} textAlign="center">
         <Text>
-          {`Now you can trade this Ape in ${capitalizeFirstLetter(poolData?.selectedDex)}. Click the button below`}
+          {`Now you can trade this Agent in ${capitalizeFirstLetter(poolData?.selectedDex)}. Click the button below`}
         </Text>
       </Box>
       <Box width="100%">
