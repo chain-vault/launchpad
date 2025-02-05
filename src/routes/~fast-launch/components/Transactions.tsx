@@ -29,126 +29,119 @@ export const TransactionsList: React.FC = () => {
           const isBuy = item.eventType === 'poolBuyEvent';
           const hasUsdData = item.amountUSD && !Number.isNaN(parseFloat(item.amountUSD));
           return !isMobile ?
-              <Tr pb={2} px={0} py={2}>
-                <Flex justifyContent="space-between" w="100%">
-                  <Td textStyle={['body-sm']}>{getTimeDifferenceFromNow(item.timestamp)}</Td>
-                  <Td color={isBuy ? '#5FD875' : '#FC1369'} textStyle="body-sm">
-                    {isBuy ? 'Buy' : 'Sell'}
-                  </Td>
-                  <Td textStyle={['body-sm']}>
-                    {hasUsdData ? '$' : null}
-                    {
-                      hasUsdData ?
-                        <NumberWithTooltip tooltip={item.amountUSD}>
-                          {formatNumber({
-                            input: item.amountUSD,
-                            placeholder: '-',
-                            type: NumberFormatType.TxValuesFormatter,
-                          })}
-                        </NumberWithTooltip>
-                      : <WithSolPriceUSD
-                          formatOptions={{
-                            formattingType: NumberFormatType.TxValuesFormatter,
-                            placeholder: '-',
-                            prefix: '$',
-                          }}
-                          solInput={item.amountSOL}
-                        />
-
-
-                      // <NumberWithTooltip
-                      //     tooltip={convertSol(
-                      //       new Decimal(isBuy ? item.amountIn : item.amountOut).toString()
-                      //     )}
-                      //   >
-                      //     {convertSol(item.amountSOL, {
-                      //       formattingType: NumberFormatType.TxValuesFormatter,
-                      //     })}
-                      //   </NumberWithTooltip>
-                    }
-                  </Td>
-                  <Td textStyle={['body-sm']}>
-                    <NumberWithTooltip tooltip={isBuy ? item.amountOut : item.amountIn}>
-                      {formatNumber({
-                        input: isBuy ? item.amountOut : item.amountIn,
-                        type: NumberFormatType.TxValuesFormatter,
-                      })}
-                    </NumberWithTooltip>
-                  </Td>
-                  <Td textStyle={['body-sm']}>
-                    <NumberWithTooltip tooltip={item.amountSOL}>
-                      {formatNumber({
-                        input: item.amountSOL,
-                        suffix: '',
-                        type: NumberFormatType.TxDisplayValuesFormatterWithSubscript,
-                      })}
-                    </NumberWithTooltip>
-                  </Td>
-                  <Td textStyle={['body-sm-bold']}>
-                    <NumberWithTooltip tooltip={item.caller.toString()} w="fit-content">
-                      <Text
-                      >
-                        {shrinkText({
-                          maxLength: 4,
-                          string: item.caller.toString() ?? '',
+            <Tr pb={2} px={0} py={2}>
+              <Flex justifyContent="space-between" w="100%">
+                <Td textStyle={['body-sm']}>{getTimeDifferenceFromNow(item.timestamp)}</Td>
+                <Td color={isBuy ? '#5FD875' : '#FC1369'} textStyle="body-sm">
+                  {isBuy ? 'Buy' : 'Sell'}
+                </Td>
+                <Td textStyle={['body-sm']}>
+                  {hasUsdData ? '$' : null}
+                  {
+                    hasUsdData ?
+                      <NumberWithTooltip tooltip={item.amountUSD}>
+                        {formatNumber({
+                          input: item.amountUSD,
+                          placeholder: '-',
+                          type: NumberFormatType.TxValuesFormatter,
                         })}
-                      </Text>
-                    </NumberWithTooltip>
-                  </Td>
+                      </NumberWithTooltip>
+                      : <WithSolPriceUSD
+                        formatOptions={{
+                          formattingType: NumberFormatType.TxValuesFormatter,
+                          placeholder: '-',
+                          prefix: '$',
+                        }}
+                        solInput={item.amountSOL}
+                      />
 
-                  <Td textStyle={['body-sm']}>
-                    <Link href={getExplorerUrl(item?.signature?.toString())} target="_blank">
-                      <RxExternalLink />
-                    </Link>
-                  </Td>
-                </Flex>
-              </Tr>
-            : <Tr pb={2} px={0} py={2}>
-                <Flex alignItems="center" justify="space-between" width="100%">
-                  <Td maxW="50px" textStyle={['body-sm']}>
-                    <HStack gap={1}>
-                      <Text>{getTimeDifferenceFromNow(item?.timestamp).split(' ')[0]}</Text>
-                      <Text color={isBuy ? '#5FD875' : '#FC1369'} textStyle={['body-sm']}>
-                        {isBuy ? 'B' : 'S'}
-                      </Text>
-                    </HStack>
-                  </Td>
-                  <Td textStyle={['body-sm']}>
+
+                    // <NumberWithTooltip
+                    //     tooltip={convertSol(
+                    //       new Decimal(isBuy ? item.amountIn : item.amountOut).toString()
+                    //     )}
+                    //   >
+                    //     {convertSol(item.amountSOL, {
+                    //       formattingType: NumberFormatType.TxValuesFormatter,
+                    //     })}
+                    //   </NumberWithTooltip>
+                  }
+                </Td>
+                <Td textStyle={['body-sm']}>
+                  <NumberWithTooltip tooltip={isBuy ? item.amountOut : item.amountIn}>
                     {formatNumber({
                       input: isBuy ? item.amountOut : item.amountIn,
                       type: NumberFormatType.TxValuesFormatter,
                     })}
-                  </Td>
-                  <Td textStyle={['body-sm']}>
+                  </NumberWithTooltip>
+                </Td>
+                <Td textStyle={['body-sm']}>
+                  <NumberWithTooltip tooltip={item.amountSOL}>
                     {formatNumber({
                       input: item.amountSOL,
                       suffix: '',
                       type: NumberFormatType.TxDisplayValuesFormatterWithSubscript,
                     })}
-                  </Td>
-                  <Td textStyle={['body-sm-bold']}>
-                    <Link
-                      _hover={{ color: 'blue.500', textDecoration: 'underline' }}
-                      color="blue.500"
-                      href={`/profile?user=${item.caller.toString()}&view=pump`}
-                      textDecoration="none"
+                  </NumberWithTooltip>
+                </Td>
+                <Td textStyle={['body-sm-bold']}>
+                  <NumberWithTooltip tooltip={item.caller.toString()} w="fit-content">
+                    <Text
                     >
-                      <Text w="fit-content">
-                        {shrinkText({
-                          maxLength: 4,
-                          string: item.caller.toString() ?? '',
-                        })}
-                      </Text>
-                    </Link>
-                  </Td>
+                      {shrinkText({
+                        maxLength: 4,
+                        string: item.caller.toString() ?? '',
+                      })}
+                    </Text>
+                  </NumberWithTooltip>
+                </Td>
 
-                  <Td textStyle={['body-sm']}>
-                    <Link href={getExplorerUrl(item?.signature?.toString())} target="_blank">
-                      <RxExternalLink />
-                    </Link>
-                  </Td>
-                </Flex>
-              </Tr>;
+                <Td textStyle={['body-sm']}>
+                  <Link href={getExplorerUrl(item?.signature?.toString())} target="_blank">
+                    <RxExternalLink />
+                  </Link>
+                </Td>
+              </Flex>
+            </Tr>
+            : <Tr pb={2} px={0} py={2}>
+              <Flex alignItems="center" justify="space-between" width="100%">
+                <Td maxW="50px" textStyle={['body-sm']}>
+                  <HStack gap={1}>
+                    <Text>{getTimeDifferenceFromNow(item?.timestamp).split(' ')[0]}</Text>
+                    <Text color={isBuy ? '#5FD875' : '#FC1369'} textStyle={['body-sm']}>
+                      {isBuy ? 'B' : 'S'}
+                    </Text>
+                  </HStack>
+                </Td>
+                <Td textStyle={['body-sm']}>
+                  {formatNumber({
+                    input: isBuy ? item.amountOut : item.amountIn,
+                    type: NumberFormatType.TxValuesFormatter,
+                  })}
+                </Td>
+                <Td textStyle={['body-sm']}>
+                  {formatNumber({
+                    input: item.amountSOL,
+                    suffix: '',
+                    type: NumberFormatType.TxDisplayValuesFormatterWithSubscript,
+                  })}
+                </Td>
+                <Td textStyle={['body-sm-bold']}>
+                  <Text w="fit-content">
+                    {shrinkText({
+                      maxLength: 4,
+                      string: item.caller.toString() ?? '',
+                    })}
+                  </Text>
+                </Td>
+
+                <Td textStyle={['body-sm']}>
+                  <Link href={getExplorerUrl(item?.signature?.toString())} target="_blank">
+                    <RxExternalLink />
+                  </Link>
+                </Td>
+              </Flex>
+            </Tr>;
         }}
         columns={4}
         data={data}
