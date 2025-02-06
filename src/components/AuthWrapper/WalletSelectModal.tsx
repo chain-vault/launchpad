@@ -112,7 +112,12 @@ const WalletConnectBody = () => {
       </Center>
     : <VStack gap={6}>
         <WalletInfoButton action={WalletInfoButonActions.DISCONNECT_WALLET} />
-        <Grid gap={[2, 2, 4]} templateColumns="repeat(2, 1fr)">
+        <Grid
+          gap={[2, 2, 4]}
+          pb={[10, 5, 4]}
+          templateColumns={{ base: '1fr', md: 'repeat(2, 1fr)' }}
+          w="100%"
+        >
           {connectors.map((connector) => {
             const isSelected = isSelectedWallet(connector);
             const downloadUrl = getDownloadUrl(connector);
@@ -149,7 +154,7 @@ const WalletConnectBody = () => {
                   justifyContent="flex-start"
                   position="relative"
                   variant="filled"
-                  w={{ base: '92px', md: '100%' }}
+                  w={{ base: '100%', md: '100%' }}
                 >
                   {downloadUrl && (
                     <Link

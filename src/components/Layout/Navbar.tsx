@@ -5,6 +5,7 @@ import {
   Button,
   Collapse,
   Container,
+  Divider,
   Flex,
   HStack,
   Icon,
@@ -25,7 +26,7 @@ import { WalletInfoButonActions } from '@constants/index';
 import useResponsiveValue from '@hooks/useResponsiveValue';
 import { useWeb3React } from '@hooks/useWeb3React';
 
-import { BlockBeastLogo } from '@assets/imges';
+import { AppLogoMobile, BlockBeastLogo } from '@assets/imges';
 
 // Redo whole file
 // export const NavMenu = ({ isConnected, user }: { isConnected: boolean; user: string }) => {
@@ -179,6 +180,7 @@ const Navbar = ({ isOpen, onToggle }: { isOpen: boolean; onToggle: () => void })
           : '0px'
         : '0px'
       }
+      bgColor="brand.accent.900"
       left={0}
       position="fixed"
       py={4}
@@ -193,12 +195,22 @@ const Navbar = ({ isOpen, onToggle }: { isOpen: boolean; onToggle: () => void })
           <HStack spacing={8}>
             <HStack spacing={2}>
               <Link to="/">
-                <Image alt="Launchpad Logo" src={BlockBeastLogo} />
+                <Image
+                  alt="Launchpad Logo Mobile"
+                  display={{ base: 'block', md: 'none' }}
+                  height="42px"
+                  src={AppLogoMobile}
+                  width="auto"
+                />
+
+                <Image
+                  alt="Launchpad Logo"
+                  display={{ base: 'none', md: 'block' }}
+                  height="42px"
+                  src={BlockBeastLogo}
+                  width="auto"
+                />
               </Link>
-              {/* width={8} height={8} */}
-              {/* <Text color="cyan.300" fontSize="xl" fontWeight="bold">
-                Launchpad
-              </Text> */}
             </HStack>
             <HStack display={{ base: 'none', md: 'flex' }} spacing={6}>
               <Link to="/">
@@ -252,19 +264,18 @@ const Navbar = ({ isOpen, onToggle }: { isOpen: boolean; onToggle: () => void })
         </Flex>
       </Container>
       <Collapse in={isOpen} animateOpacity>
-        <Box>
+        <Divider mt={4} />
+        <Box pt={6}>
           <VStack spacing={6}>
             <Link to="/">
-              <Button
-                _hover={{ bg: 'green.200' }}
-                bg="green.100"
-                color="gray.800"
-                px={6}
-                size="md"
-                width="100%"
+              <Text
+                _hover={{ color: 'green.200', transition: '0.2s ease-in-out' }}
+                color="green.100"
+                fontSize="md"
+                fontWeight="medium"
               >
                 AI Token Marketplace
-              </Button>
+              </Text>
             </Link>
             <Link to="/fast-launch/create">
               <Button
