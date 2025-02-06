@@ -7,3 +7,8 @@ span[class^='errorCard__icon'] {
   background-position: center bottom;
   background-size: 100%;
 }
+
+.word-wrap {
+  overflow-wrap: break-word;  /* Ensures long words break */
+  word-break: break-word;     /* Fallback */
+}

@@ -16,7 +16,7 @@ export const ProjectInfo: React.FC = () => {
   return (
     <>
       <Skeleton isLoaded={!isAgentLoading}>
-        <Box>{agent?.description}</Box>
+        <Box className='word-wrap' maxWidth="53em">{agent?.description}</Box>
       </Skeleton>
       {isMobile && (
         <Flex py={2}>
