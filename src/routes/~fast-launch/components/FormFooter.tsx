@@ -86,7 +86,7 @@ export const FormFooter: React.FC<{
         // <Button onClick={onConnectWallet} type="button" variant="accent">
         //   Connect Wallet <Icon as={MdArrowOutward} boxSize={5} ml={5} />
         // </Button>
-        <ConnectWalletButton variant="accent" w="40%" showRightIcon />
+        <ConnectWalletButton variant="accent" w={{ base: '60%', md: '50%' }} showRightIcon />
       )}
 
       {isConnected && (

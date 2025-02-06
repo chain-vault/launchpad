@@ -25,7 +25,7 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
         <Box>{isFunction(children) ? children(selectedTab) : null}</Box>
       </Box>
       <Box
-        bg="surface.base.900"
+        bg="brand.accent.600"
         bottom={0}
         color="surface.base.100"
         left={0}

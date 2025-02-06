@@ -58,11 +58,7 @@ const Layout = ({ children }: React.PropsWithChildren) => {
     defaultIsOpen: !isApeInPoolCreationEnabled,
   });
 
-  const {
-    isOpen: isSettingsDrawerOpen,
-    onClose: onCloseSettingsDrawer,
-    onOpen: onOpenSettingsDrawer,
-  } = useDisclosure();
+  const { isOpen: isSettingsDrawerOpen, onClose: onCloseSettingsDrawer } = useDisclosure();
   // lifiting up state to add blur effect on collapse
   const { isOpen, onToggle } = useDisclosure();
   const { pathname } = useLocation();
@@ -109,7 +105,7 @@ const Layout = ({ children }: React.PropsWithChildren) => {
         templateRows="82px 1fr auto"
       >
         <GridItem area="header" as="header">
-          <Navbar isOpen={isOpen} onOpenSettingsDrawer={onOpenSettingsDrawer} onToggle={onToggle} />
+          <Navbar isOpen={isOpen} onToggle={onToggle} />
         </GridItem>
 
         <GridItem

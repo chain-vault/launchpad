@@ -14,7 +14,7 @@ import { isApeInEmbeddedWalletEnabled } from '@constants/config/features';
 
 import PhantomGoogle from '@assets/imges/google-phantom.svg';
 
-interface Connector extends Wallet {
+export interface Connector extends Wallet {
   meta?: {
     displayName: string;
     downloadURI?: string;
