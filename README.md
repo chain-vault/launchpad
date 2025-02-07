@@ -1,4 +1,4 @@
-# Apeon
+# Blockbeat.ai
 
 The project is managed with Yarn Berry and utilizes the Plug'n'Play feature for efficient dependency management.
 
@@ -14,12 +14,6 @@ The project is managed with Yarn Berry and utilizes the Plug'n'Play feature for 
 1. Make sure you have corepack installed and stable version of yarn in your system
 
 2. Clone the repository:
-
-   ```bash
-   git clone <https://github.com/your-username/apeon.git>
-   cd apeon
-
-   ```
 
 3. Install dependencies using Yarn:
 
