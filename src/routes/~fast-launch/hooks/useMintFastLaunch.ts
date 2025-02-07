@@ -69,6 +69,7 @@ type CreateAgentRequest = {
   description: string;
   greeting: string;
   image: string;
+  is_cookie_fun_enabled: boolean;
   is_token: boolean;
   mintAddress: string;
   name: string;
@@ -456,6 +457,7 @@ const useMintToken = (onSuccess?: (data: string[]) => void, onError?: (error: st
           description: variables.beastDescription,
           greeting: variables.beastGreeting,
           image,
+          is_cookie_fun_enabled: variables.cookieFun,
           is_token: true,
           mintAddress,
           name: variables.tokenName,

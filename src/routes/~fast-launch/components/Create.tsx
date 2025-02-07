@@ -46,6 +46,7 @@ export const CreateFastLaunch: React.FC = () => {
       beastBiography: '',
       beastDescription: '',
       beastGreeting: '',
+      cookieFun: false,
       discord: '',
       initialBuy: '',
       lockToken: {
