@@ -1,4 +1,4 @@
-import React, { ReactNode, useEffect } from 'react';
+import React, { ReactNode } from 'react';
 
 import {
   Drawer,
@@ -10,11 +10,7 @@ import {
   DrawerProps,
 } from '@chakra-ui/react';
 
-import { Slippage } from '@app-types/index';
-
-import { RPCOptions } from '@constants/config/transactions';
 import useResponsiveValue from '@hooks/useResponsiveValue';
-import useTransactionSettings from '@hooks/useTransactionSettings';
 
 interface CustomDrawerProps extends DrawerProps {
   children: ReactNode;
@@ -38,19 +34,19 @@ const CustomDrawer: React.FC<CustomDrawerProps> = ({
   const searchBarHeight = isIos ? 56 : 48;
   const topPadding = statusBarHeight + searchBarHeight;
 
-  const { customRPCUrl, onUpdateSlippage, selectedRPC, slippage, updateTransactionSettings } =
-    useTransactionSettings();
+  // const { customRPCUrl, onUpdateSlippage, selectedRPC, slippage, updateTransactionSettings } =
+  //   useTransactionSettings();
 
-  useEffect(() => {
-    if (selectedRPC === RPCOptions.CUSTOM && !customRPCUrl) {
-      updateTransactionSettings(['selectedRPC', RPCOptions.HELIUS]);
-    }
-    if (!slippage) {
-      onUpdateSlippage(Slippage.AUTO);
-    }
+  // useEffect(() => {
+  //   if (selectedRPC === RPCOptions.CUSTOM && !customRPCUrl) {
+  //     updateTransactionSettings(['selectedRPC', RPCOptions.HELIUS]);
+  //   }
+  //   if (!slippage) {
+  //     onUpdateSlippage(Slippage.AUTO);
+  //   }
 
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isOpen]);
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, [isOpen]);
 
   return (
     <Drawer

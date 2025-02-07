@@ -32,6 +32,7 @@ import { TOKEN_NAME_VALIDATION_RULES, TOKEN_SYMBOL_VALIDATION_RULES } from '@con
 import useMintToken from '../hooks/useMintFastLaunch';
 import { modalStateAtom } from '../state/atom';
 import { FastLaunchForm } from '../types';
+import { DataSwarm } from './DataSwarm';
 import { FormFooter } from './FormFooter';
 import { InitialBuyCount } from './InitialBuyCount';
 import { FormLaunchTypeLoader } from './LaunchTypeLoader';
@@ -45,6 +46,7 @@ export const CreateFastLaunch: React.FC = () => {
       beastBiography: '',
       beastDescription: '',
       beastGreeting: '',
+      cookieFun: false,
       discord: '',
       initialBuy: '',
       lockToken: {
@@ -165,6 +167,9 @@ export const CreateFastLaunch: React.FC = () => {
                   </Flex>
                   <Flex flexDirection="column" gap={4} mb={4}>
                     <TokenLogo label="Token Logo / Face for your Beast" />
+                  </Flex>
+                  <Flex mb={4}>
+                    <DataSwarm />
                   </Flex>
                   <Flex flexDirection="column" gap={4} mb={4}>
                     <FormHandler

@@ -82,7 +82,7 @@ export const TradeGraph: React.FC = () => {
             width={{ base: 'auto', lg: 'max-content' }}
           >
             <Text textColor="surface.brand.secondary.900" textStyle="body-sm-bold">
-              Bonding Curve Completed. Now you can trade this Ape in{' '}
+              Bonding Curve Completed. Now you can trade this Agent token in{' '}
               <chakra.span textTransform="capitalize">{poolData?.selectedDex}</chakra.span>
             </Text>
           </Box>
