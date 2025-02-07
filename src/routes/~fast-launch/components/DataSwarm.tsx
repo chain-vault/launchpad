@@ -5,14 +5,12 @@ import { useFormContext } from 'react-hook-form';
 
 import { CookieFunIcon } from '@assets/icons';
 
-// import { LockPeriodDropDown } from './LockPeriodDropDown';
-
 type DataSwarmProps = {};
 export const DataSwarm: React.FC<DataSwarmProps> = () => {
-  const name = 'dataSwarm.locked';
+  const cookieFun = 'cookieFun';
   const { getValues, register, watch } = useFormContext();
-  const isEnabled = getValues(name);
-  watch([name, 'DataSwarm.period']);
+  const isEnabled = getValues(cookieFun);
+  watch(cookieFun);
   return (
     <Flex
       alignItems="center"
@@ -50,7 +48,7 @@ export const DataSwarm: React.FC<DataSwarmProps> = () => {
             position="absolute"
             right={{ base: '0', md: '-5' }}
           >
-            <Switch {...register(name)} size="lg" />
+            <Switch {...register(cookieFun)} size="lg" />
           </Flex>
           <Flex>
             <FormLabel m={0}>Data Swarm API</FormLabel>

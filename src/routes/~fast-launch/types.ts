@@ -16,6 +16,7 @@ export type FastLaunchForm = {
   beastBiography: string;
   beastDescription: string;
   beastGreeting: string;
+  cookieFun: boolean;
   discord: string;
   initialBuy: number | string;
   lockToken: {
