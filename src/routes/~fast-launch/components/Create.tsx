@@ -67,7 +67,7 @@ export const CreateFastLaunch: React.FC = () => {
   });
 
   const { isPending, onCreatePool } = useMintToken(() => {
-    // methods.reset({}, { keepDefaultValues: true });
+    methods.reset({}, { keepDefaultValues: true });
   });
   const {
     control,
