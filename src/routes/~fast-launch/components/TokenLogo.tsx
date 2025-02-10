@@ -96,9 +96,10 @@ export const TokenLogo: React.FC<TokenLogoProps> = ({ label }) => {
         </Box>
         <Box
           as="span"
-          color="base.500"
+          color="#4b505e"
           display="inline-block"
-          fontWeight="semibold"
+          fontSize={['xs', 'sm']}
+          fontWeight="normal"
           lineHeight={4}
           maxWidth="100%"
           overflow="hidden"

@@ -10,9 +10,9 @@ import { GenericLambdaResponse } from '@app-types/index';
 import { useGetAllPools } from '@hooks/apein/useGetPool';
 
 export enum PoolSortOptions {
-  CURVE_PROGRESS = 'Bonding Curve Progress',
+  CURVE_PROGRESS = 'Bonding Curve',
   MARKET_CAP = 'Market Cap',
-  RECENTLY_LAUNCHED = 'Recently Launched',
+  RECENTLY_LAUNCHED = 'Recent',
 }
 export type AgentFileters = {
   search: string;

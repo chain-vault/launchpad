@@ -70,7 +70,12 @@ const Footer = () => {
         </Box> */}
       </Flex>
       <Flex direction="column" gap={2} mb={6}>
-        <Flex alignItems="center" direction="row" gap={2} justifyContent="center">
+        <Flex
+          alignItems="center"
+          direction={{ base: 'column', lg: 'row' }}
+          gap={2}
+          justifyContent="center"
+        >
           <Flex alignItems="center" gap={1} justifyContent="center">
             <Text opacity="0.5" textStyle="body-regular">
               Charts powered by{' '}
@@ -79,7 +84,7 @@ const Footer = () => {
               Tradingview
             </ChakraLink>
           </Flex>
-          <Box>
+          <Box display={{ base: 'none', md: 'block' }}>
             <Text>|</Text>
           </Box>
           <Flex alignItems="center" gap={1} justifyContent="center">
@@ -90,7 +95,7 @@ const Footer = () => {
               Apeon
             </ChakraLink>
           </Flex>
-          <Box>
+          <Box display={{ base: 'none', md: 'block' }}>
             <Text>|</Text>
           </Box>
           <Text opacity="0.5" textStyle="body-regular">

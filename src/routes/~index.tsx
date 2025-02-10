@@ -6,7 +6,7 @@ import PopularTokens from '@components/PopularTokens';
 export const Route = createFileRoute('/')({
   component: function Render() {
     return (
-      <Box bg="base.900" maxW="100vw" py={2}>
+      <Box bg="base.900" maxW="100vw" mt={4} py={2}>
         <Container maxW="container.xl">
           <Flex direction="column">
             <Text textStyle="h2">
@@ -18,7 +18,7 @@ export const Route = createFileRoute('/')({
               The safest and fastest way to launch and trade AI tokens on Solana
             </Text>
 
-            <Flex gap="1rem" mt={8} />
+            <Flex gap="1rem" mt={4} />
             <PopularTokens />
           </Flex>
         </Container>

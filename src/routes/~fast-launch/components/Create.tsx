@@ -94,7 +94,7 @@ export const CreateFastLaunch: React.FC = () => {
   return (
     <>
       <Box w="100%">
-        <Container maxW="container.xl" pb={5} textAlign="center">
+        <Container maxW="container.xl" mt={4} pb={5} textAlign="center">
           {/* {isPending && <Toast />} */}
           <Card
             bg="#2C3655 !important"
@@ -124,6 +124,9 @@ export const CreateFastLaunch: React.FC = () => {
                     <FormHandler
                       inputField={
                         <FormInput<FastLaunchForm>
+                          inputProps={{
+                            fontSize: ['xs', 'sm'],
+                          }}
                           rules={{
                             ...TOKEN_NAME_VALIDATION_RULES,
                             pattern: ASCII_STRING_PATTERN,
@@ -132,12 +135,12 @@ export const CreateFastLaunch: React.FC = () => {
                           control={control}
                           maxLength={32}
                           name="tokenName"
-                          placeholder="Go for something beasty"
+                          placeholder="This is both; the name for your Beast & your Token."
                         />
                       }
                       fieldError={errors.tokenName}
                       htmlFor="tokenName"
-                      label="Name your Beast / Token"
+                      label="Name of Beast (Ai Agent)"
                       required
                     />
                   </Flex>
@@ -146,6 +149,7 @@ export const CreateFastLaunch: React.FC = () => {
                       inputField={
                         <FormInput<FastLaunchForm>
                           inputProps={{
+                            fontSize: ['xs', 'sm'],
                             textTransform: 'uppercase',
                           }}
                           rules={{
@@ -166,7 +170,7 @@ export const CreateFastLaunch: React.FC = () => {
                     />
                   </Flex>
                   <Flex flexDirection="column" gap={4} mb={4}>
-                    <TokenLogo label="Token Logo / Face for your Beast" />
+                    <TokenLogo label="Token Logo" />
                   </Flex>
                   <Flex mb={4}>
                     <DataSwarm />
@@ -177,15 +181,17 @@ export const CreateFastLaunch: React.FC = () => {
                         <Textarea
                           bg="surface.base.700"
                           border="none"
+                          fontSize={['xs', 'sm']}
                           {...methods.register('beastBiography', { required: true })}
-                          placeholder="Tell it what it should know, how to behave."
+                          fontWeight="normal"
+                          placeholder="Explain to the beast who she/he is, speaking style (serious, energetic, happy, funny, sarcastic..), what field they should be an expert in, what they shouldn't say, their principles and beliefs around sensitive topics of race and politics etc."
                           resize="none"
                         />
                       }
                       alignOptionalLabel="right"
                       fieldError={errors.beastBiography}
                       htmlFor="beastBiography"
-                      label="Feed the Beast"
+                      label="Instruction"
                       required
                     />
                   </Flex>
@@ -194,17 +200,20 @@ export const CreateFastLaunch: React.FC = () => {
                     <FormHandler
                       inputField={
                         <FormInput<FastLaunchForm>
+                          inputProps={{
+                            fontSize: ['xs', 'sm'],
+                          }}
                           rules={{
                             required: 'Required field',
                           }}
                           control={control}
                           name="beastGreeting"
-                          placeholder="Type here your Beast's hello message"
+                          placeholder="Type a welcome message for your users."
                         />
                       }
                       fieldError={errors.beastGreeting}
                       htmlFor="beastGreeting"
-                      label="Beast says Hello!"
+                      label="Greeting"
                       required
                     />
                   </Flex>
@@ -213,17 +222,20 @@ export const CreateFastLaunch: React.FC = () => {
                     <FormHandler
                       inputField={
                         <FormInput<FastLaunchForm>
+                          inputProps={{
+                            fontSize: ['xs', 'sm'],
+                          }}
                           rules={{
                             required: 'Required field',
                           }}
                           control={control}
                           name="beastDescription"
-                          placeholder="Give a short tagline to tell people who your Beast is"
+                          placeholder="Write a short description about what your agent can do. This will be visible to your users."
                         />
                       }
                       fieldError={errors.beastDescription}
                       htmlFor="beastDescription"
-                      label="Who's your Beast?"
+                      label="Personality"
                       required
                     />
                   </Flex>
@@ -235,6 +247,7 @@ export const CreateFastLaunch: React.FC = () => {
                           <FormInput<FastLaunchForm>
                             inputProps={{
                               autoCapitalize: 'off',
+                              fontSize: ['xs', 'sm'],
                             }}
                             rules={{
                               pattern: STRING_TWITTER_USERNAME,
@@ -257,6 +270,7 @@ export const CreateFastLaunch: React.FC = () => {
                           <FormInput<FastLaunchForm>
                             inputProps={{
                               autoCapitalize: 'off',
+                              fontSize: ['xs', 'sm'],
                             }}
                             rules={{
                               pattern: STRING_URL_PATTERN,
@@ -279,6 +293,7 @@ export const CreateFastLaunch: React.FC = () => {
                           <FormInput<FastLaunchForm>
                             inputProps={{
                               autoCapitalize: 'off',
+                              fontSize: ['sm', 'md'],
                             }}
                             rules={{
                               pattern: STRING_URL_PATTERN,
@@ -301,6 +316,7 @@ export const CreateFastLaunch: React.FC = () => {
                           <FormInput<FastLaunchForm>
                             inputProps={{
                               autoCapitalize: 'off',
+                              fontSize: ['sm', 'md'],
                             }}
                             rules={{
                               pattern: STRING_URL_PATTERN,

@@ -88,6 +88,7 @@ export const Header = () => {
     <Grid
       columnGap={9}
       marginEnd={0}
+      marginTop={4}
       rowGap={2}
       templateColumns={{ base: 'repeat(2, 1fr)', lg: '1.2fr 3fr' }}
       templateRows={{ base: '1fr 2fr', lg: '1fr', md: 'repeat(2, 1fr)' }}
