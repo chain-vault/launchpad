@@ -13,7 +13,7 @@ export const PRIVATE_MESSAGE = `Sign in with BlockBeast.\n\nNo password is requi
   This request will not initiate any blockchain transaction or cost any gas fee. nonce:`;
 
 type CreateJwtProps = {
-  message: string;
+  nonce: string;
   public_key: string;
   signature: number[];
 };
@@ -28,7 +28,12 @@ type AuthNonceResponse = {
 export const useCreateJwt = () =>
   useMutation({
     mutationFn: (payload: CreateJwtProps) =>
-      apiConfig<CreateJwtResponse>({ data: payload, method: 'POST', url: 'login' }),
+      apiConfig<CreateJwtResponse>({
+        data: payload,
+        method: 'POST',
+        url: 'login',
+        withCredentials: true,
+      }),
   });
 
 export const useGetWalletAuth = () =>
@@ -37,6 +42,7 @@ export const useGetWalletAuth = () =>
       apiConfig<AuthNonceResponse>({
         method: 'GET',
         url: 'wallet-auth',
+        withCredentials: true,
       }),
   });
 
@@ -72,6 +78,7 @@ export const useAuth = () => {
     setAuthStatus({ authenticationStatus: UserAuthenticationStatus.SIGNING_USER });
 
     getWalletAuthToken(undefined, {
+      onError: () => handleAuthorizationError(AuthErrorMessages.AUTHORIZATION_FAILED),
       onSuccess: async (data) => {
         try {
           const signature = await getSignature(`${PRIVATE_MESSAGE} ${data.data.authNonce}`);
@@ -79,7 +86,7 @@ export const useAuth = () => {
 
           createJwt(
             {
-              message: PRIVATE_MESSAGE,
+              nonce: data.data.authNonce,
               public_key: publicKey.toString(),
               signature: Array.from(signature),
             },
