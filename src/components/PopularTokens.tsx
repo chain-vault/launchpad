@@ -184,7 +184,12 @@ const PopularTokens = () => {
   return (
     <Box bg="base.800" mt="2.5">
       <Box bg="#1E263A" borderRadius="md" p={4}>
-        <HStack alignItems="flex-start" justifyContent="space-between" mb={4} spacing={2}>
+        <Flex
+          alignItems="flex-start"
+          flexDirection={{ base: 'column', lg: 'row' }} // handled for mobile and large screen
+          justifyContent="space-between"
+          mb={4}
+        >
           <Box bg="#121E30" borderRadius="full" display="flex" padding="2">
             <Box bg="#121E30" borderRadius="full" display="flex" padding="2">
               {Object.entries(PoolSortOptions).map(([key, label]) => (
@@ -199,9 +204,10 @@ const PopularTokens = () => {
                   borderRadius="full"
                   color={`${filter.sortBy === PoolSortOptions[key as keyof typeof PoolSortOptions] ? 'white' : 'gray.400'}`}
                   key={key}
+                  p={2}
                   size="sm"
                 >
-                  {label}
+                  <Text textStyle="body-md">{label}</Text>
                 </Button>
               ))}
             </Box>
@@ -234,7 +240,7 @@ const PopularTokens = () => {
               </Box>
             </Flex>
           </Box>
-        </HStack>
+        </Flex>
 
         <TableContainer w="full">
           <Table color="white" variant="unstyled" w="full">
