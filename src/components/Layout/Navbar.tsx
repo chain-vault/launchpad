@@ -298,7 +298,7 @@ const Navbar = ({ isOpen, onToggle }: { isOpen: boolean; onToggle: () => void })
               color="green.100"
               fontSize="md"
               fontWeight="medium"
-              href="https://dapp.blockbeast.com/"
+              href="https://dapp.blockbeast.ai/"
               isExternal
             >
               AI Beast
