@@ -182,33 +182,38 @@ const PopularTokens = () => {
   };
 
   return (
-    <Box bg="base.800" mt="2.5">
+    <Box bg="base.900" mt="2.5">
       <Box bg="#1E263A" borderRadius="md" p={4}>
-        <HStack alignItems="flex-start" justifyContent="space-between" mb={4} spacing={2}>
-          <Box bg="#121E30" borderRadius="full" display="flex" padding="2">
-            <Box bg="#121E30" borderRadius="full" display="flex" padding="2">
-              {Object.entries(PoolSortOptions).map(([key, label]) => (
-                <Button
-                  onClick={() =>
-                    onChangeFilters({
-                      sortBy: PoolSortOptions[key as keyof typeof PoolSortOptions],
-                    })
-                  }
-                  _hover={{ bg: 'blue.500' }}
-                  bg={`${filter.sortBy === PoolSortOptions[key as keyof typeof PoolSortOptions] ? 'blue.500' : 'transparant'}`}
-                  borderRadius="full"
-                  color={`${filter.sortBy === PoolSortOptions[key as keyof typeof PoolSortOptions] ? 'white' : 'gray.400'}`}
-                  key={key}
-                  size="sm"
-                >
-                  {label}
-                </Button>
-              ))}
-            </Box>
+        <Flex
+          alignItems={{ base: 'center', lg: 'flex-start' }}
+          flexDirection={{ base: 'column', lg: 'row' }} // handled for mobile and large screen
+          justifyContent="space-between"
+          mb={{ base: '4', lg: '4' }}
+        >
+          <Box bg="#121E30" borderRadius="full" display="flex" padding="1">
+            {Object.entries(PoolSortOptions).map(([key, label]) => (
+              <Button
+                onClick={() =>
+                  onChangeFilters({
+                    sortBy: PoolSortOptions[key as keyof typeof PoolSortOptions],
+                  })
+                }
+                _hover={{ bg: 'blue.500' }}
+                bg={`${filter.sortBy === PoolSortOptions[key as keyof typeof PoolSortOptions] ? 'blue.500' : 'transparant'}`}
+                borderRadius="full"
+                color={`${filter.sortBy === PoolSortOptions[key as keyof typeof PoolSortOptions] ? 'white' : 'gray.400'}`}
+                key={key}
+                px={4}
+                py={2}
+                size="sm"
+              >
+                <Text textStyle="body-md">{label}</Text>
+              </Button>
+            ))}
           </Box>
           <Box>
             {/* Search Bar */}
-            <Flex alignItems="center" justifyContent="center" mt={4}>
+            <Flex alignItems="center" justifyContent="center" mt={{ base: '4', lg: '0' }}>
               <Box maxW="18.75rem" w="full">
                 <InputGroup>
                   <InputLeftElement pointerEvents="none">
@@ -234,7 +239,7 @@ const PopularTokens = () => {
               </Box>
             </Flex>
           </Box>
-        </HStack>
+        </Flex>
 
         <TableContainer w="full">
           <Table color="white" variant="unstyled" w="full">

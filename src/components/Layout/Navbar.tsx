@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import {
   Box,
   Button,
+  Link as ChakraLink,
   Collapse,
   Container,
   Divider,
@@ -213,11 +214,26 @@ const Navbar = ({ isOpen, onToggle }: { isOpen: boolean; onToggle: () => void })
               </Link>
             </HStack>
             <HStack display={{ base: 'none', md: 'flex' }} spacing={6}>
-              <Link to="/">
-                <Text color={opacity ? 'white' : 'blue.400'} fontWeight="medium">
-                  AI Token Marketplace
-                </Text>
-              </Link>
+              <ChakraLink
+                _hover={{ color: 'green.200', transition: '0.2s ease-in-out' }}
+                color="green.100"
+                fontSize="md"
+                fontWeight="medium"
+                href="/"
+              >
+                AI Token Marketplace
+              </ChakraLink>
+
+              <ChakraLink
+                _hover={{ color: 'green.200', transition: '0.2s ease-in-out' }}
+                color="green.100"
+                fontSize="md"
+                fontWeight="medium"
+                href="https://dapp.blockbeast.ai/"
+                isExternal
+              >
+                AI Beast
+              </ChakraLink>
             </HStack>
           </HStack>
 
@@ -267,16 +283,27 @@ const Navbar = ({ isOpen, onToggle }: { isOpen: boolean; onToggle: () => void })
         <Divider mt={4} />
         <Box pt={6}>
           <VStack spacing={6}>
-            <Link to="/">
-              <Text
-                _hover={{ color: 'green.200', transition: '0.2s ease-in-out' }}
-                color="green.100"
-                fontSize="md"
-                fontWeight="medium"
-              >
-                AI Token Marketplace
-              </Text>
-            </Link>
+            <ChakraLink
+              _hover={{ color: 'green.200', transition: '0.2s ease-in-out' }}
+              color="green.100"
+              fontSize="md"
+              fontWeight="medium"
+              href="/"
+            >
+              AI Token Marketplace
+            </ChakraLink>
+
+            <ChakraLink
+              _hover={{ color: 'green.200', transition: '0.2s ease-in-out' }}
+              color="green.100"
+              fontSize="md"
+              fontWeight="medium"
+              href="https://dapp.blockbeast.ai/"
+              isExternal
+            >
+              AI Beast
+            </ChakraLink>
+
             <Link to="/fast-launch/create">
               <Button
                 _hover={{ bg: 'green.200' }}

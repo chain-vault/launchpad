@@ -71,7 +71,7 @@ export const BondingCurve: React.FC = () => {
 
   return (
     <Box width="100%">
-      <Card>
+      <Card backgroundColor="#1e263a">
         {/* <CardHeader>Hello</CardHeader> */}
 
         <CardBody>

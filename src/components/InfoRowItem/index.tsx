@@ -19,11 +19,7 @@ const InfoRowItem = ({ helperText, isPositive, label, tooltipValue, value }: Inf
     <Flex alignItems="center" gap={2} justifyContent="space-between">
       <Text opacity={0.5}>{label}</Text>
       {helperText && (
-        <TooltipWithIcon
-          icon={FaQuestionCircle}
-          placement="right-start"
-          tooltipContent={helperText}
-        />
+        <TooltipWithIcon icon={FaQuestionCircle} placement="auto" tooltipContent={helperText} />
       )}
     </Flex>
     <NumberWithTooltip
