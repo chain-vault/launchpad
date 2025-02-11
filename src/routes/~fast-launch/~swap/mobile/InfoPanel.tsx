@@ -12,6 +12,7 @@ import { ProjectInfo } from '@routes/~fast-launch/components/ProjectInfo';
 import { Socials } from '@routes/~fast-launch/components/Socials';
 import { TokenDetails } from '@routes/~fast-launch/components/TokenDetails';
 import { useFastLaunchSearchParams } from '@routes/~fast-launch/hooks/useFastLaunchSearchParams';
+import { useGetAgent } from '@routes/~fast-launch/hooks/useGetAgentInfo';
 import { useTokenAddress } from '@routes/~fast-launch/hooks/useTokenAddress';
 import { shrinkText } from '@utils/shrinkText';
 import { decompressString } from '@utils/textCompression';
@@ -22,6 +23,10 @@ export const InfoPanel: React.FC = () => {
   );
   const { isMetaDataLoading, poolTokenMetadata } = useTokenMetadata(useTokenAddress(), true);
   const desc = decompressString(poolTokenMetadata?.poolDescription ?? '');
+
+  const { data: agent, isLoading: isAgentLoading } = useGetAgent(
+    useFastLaunchSearchParams().agentId
+  );
 
   return (
     <Box>
