@@ -230,7 +230,7 @@ export const CreateFastLaunch: React.FC = () => {
                           }}
                           control={control}
                           name="beastDescription"
-                          placeholder="Write a short description about what your agent can do. This will be visible to your users."
+                          placeholder="Tell users who your agent is."
                         />
                       }
                       fieldError={errors.beastDescription}

@@ -221,7 +221,7 @@ const Navbar = ({ isOpen, onToggle }: { isOpen: boolean; onToggle: () => void })
                 fontWeight="medium"
                 href="/"
               >
-                AI Token Marketplace
+                AI Token Launchpad
               </ChakraLink>
 
               <ChakraLink
@@ -232,7 +232,7 @@ const Navbar = ({ isOpen, onToggle }: { isOpen: boolean; onToggle: () => void })
                 href={import.meta.env.VITE_BLOCKBEAST_URL}
                 isExternal
               >
-                AI Beast
+                Beasts
               </ChakraLink>
             </HStack>
           </HStack>
@@ -248,7 +248,7 @@ const Navbar = ({ isOpen, onToggle }: { isOpen: boolean; onToggle: () => void })
                 size="md"
                 width="100%"
               >
-                Create New Agent
+                Launch AI Token
               </Button>
             </Link>
 
@@ -290,7 +290,7 @@ const Navbar = ({ isOpen, onToggle }: { isOpen: boolean; onToggle: () => void })
               fontWeight="medium"
               href="/"
             >
-              AI Token Marketplace
+              AI Token Launchpad
             </ChakraLink>
 
             <ChakraLink
@@ -301,7 +301,7 @@ const Navbar = ({ isOpen, onToggle }: { isOpen: boolean; onToggle: () => void })
               href={import.meta.env.VITE_BLOCKBEAST_URL}
               isExternal
             >
-              AI Beast
+              Beasts
             </ChakraLink>
 
             <Link to="/fast-launch/create">
@@ -313,7 +313,7 @@ const Navbar = ({ isOpen, onToggle }: { isOpen: boolean; onToggle: () => void })
                 size="md"
                 width="100%"
               >
-                Create New Agent
+                Launch AI Token
               </Button>
             </Link>
           </VStack>
