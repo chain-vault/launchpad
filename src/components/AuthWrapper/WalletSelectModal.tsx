@@ -201,7 +201,7 @@ const WalletConnectBody = () => {
 };
 
 const WalletSelectDrawer = () => {
-  const { disconnect } = useWalletConnection();
+  const { disconnect, isConnected } = useWalletConnection();
 
   const [isOpen, setIsOpen] = useAtom(walletConnectModalAtom);
   const userAuthState = useAtomValue(userAuthAtom);
@@ -222,7 +222,7 @@ const WalletSelectDrawer = () => {
             'Connecting Wallet'
           : userAuthState.authenticationStatus === UserAuthenticationStatus.SIGNING_USER ?
             'Signing'
-          : 'Connect Your Wallet'
+          : isConnected ? 'Wallet Connected' : 'Connect Your Solana Wallet'
         }
         isOpen={isOpen}
         onClose={onCloseDrawer}
@@ -246,7 +246,7 @@ const WalletSelectDrawer = () => {
                   'Connecting Wallet'
                 : userAuthState.authenticationStatus === UserAuthenticationStatus.SIGNING_USER ?
                   'Signing'
-                : 'Connect Your Solana wallet'}
+                : isConnected ? 'Wallet Connected' : 'Connect Your Solana wallet'}
               </Flex>
               <Button onClick={onCloseDrawer} variant="outline">
                 Close
