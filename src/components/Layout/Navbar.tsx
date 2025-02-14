@@ -221,7 +221,7 @@ const Navbar = ({ isOpen, onToggle }: { isOpen: boolean; onToggle: () => void })
                 fontWeight="medium"
                 href="/"
               >
-                AI Token Launchpad
+                Market
               </ChakraLink>
 
               <ChakraLink
@@ -290,7 +290,7 @@ const Navbar = ({ isOpen, onToggle }: { isOpen: boolean; onToggle: () => void })
               fontWeight="medium"
               href="/"
             >
-              AI Token Launchpad
+              Market
             </ChakraLink>
 
             <ChakraLink

@@ -162,7 +162,7 @@ const ResultRowData = ({ poolInfo: { agent, pool } }: { poolInfo: PoolWithAgent 
           size="sm"
           variant="outline"
         >
-          View
+          Trade
         </Button>
       </Td>
     </Tr>
