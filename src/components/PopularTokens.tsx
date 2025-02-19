@@ -69,13 +69,13 @@ const ResultRowData = ({ poolInfo: { agent, pool } }: { poolInfo: PoolAgentMetad
       </Td>
       <Td>
         <Tr>
-          <Link href={getExplorerUrlAddressUrl(pool?.token.toString() ?? '')} target="_blank">
-            <Flex alignItems="center" direction="row" gap="2" marginTop="2">
-              <Flex bgColor="rgb(255 255 255 / 5%)" borderRadius="full" px={2} py={2}>
-                <ClipboardText theme="filled" trim>
-                  {pool?.token.toString() ?? ''}
-                </ClipboardText>
-              </Flex>
+          <Flex alignItems="center" direction="row" gap="2" marginTop="2">
+            <Flex bgColor="rgb(255 255 255 / 5%)" borderRadius="full" px={2} py={2}>
+              <ClipboardText theme="filled" trim >
+                {pool?.token.toString() ?? ''}
+              </ClipboardText>
+            </Flex>
+            <Link href={getExplorerUrlAddressUrl(pool?.token.toString() ?? '')} target="_blank">
               <Flex
                 alignItems="center"
                 bgColor="rgb(255 255 255 / 5%)"
@@ -87,8 +87,8 @@ const ResultRowData = ({ poolInfo: { agent, pool } }: { poolInfo: PoolAgentMetad
               >
                 <LuExternalLink />
               </Flex>
-            </Flex>
-          </Link>
+            </Link>
+          </Flex>
         </Tr>
       </Td>
       <Td>

@@ -30,7 +30,7 @@ export const ClipboardText: React.FC<{
   //     }
   //   : { borderRadius: '5px', p: 2, paddingBottom: 1, paddingTop: 1, pl: '25px' };
   return (
-    <Flex alignItems="center" data-test={theme} gap={1}>
+    <Flex _hover={{ cursor: 'pointer' }} alignItems="center" data-test={theme} gap={1} onClick={onCopy}>
       <NumberWithTooltip
         textStyle={trim ? 'body-md' : { base: 'body-sm', md: 'body-md' }}
         tooltip={children}
@@ -42,7 +42,6 @@ export const ClipboardText: React.FC<{
         as={!hasCopied ? PiCopy : PiCheckSquare}
         color="surface.base.800"
         cursor="pointer"
-        onClick={onCopy}
       />
     </Flex>
   );
