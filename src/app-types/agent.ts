@@ -1,4 +1,5 @@
 import { PoolData } from './apiIn';
+import { PoolAndTokenMetaData } from './poolAndToken';
 
 export type Agent = {
   bio: string;
@@ -12,7 +13,7 @@ export type Agent = {
   publicKey?: string;
 };
 
-export type PoolWithAgent = { agent: Agent } & { pool: PoolData };
+export type PoolAgentMetadata = { agent: Agent } & { pool: PoolAndTokenMetaData & PoolData };
 
 export type AgentAnalyticsMetrics = {
   agentId: string;
