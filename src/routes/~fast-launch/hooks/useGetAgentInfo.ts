@@ -4,17 +4,19 @@ import apiConfig from '@adapters/api/apiConfig';
 import { useQuery } from '@tanstack/react-query';
 import { AxiosResponse } from 'axios';
 
-import { Agent, AgentAnalyticsMetrics, PoolWithAgent } from '@app-types/agent';
+import { Agent, AgentAnalyticsMetrics, PoolAgentMetadata } from '@app-types/agent';
 import { GenericLambdaResponse } from '@app-types/index';
 
 import { useGetAllPools } from '@hooks/apein/useGetPool';
+import useGetAllTokensWithMetadata from '@hooks/useGetAllTokensWithMetadata';
+import { useMultiTokensMetadata } from '@hooks/useToken';
 
 export enum PoolSortOptions {
   CURVE_PROGRESS = 'Bonding Curve',
   MARKET_CAP = 'Market Cap',
   RECENTLY_LAUNCHED = 'Recent',
 }
-export type AgentFileters = {
+export type AgentFilters = {
   search: string;
   sortBy: PoolSortOptions;
 };
@@ -46,7 +48,7 @@ export const useGetAgentAnalytics = (agentId: string) =>
   });
 
 export const useFilterAgents = () => {
-  const [agentFilters, setAgentFilters] = useState<AgentFileters>({
+  const [agentFilters, setAgentFilters] = useState<AgentFilters>({
     search: '',
     sortBy: PoolSortOptions.RECENTLY_LAUNCHED,
   });
@@ -71,20 +73,55 @@ export const useFilterAgents = () => {
       response.data.body.response,
   });
 
+  const { isLoading: isFetchTokensLoading, tokens: allFastlaunchTokens } =
+    useGetAllTokensWithMetadata(true);
+
+  const excludedTokenList = useMemo(
+    () =>
+      allPoolsData?.length && !isFetchTokensLoading ?
+        allPoolsData
+          .map((pool) => pool.token)
+          .filter(
+            (token) =>
+              !allFastlaunchTokens.some((allToken) => allToken.mint.toString() === token.toString())
+          )
+      : [],
+    [allFastlaunchTokens, allPoolsData, isFetchTokensLoading]
+  );
+
+  const { isMetaDataLoading, poolTokensMetadata: excludedPoolTokensMetadata } =
+    useMultiTokensMetadata(excludedTokenList, true);
+
+  const combinedTokensData = useMemo(
+    () => [...allFastlaunchTokens, ...excludedPoolTokensMetadata],
+    [allFastlaunchTokens, excludedPoolTokensMetadata]
+  );
+
+  const combinedData = allPoolsData.map((pool) => {
+    const matchingMetadata = combinedTokensData.find(
+      (metadata) => metadata?.mint?.toString() === pool.token.toString()
+    );
+
+    return {
+      ...pool,
+      ...matchingMetadata,
+    };
+  });
+
   // TODO: Optimize the filter loop
-  const combinedPools: PoolWithAgent[] = useMemo(() => {
-    if (!allPoolsData || !agentData) return [];
+  const combinedPools: PoolAgentMetadata[] = useMemo(() => {
+    if (!agentData || !combinedData) return [];
 
     const agentPoolIds = new Set(agentData.map((agent) => agent.poolAddress));
     const agentMap = new Map(agentData.map((agent) => [agent.poolAddress, agent]));
 
-    return allPoolsData
+    return combinedData
       .filter((pool) => agentPoolIds.has(pool.poolId.toString()))
       .map((pool) => ({
         agent: agentMap.get(pool.poolId.toString()),
         pool,
       }))
-      .filter((pool): pool is PoolWithAgent => !!pool.agent)
+      .filter((pool): pool is PoolAgentMetadata => !!pool.agent)
       .sort((a, b) => {
         if (agentFilters.sortBy === PoolSortOptions.MARKET_CAP) {
           return Number(b.pool.marketCap) - Number(a.pool.marketCap);
@@ -100,9 +137,9 @@ export const useFilterAgents = () => {
       .filter((data) =>
         data.pool.tokenName.toLowerCase().includes(agentFilters.search.toLowerCase())
       );
-  }, [allPoolsData, agentData, agentFilters]);
+  }, [combinedData, agentData, agentFilters]);
 
-  const onChangeFilters = (newFilter: Partial<AgentFileters>) => {
+  const onChangeFilters = (newFilter: Partial<AgentFilters>) => {
     setAgentFilters((prevFilters) => ({
       ...prevFilters,
       ...newFilter,
@@ -112,7 +149,7 @@ export const useFilterAgents = () => {
   return {
     data: combinedPools,
     filter: agentFilters,
-    isLoading: isAgentDataLoading || isPoolsDataLoading,
+    isLoading: isAgentDataLoading || isPoolsDataLoading || isMetaDataLoading,
     onChangeFilters,
     refetch: refetchAgents,
   };

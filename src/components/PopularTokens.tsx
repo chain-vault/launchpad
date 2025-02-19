@@ -22,17 +22,18 @@ import { useNavigate } from '@tanstack/react-router';
 import { IoMdSearch } from 'react-icons/io';
 import { LuExternalLink } from 'react-icons/lu';
 
-import { PoolWithAgent } from '@app-types/agent';
+import { PoolAgentMetadata } from '@app-types/agent';
 
 import { getExplorerUrlAddressUrl } from '@constants/config';
 import { PoolSortOptions, useFilterAgents } from '@routes/~fast-launch/hooks/useGetAgentInfo';
 import { getTimeDifference } from '@utils/duration';
 import { formatNumber, formatPercent, NumberFormatType } from '@utils/formatNumbers';
+import { shrinkText } from '@utils/shrinkText';
 import { Token } from '@utils/token';
 
 import { ClipboardText } from './ClipboardText';
 
-const ResultRowData = ({ poolInfo: { agent, pool } }: { poolInfo: PoolWithAgent }) => {
+const ResultRowData = ({ poolInfo: { agent, pool } }: { poolInfo: PoolAgentMetadata }) => {
   const navigate = useNavigate();
 
   return (
@@ -46,42 +47,48 @@ const ResultRowData = ({ poolInfo: { agent, pool } }: { poolInfo: PoolWithAgent 
               to: '/fast-launch/swap/$poolAddress',
             })
           }
-          gap={2}
-          size="sm"
           variant="unstyled"
         >
-          <Image
-            src={
-              agent.imageUrl ||
-              'https://s3-alpha-sig.figma.com/img/d2da/29ed/db62a0bcddc7a8b6e80e049081ae833c?Expires=1738540800&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=as74f6SFcoYblzly-yWLxk3EZSnUucTEFNtL034ZXJUqm0NHiRB2YSGcbsjxmaYhsOnQV5KpPuF5TP47FwJDoyNkbjFrXn45N22nbnRMNQvTZuOlhQMRngnev9Y54Aezx6eVEorLphlZ8KrwNicJ5vXIIiz4-1Au1fbfl-CVZWT5o~23rgLuYQhKy-uBeOvfN6u3FxRf1UlEvOWnUTtJ7UidNJ1EBcEeS9hA9xXBk~bAiICZ5E70xwGhqfCUWz2jQTWcGOqwSzbmyeimjnbVddFL2uClL5NCI3BKPqFRRaJag7KKFIkWSDfRyyCylYVlLCmmdC4zm5uLz4rsaH-bng__'
-            }
-            alt="Token icon"
-            borderRadius="full"
-            boxSize="24px"
-          />
-          <Text fontWeight="medium">{pool.tokenName}</Text>
-        </Button>
-        <Tr>
-          <Flex alignItems="center" direction="row" gap="2" marginTop="2">
-            <Flex
-              alignItems="center"
-              bgColor="rgb(255 255 255 / 5%)"
+          <Flex gap={2} justifyContent="flex-start">
+            <Image
+              src={
+                agent.imageUrl ||
+                'https://s3-alpha-sig.figma.com/img/d2da/29ed/db62a0bcddc7a8b6e80e049081ae833c?Expires=1738540800&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=as74f6SFcoYblzly-yWLxk3EZSnUucTEFNtL034ZXJUqm0NHiRB2YSGcbsjxmaYhsOnQV5KpPuF5TP47FwJDoyNkbjFrXn45N22nbnRMNQvTZuOlhQMRngnev9Y54Aezx6eVEorLphlZ8KrwNicJ5vXIIiz4-1Au1fbfl-CVZWT5o~23rgLuYQhKy-uBeOvfN6u3FxRf1UlEvOWnUTtJ7UidNJ1EBcEeS9hA9xXBk~bAiICZ5E70xwGhqfCUWz2jQTWcGOqwSzbmyeimjnbVddFL2uClL5NCI3BKPqFRRaJag7KKFIkWSDfRyyCylYVlLCmmdC4zm5uLz4rsaH-bng__'
+              }
+              alt="Token icon"
               borderRadius="full"
-              direction="row"
-              gap="1"
-              px={2}
-              py={1}
-            >
-              <Link href={getExplorerUrlAddressUrl(pool?.token.toString() ?? '')} target="_blank">
-                <LuExternalLink />
-              </Link>
-            </Flex>
-            <Flex bgColor="rgb(255 255 255 / 5%)" borderRadius="full" px={2} py={2}>
-              <ClipboardText theme="filled" trim>
-                {pool?.token.toString() ?? ''}
-              </ClipboardText>
+              boxSize="3em"
+              objectFit='cover'
+            />
+            <Flex alignItems='flex-start' direction="column" gap="1" pr={6}>
+              <Text fontWeight="medium" isTruncated>{shrinkText({ maxLength: 20, string: pool.tokenName ?? '' })}</Text>
+              <Text fontWeight="medium" textColor="gray.400">{pool.symbol}</Text>
             </Flex>
           </Flex>
+        </Button>
+      </Td>
+      <Td>
+        <Tr>
+          <Link href={getExplorerUrlAddressUrl(pool?.token.toString() ?? '')} target="_blank">
+            <Flex alignItems="center" direction="row" gap="2" marginTop="2">
+              <Flex bgColor="rgb(255 255 255 / 5%)" borderRadius="full" px={2} py={2}>
+                <ClipboardText theme="filled" trim>
+                  {pool?.token.toString() ?? ''}
+                </ClipboardText>
+              </Flex>
+              <Flex
+                alignItems="center"
+                bgColor="rgb(255 255 255 / 5%)"
+                borderRadius="full"
+                direction="row"
+                gap="1"
+                px={2}
+                py={2}
+              >
+                <LuExternalLink />
+              </Flex>
+            </Flex>
+          </Link>
         </Tr>
       </Td>
       <Td>
@@ -126,44 +133,44 @@ const ResultRowData = ({ poolInfo: { agent, pool } }: { poolInfo: PoolWithAgent 
         })}
       </Td> */}
       <Td>
-        <Button
-          onClick={() => {
-            window.open(`${import.meta.env.VITE_BLOCKBEAST_URL}/chat/${agent.id}`, '_blank');
-          }}
-          _hover={{ bg: 'green.500', color: 'white' }}
-          bg="transparent"
-          borderColor="green.500"
-          borderRadius="2xl"
-          color="green.500"
-          h="24px"
-          px={3}
-          size="sm"
-          variant="outline"
-        >
-          Agent
-        </Button>
-      </Td>
-      <Td>
-        <Button
-          onClick={() => {
-            navigate({
-              params: { poolAddress: pool.poolId.toString() },
-              search: { agentId: agent.id },
-              to: '/fast-launch/swap/$poolAddress',
-            });
-          }}
-          _hover={{ bg: 'green.500', color: 'white' }}
-          bg="transparent"
-          borderColor="green.500"
-          borderRadius="2xl"
-          color="green.500"
-          h="24px"
-          px={3}
-          size="sm"
-          variant="outline"
-        >
-          Trade
-        </Button>
+        <Flex alignContent="center" gap={2}>
+          <Button
+            onClick={() => {
+              window.open(`${import.meta.env.VITE_BLOCKBEAST_URL}/chat/${agent.id}`, '_blank');
+            }}
+            _hover={{ bg: 'green.500', color: 'white' }}
+            bg="transparent"
+            borderColor="green.500"
+            borderRadius="2xl"
+            color="green.500"
+            h="24px"
+            px={3}
+            size="sm"
+            variant="outline"
+          >
+            Agent
+          </Button>
+          <Button
+            onClick={() => {
+              navigate({
+                params: { poolAddress: pool.poolId.toString() },
+                search: { agentId: agent.id },
+                to: '/fast-launch/swap/$poolAddress',
+              });
+            }}
+            _hover={{ bg: 'green.500', color: 'white' }}
+            bg="transparent"
+            borderColor="green.500"
+            borderRadius="2xl"
+            color="green.500"
+            h="24px"
+            px={3}
+            size="sm"
+            variant="outline"
+          >
+            Trade
+          </Button>
+        </Flex>
       </Td>
     </Tr>
   );
@@ -246,6 +253,7 @@ const PopularTokens = () => {
             <Thead>
               <Tr>
                 <Th color="gray.400">AI Agent Token</Th>
+                <Th color="gray.400">Contract Address</Th>
                 <Th color="gray.400">
                   <HStack spacing={1}>
                     <Text>Price</Text>
@@ -266,7 +274,7 @@ const PopularTokens = () => {
                 <Flex justifyContent="center" width="100%">
                   Searching...
                 </Flex>
-              : popularAgents.map((data) => (
+                : popularAgents.map((data) => (
                   <ResultRowData key={data.pool.poolId.toString()} poolInfo={data} />
                 ))
               }
