@@ -187,7 +187,7 @@ const PopularTokens = () => {
   const handleSearch = (search: string) => {
     onChangeFilters({ search });
   };
-  // console.log(popularAgents)
+
   return (
     <Box bg="base.900" mt="2.5">
       <Box bg="#1E263A" borderRadius="md" p={4}>
