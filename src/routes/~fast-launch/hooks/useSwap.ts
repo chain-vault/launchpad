@@ -32,7 +32,7 @@ import { createActions, useProgressiveToast } from '@hooks/useProgressiveToast';
 import useReferal from '@hooks/useReferal';
 import useTransaction from '@hooks/useTransaction';
 import { getConnection, useWeb3React } from '@hooks/useWeb3React';
-import { ApeonFastlaunch, FastLauchIdl } from '@idl/fastlaunch';
+import { FastLauchIdl } from '@idl/fastlaunch';
 import { formatNumber, NumberFormatType } from '@utils/formatNumbers';
 import { calculateAmountWithSlippage } from '@utils/formatValues';
 import { Token } from '@utils/token';
@@ -48,7 +48,8 @@ export const useSwap = () => {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const connection = useMemo(() => getConnection(), [selectedRPC, customRPCUrl]);
   const { publicKey } = useWeb3React();
-  const apeInProgram = useGetProgramInstance<ApeonFastlaunch>(FastLauchIdl as Idl);
+  const apeInProgram = useGetProgramInstance(FastLauchIdl as Idl);
+
   const queryClient = useQueryClient();
   const [txHash, setTxHash] = useState<string>('');
   const { data: poolSettings } = useApeInSettings();

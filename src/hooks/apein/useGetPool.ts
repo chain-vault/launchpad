@@ -18,7 +18,7 @@ import { getLegacyPoolById, getLegacyPoolsByUser, isLegacyPool } from '@constant
 import { useGetAllTokensSupply, useGetTokenSupply } from '@hooks/useGetAllTokensWithMetadata';
 import { getProgramInstance, useGetProgramInstance } from '@hooks/useGetProgramInstance';
 import { getConnection } from '@hooks/useWeb3React';
-import { ApeonFastlaunch, FastLauchIdl } from '@idl/fastlaunch';
+import { FastLauchIdl, FastLauchIdlType } from '@idl/fastlaunch';
 import { PoolMath } from '@utils/apeInPoolMath';
 import BaseDecimal, {
   convertBNToDecimal,
@@ -169,7 +169,7 @@ export const getFormattedPoolData = (
 };
 
 export const useGetPoolById = (poolId?: string) => {
-  const poolProgram = useGetProgramInstance<ApeonFastlaunch>(FastLauchIdl as Idl, false);
+  const poolProgram = useGetProgramInstance<FastLauchIdlType>(FastLauchIdl as Idl, false);
   const { data, isLoading, refetch } = useQuery<PoolAccountData | undefined>({
     queryFn:
       poolId && !isLegacyPool(poolId) && poolProgram ?
@@ -238,10 +238,7 @@ export const useGetAllPools = () => {
     isLoading: curveSettingsLoading,
   } = useGetAllCurveSettings();
 
-  const poolProgram = useGetProgramInstance<ApeonFastlaunch>(
-    FastLauchIdl as ApeonFastlaunch,
-    false
-  );
+  const poolProgram = useGetProgramInstance<FastLauchIdlType>(FastLauchIdl, false);
   const curveModeBase58 = bs58.encode(Uint8Array.from([ApeInCurveMode]));
 
   const { data: pairData, isLoading: isPairDataLoading } = useGetApeInPairData();
@@ -324,10 +321,7 @@ export const useGetPoolsByUser = (userId?: string) => {
 
   useGetAllCurveSettings();
 
-  const poolProgram = useGetProgramInstance<ApeonFastlaunch>(
-    FastLauchIdl as ApeonFastlaunch,
-    false
-  );
+  const poolProgram = useGetProgramInstance<FastLauchIdlType>(FastLauchIdl, false);
   const curveModeBase58 = bs58.encode(Uint8Array.from([ApeInCurveMode]));
 
   const { data, isLoading } = useQuery<AllPoolAccounts | undefined>({
@@ -381,7 +375,7 @@ export const useGetPoolsByUser = (userId?: string) => {
 };
 
 export const getPoolAccountQueryOptions = (poolId: string) => {
-  const poolProgram = getProgramInstance<ApeonFastlaunch>(FastLauchIdl as Idl);
+  const poolProgram = getProgramInstance<FastLauchIdlType>(FastLauchIdl as Idl);
   const poolAccountQueryOptions = queryOptions({
     queryFn:
       poolId && poolProgram ?
