@@ -2,7 +2,7 @@ import type { PublicKey } from '@solana/web3.js';
 import type { Dayjs } from 'dayjs';
 
 import { CurveIndex } from '@constants/config';
-import { ApeonFastlaunch } from '@idl/fastlaunch';
+import { FastLauchIdlType } from '@idl/fastlaunch';
 import { DecimalType } from '@utils/decimalHelper';
 
 import {
@@ -12,10 +12,10 @@ import {
 } from './poolAndToken';
 import { TransformBNToDecimal } from './utils';
 
-export type PoolSettingsResponse = GetAllAccountReturnType<ApeonFastlaunch, 'fastLaunchSettings'>;
-export type PoolCurveSettings = FetchAccountReturnType<ApeonFastlaunch, 'curveAccounts'>;
-export type PoolAccountDataResponse = FetchAccountReturnType<ApeonFastlaunch, 'poolData'>;
-export type AllPoolAccountsResponse = GetAllAccountReturnType<ApeonFastlaunch, 'poolData'>;
+export type PoolSettingsResponse = GetAllAccountReturnType<FastLauchIdlType, 'fastLaunchSettings'>;
+export type PoolCurveSettings = FetchAccountReturnType<FastLauchIdlType, 'curveAccounts'>;
+export type PoolAccountDataResponse = FetchAccountReturnType<FastLauchIdlType, 'poolData'>;
+export type AllPoolAccountsResponse = GetAllAccountReturnType<FastLauchIdlType, 'poolData'>;
 
 export type CurveSettings = TransformBNToDecimal<PoolCurveSettings>;
 export type ApeInPoolSettings = TransformBNToDecimal<PoolSettingsResponse>;

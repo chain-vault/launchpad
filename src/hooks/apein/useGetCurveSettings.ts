@@ -8,7 +8,7 @@ import { CurveSettings } from '@app-types/apiIn';
 
 import { CurveIndex, getCurveAccount } from '@constants/config';
 import { useGetProgramInstance } from '@hooks/useGetProgramInstance';
-import { ApeonFastlaunch, FastLauchIdl } from '@idl/fastlaunch';
+import { FastLauchIdl, FastLauchIdlType } from '@idl/fastlaunch';
 import { convertBNToDecimal } from '@utils/decimalHelper';
 
 const useGetCurveSettings = (
@@ -19,7 +19,7 @@ const useGetCurveSettings = (
   curveSettings: CurveSettings | undefined;
   isLoading: boolean;
 } => {
-  const apeInProgram = useGetProgramInstance<ApeonFastlaunch>(FastLauchIdl as Idl, false);
+  const apeInProgram = useGetProgramInstance<FastLauchIdlType>(FastLauchIdl as Idl, false);
   const curveAccount =
     account ||
     (curveIndex ?
@@ -50,7 +50,7 @@ export const useGetAllCurveSettings = (): {
   getCurveSettingsById: (id: PublicKey | string) => CurveSettings | null;
   isLoading: boolean;
 } => {
-  const apeInProgram = useGetProgramInstance<ApeonFastlaunch>(FastLauchIdl as Idl, false);
+  const apeInProgram = useGetProgramInstance<FastLauchIdlType>(FastLauchIdl as Idl, false);
   const accounts = useMemo(
     () =>
       apeInProgram ?

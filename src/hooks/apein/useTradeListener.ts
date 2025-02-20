@@ -11,27 +11,27 @@ import { AllPoolAccounts, PoolAccountData } from '@app-types/apiIn';
 import { ApeInCurveMode } from '@constants/config';
 import { useGetProgramInstance } from '@hooks/useGetProgramInstance';
 import { useEventListener } from '@hooks/useProgramEventListener';
-import { ApeonFastlaunch, FastLauchIdl } from '@idl/fastlaunch';
+import { FastLauchIdl, FastLauchIdlType } from '@idl/fastlaunch';
 import { convertBNToDecimal } from '@utils/decimalHelper';
 
 const isBuyOrSellEvent = (
   _event: ApeInEventType,
   eventName: string
-): _event is IdlEvents<ApeonFastlaunch>['poolBuyEvent' | 'poolSellEvent'] =>
+): _event is IdlEvents<FastLauchIdlType>['poolBuyEvent' | 'poolSellEvent'] =>
   eventName === 'poolBuyEvent' || eventName === 'poolSellEvent';
 
 const isLiquidityPoolUpdatedEvent = (
   _event: ApeInEventType,
   eventName: string
-): _event is IdlEvents<ApeonFastlaunch>['liquidityPoolAddressUpdatedEvent'] =>
+): _event is IdlEvents<FastLauchIdlType>['liquidityPoolAddressUpdatedEvent'] =>
   eventName === 'liquidityPoolAddressUpdatedEvent';
 
 const isLockEvent = (
   _event: ApeInEventType,
   eventName: string
-): _event is IdlEvents<ApeonFastlaunch>['tokenLockEvent'] => eventName === 'tokenLockEvent';
+): _event is IdlEvents<FastLauchIdlType>['tokenLockEvent'] => eventName === 'tokenLockEvent';
 
-export type ApeInEventType = IdlEvents<ApeonFastlaunch>[ // | 'liquidityPoolAddressUpdatedEvent'
+export type ApeInEventType = IdlEvents<FastLauchIdlType>[ // | 'liquidityPoolAddressUpdatedEvent'
   | 'liquidityPoolAddressUpdatedEvent'
   | 'poolBuyEvent'
   | 'poolCreatedEvent'
@@ -238,7 +238,7 @@ export const useApeinEventsHandler = (
     }
   };
 
-  const apeInProgram = useGetProgramInstance<ApeonFastlaunch>(FastLauchIdl as Idl, false);
+  const apeInProgram = useGetProgramInstance<FastLauchIdlType>(FastLauchIdl as Idl, false);
   useEventListener(apeInProgram, 'poolBuyEvent', handleEventCallback);
   useEventListener(apeInProgram, 'poolSellEvent', handleEventCallback);
   useEventListener(apeInProgram, 'poolCreatedEvent', handleEventCallback);

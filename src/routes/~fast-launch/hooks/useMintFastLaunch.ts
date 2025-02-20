@@ -42,7 +42,7 @@ import useWebIrys from '@hooks/useIrys';
 import { createActions, useProgressiveToast } from '@hooks/useProgressiveToast';
 import useTransaction from '@hooks/useTransaction';
 import { getConnection, useWeb3React } from '@hooks/useWeb3React';
-import { ApeonFastlaunch, FastLauchIdl } from '@idl/fastlaunch';
+import { FastLauchIdl, FastLauchIdlType } from '@idl/fastlaunch';
 import { TokenFactory, TokenFactoryIdl } from '@idl/token';
 import createJSONFile from '@utils/createJSONfile';
 import { fileToBase64 } from '@utils/fileConversion';
@@ -113,7 +113,7 @@ const useMintToken = (onSuccess?: (data: string[]) => void, onError?: (error: st
 
   const { sendAndConfirmTransaction } = useTransaction(onSetTxId);
   const tokenFactoryProgram = useGetProgramInstance<TokenFactory>(TokenFactoryIdl as Idl);
-  const apeInProgram = useGetProgramInstance<ApeonFastlaunch>(FastLauchIdl as Idl);
+  const apeInProgram = useGetProgramInstance<FastLauchIdlType>(FastLauchIdl as Idl);
 
   const { addFileToQue, uploadBundle } = useWebIrys();
   const { publicKey } = useWeb3React();

@@ -10,7 +10,7 @@ import { DEFAULT_TOKEN_DECIMAL, NATIVE_TOKEN, NATIVE_TOKEN_DECIMAL } from '@cons
 import { useGetPoolById } from '@hooks/apein/useGetPool';
 import { ApeInEventType, useApeinEventsHandler } from '@hooks/apein/useTradeListener';
 import { useTokenMetadata } from '@hooks/useToken';
-import { ApeonFastlaunch } from '@idl/fastlaunch';
+import { FastLauchIdlType } from '@idl/fastlaunch';
 import { convertBNToDecimal } from '@utils/decimalHelper';
 import { Token } from '@utils/token';
 
@@ -32,12 +32,12 @@ export type Transaction = {
 const isBuyEvent = (
   _event: ApeInEventType,
   eventName: string
-): _event is IdlEvents<ApeonFastlaunch>['poolBuyEvent'] => eventName === 'poolBuyEvent';
+): _event is IdlEvents<FastLauchIdlType>['poolBuyEvent'] => eventName === 'poolBuyEvent';
 
 const isSellEvent = (
   _event: ApeInEventType,
   eventName: string
-): _event is IdlEvents<ApeonFastlaunch>['poolSellEvent'] => eventName === 'poolSellEvent';
+): _event is IdlEvents<FastLauchIdlType>['poolSellEvent'] => eventName === 'poolSellEvent';
 
 export const useTransactionsData = (sort: `${SortOptions}` = SortOptions.asc) => {
   const { pool } = useFastLaunchSearchParams();

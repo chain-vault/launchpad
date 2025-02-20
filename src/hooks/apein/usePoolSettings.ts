@@ -3,7 +3,7 @@ import { queryOptions, skipToken, useQuery } from '@tanstack/react-query';
 
 import { ApeInPoolSettings } from '@app-types/apiIn';
 
-import { ApeonFastlaunch, FastLauchIdl } from '@idl/fastlaunch';
+import { FastLauchIdl, FastLauchIdlType } from '@idl/fastlaunch';
 import { convertBNToDecimal } from '@utils/decimalHelper';
 
 import { getProgramInstance, useGetProgramInstance } from '../useGetProgramInstance';
@@ -12,7 +12,7 @@ export const useApeInSettings = (): {
   data: ApeInPoolSettings[0]['account'] | undefined;
   isLoading: boolean;
 } => {
-  const poolProgram = useGetProgramInstance<ApeonFastlaunch>(FastLauchIdl as Idl, false);
+  const poolProgram = useGetProgramInstance<FastLauchIdlType>(FastLauchIdl as Idl, false);
   const { data, isLoading } = useQuery<ApeInPoolSettings | undefined>({
     queryFn:
       poolProgram?.programId ?
@@ -31,7 +31,7 @@ export const useApeInSettings = (): {
 };
 
 export const getPoolSettingsQueryOptions = () => {
-  const poolProgram = getProgramInstance<ApeonFastlaunch>(FastLauchIdl as Idl);
+  const poolProgram = getProgramInstance<FastLauchIdlType>(FastLauchIdl as Idl);
   const poolSettingsQueryOptions = queryOptions({
     queryFn:
       poolProgram?.programId ?
