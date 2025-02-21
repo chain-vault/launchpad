@@ -30,7 +30,7 @@ export const useCreateJwt = () =>
         data: payload,
         method: 'POST',
         url: 'login',
-        withCredentials: true,
+        // withCredentials: true,
       }),
   });
 
