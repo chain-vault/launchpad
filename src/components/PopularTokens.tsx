@@ -32,6 +32,7 @@ import { shrinkText } from '@utils/shrinkText';
 import { Token } from '@utils/token';
 
 import { ClipboardText } from './ClipboardText';
+import { TableRowSkeleton } from './ui/Skeleton/TableRowSkeleton';
 
 const ResultRowData = ({ poolInfo: { agent, pool } }: { poolInfo: PoolAgentMetadata }) => {
   const navigate = useNavigate();
@@ -269,22 +270,24 @@ const PopularTokens = () => {
                 <Th color="gray.400">Agent</Th>
               </Tr>
             </Thead>
-            <Tbody>
-              {isPopularAgentsLoading || popularAgents === undefined ?
-                <Flex justifyContent="center" width="100%">
-                  Searching...
-                </Flex>
-                : popularAgents.map((data) => (
+            {isPopularAgentsLoading || popularAgents === undefined ?
+              <Tbody>
+                <TableRowSkeleton />
+                <TableRowSkeleton />
+                <TableRowSkeleton />
+              </Tbody>
+              : <Tbody>
+                {popularAgents.map((data) => (
                   <ResultRowData key={data.pool.poolId.toString()} poolInfo={data} />
-                ))
-              }
-              {popularAgents.length === 0 && !isPopularAgentsLoading && (
-                <Flex justifyContent="center" width="100%">
-                  No Tokens found
-                </Flex>
-              )}
-            </Tbody>
+                ))}
+              </Tbody>
+            }
           </Table>
+            {popularAgents.length === 0 && !isPopularAgentsLoading && (
+              <Flex justifyContent="center" marginY="2rem" width="100%">
+                No Tokens found
+              </Flex>
+            )}
         </TableContainer>
       </Box>
     </Box>
